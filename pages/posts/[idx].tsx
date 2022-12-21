@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { boardArr } from '../home/title';
+import { GetServerSideProps } from 'next';
 
 interface Data {
   data: {
@@ -27,6 +28,16 @@ export default function Post({ data }: Data) {
       <h3>{data.index}</h3>
       <h3>{data.title}</h3>
       <h3>{data.date}</h3>
+
+      <button
+        onClick={() => {
+          axios.post('http://localhost:3000/api/addBoard', data).then((res) => {
+            console.log(res);
+          });
+        }}
+      >
+        현재 데이터를 db에 저장
+      </button>
     </>
   );
 }
@@ -35,19 +46,15 @@ export default function Post({ data }: Data) {
 //getServerSideProps를 사용하는 페이지는 요청 시 서버 측에서 렌더링되며 캐시 제어 헤더가 구성된 경우에만 캐시된다.
 //해당 함수는 요청하는 동안 데이터를 렌더링 할 필요가 있을 때 사용되는것이 Best다. ex)게시물 등..
 //요청하는동안 데이터를 렌더링할 필요가 없는 경우 클라이언트측이나 StaticProps를 가져오는것을 고려
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
   //context 인자에는 다양한 키가 들어있다. 아래 코드는 context에서 동적 경로 페이지 정보를 가져와서 그 번호로 axios 요청을 한것
-  let { data }: Data = await axios(
+  let { data }: Data = await axios.get(
     `http://localhost:3000/api/hello?idx=${context.params.idx}`,
-    {
-      method: 'GET',
-    },
   );
-  console.log('패치 결과');
-  console.log(data);
+
   return {
     props: {
       data,
     },
   };
-}
+};
