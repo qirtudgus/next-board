@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const HeaderHeight = 50;
@@ -10,6 +11,15 @@ const Header = styled.header`
   width: 100%;
   height: ${HeaderHeight}px;
   background-color: #aaa;
+  display: flex;
+
+  & ul {
+    display: flex;
+    list-style: none;
+  }
+  & ul li {
+    margin: 0 10px;
+  }
 `;
 const Footer = styled.footer`
   position: relative;
@@ -28,7 +38,16 @@ const Main = styled.main`
 export default function Layout({ children }: any) {
   return (
     <>
-      <Header>헤더</Header>
+      <Header>
+        <ul>
+          <li>
+            <Link href={'/posts/list'}>게시판</Link>
+          </li>
+          <li>
+            <Link href={'/posts/write'}>작성하기</Link>
+          </li>
+        </ul>
+      </Header>
       <Main>{children}</Main>
       <Footer>푸터영영입니다.</Footer>
     </>
