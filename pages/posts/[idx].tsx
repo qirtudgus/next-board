@@ -1,43 +1,30 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { boardArr } from '../home/title';
 import { GetServerSideProps } from 'next';
 
 interface Data {
-  data: {
-    index: number;
-    title: string;
-    date: string;
-  };
+  idx: number;
+  title: string;
+  content: string;
+  date: string;
+  nickname: string;
 }
 
-export default function Post({ data }: Data) {
+interface BoardInterface {
+  data: Data[];
+}
+
+export default function Post({ data }: BoardInterface) {
   const router = useRouter();
   //하단에 getServerSideProps를 통해 응답받아온 데이터가 props에 들어있다.
   console.log(data);
-  console.log(router);
-  const post = boardArr[Number(router.query.idx) - 1];
 
   return (
     <>
-      <h1>정적 데이터를 받아온 포스트 데이터</h1>
-      <h3>{post.index}</h3>
-      <h3>{post.title}</h3>
-      <h3>{post.date}</h3>
       <h1>api 라우트로 받아온 포스트 데이터</h1>
-      <h3>{data.index}</h3>
-      <h3>{data.title}</h3>
-      <h3>{data.date}</h3>
-
-      <button
-        onClick={() => {
-          axios.post('http://localhost:3000/api/addBoard', data).then((res) => {
-            console.log(res);
-          });
-        }}
-      >
-        현재 데이터를 db에 저장
-      </button>
+      <h3>{data[0].idx}</h3>
+      <h3>{data[0].title}</h3>
+      <h3>{data[0].date}</h3>
     </>
   );
 }
@@ -48,8 +35,8 @@ export default function Post({ data }: Data) {
 //요청하는동안 데이터를 렌더링할 필요가 없는 경우 클라이언트측이나 StaticProps를 가져오는것을 고려
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   //context 인자에는 다양한 키가 들어있다. 아래 코드는 context에서 동적 경로 페이지 정보를 가져와서 그 번호로 axios 요청을 한것
-  let { data }: Data = await axios.get(
-    `http://localhost:3000/api/hello?idx=${context.params.idx}`,
+  let { data }: BoardInterface = await axios.get(
+    `http://localhost:3000/api/getBoard?idx=${context.params.idx}`,
   );
 
   return {
