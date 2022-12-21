@@ -42,8 +42,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     const result = await excuteQuery({
       query:
         'INSERT INTO board_table (title,content,date,nickname) VALUES (?,?,?,?)',
-      values: [req.body.title, '콘텐츠', req.body.date, '닉네임'],
+      values: [
+        req.body.title,
+        req.body.content,
+        req.body.date,
+        req.body.nickname,
+      ],
     }).then((request) => {
+      console.log('게시물이 등록되었습니다.');
       res.status(201).end();
     });
   } catch (err) {
