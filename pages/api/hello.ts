@@ -1,6 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { boardArr } from '../home/title';
+
+export const boardArr = [
+  { index: 1, title: '제목이에요.', date: '2020-12-12' },
+  { index: 2, title: '자랑입니다.', date: '2020-12-12' },
+  { index: 3, title: '공부중이에요.', date: '2020-12-12' },
+];
 
 interface Data {
   index: number;
