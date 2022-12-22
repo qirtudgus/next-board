@@ -6,8 +6,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     await excuteQuery({
       query: 'SELECT * FROM board_table',
       values: '',
-    }).then((respones) => {
-      res.status(200).send(respones);
+    }).then((queryResult) => {
+      res.status(200).send(queryResult);
     });
   } catch (err) {
     console.log(err);
