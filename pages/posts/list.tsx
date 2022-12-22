@@ -9,7 +9,6 @@ const TT = styled.h1`
 `;
 
 export default function BoardList(props: any) {
-  console.log(props);
   return (
     <>
       <ul>

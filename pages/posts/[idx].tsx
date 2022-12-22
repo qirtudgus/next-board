@@ -17,8 +17,6 @@ interface BoardInterface {
 export default function Post({ data }: BoardInterface) {
   const router = useRouter();
   //하단에 getServerSideProps를 통해 응답받아온 데이터가 props에 들어있다.
-  console.log(data);
-
   return (
     <>
       <h1>api 라우트로 받아온 포스트 데이터</h1>
