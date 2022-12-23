@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
+import customAxios from '../../utils/customAxios';
 
 interface Data {
   idx: number;
@@ -33,9 +34,14 @@ export default function Post({ data }: BoardInterface) {
 //요청하는동안 데이터를 렌더링할 필요가 없는 경우 클라이언트측이나 StaticProps를 가져오는것을 고려
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   //context 인자에는 다양한 키가 들어있다. 아래 코드는 context에서 동적 경로 페이지 정보를 가져와서 그 번호로 axios 요청을 한것
-  let { data }: BoardInterface = await axios.get(
-    `http://localhost:3000/api/getBoard?idx=${context.params.idx}`,
+  let { data }: BoardInterface = await customAxios(
+    'get',
+    `/getBoard?idx=${context.params.idx}`,
   );
+
+  // let { data }: BoardInterface = await axios.get(
+  //   `http://172.30.1.19:3000/api/getBoard?idx=${context.params.idx}`,
+  // );
 
   return {
     props: {
