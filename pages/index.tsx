@@ -1,13 +1,6 @@
 import Head from 'next/head';
-import { Inter } from '@next/font/google';
-import styles from '../styles/Home.module.css';
-import Link from 'next/link';
-const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
-  const DOMAIN_ENV =
-    process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_SERVER_API : 'http://localhost:3000';
-
   return (
     <>
       <Head>
@@ -28,28 +21,6 @@ export default function Home() {
 
       <main>
         <h1>메인페이지</h1>
-        <p
-          onClick={() => {
-            console.log(process.env.NEXT_PUBLIC_MYSQL_DATABASE);
-          }}
-        >
-          현재 접속중인 schema {process.env.NEXT_PUBLIC_MYSQL_DATABASE}
-        </p>
-        <p
-          onClick={() => {
-            console.log(process.env.customKey);
-          }}
-        >
-          next.config.js의 env {process.env.customKey}
-        </p>
-        <p
-          onClick={() => {
-            console.log(DOMAIN_ENV);
-          }}
-        >
-          연결할 api 서버 {DOMAIN_ENV}
-        </p>
-        <Link href={'/posts/list'}>게시판으로 이동하기</Link>
       </main>
     </>
   );
