@@ -16,7 +16,20 @@ export default function Home() {
 
       <main>
         <h1>메인페이지</h1>
-        <p>현재 접속중인 schema {process.env.MYSQL_DATABASE}</p>
+        <p
+          onClick={() => {
+            console.log(process.env.MYSQL_DATABASE);
+          }}
+        >
+          현재 접속중인 schema {process.env.MYSQL_DATABASE}
+        </p>
+        <p
+          onClick={() => {
+            console.log(process.env.customKey);
+          }}
+        >
+          next.config.js의 env {process.env.customKey}
+        </p>
         <Link href={'/posts/list'}>게시판으로 이동하기</Link>
       </main>
     </>
