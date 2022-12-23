@@ -15,8 +15,8 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>이곳은 메인페이지</h1>
-        <Link href={'/home/title'}>게시판으로 이동하기</Link>
+        <h1>메인페이지</h1>
+        <Link href={'/posts/list'}>게시판으로 이동하기</Link>
       </main>
     </>
   );
