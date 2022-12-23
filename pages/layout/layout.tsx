@@ -30,6 +30,8 @@ const Footer = styled.footer`
   background-color: #aaa;
 `;
 const Main = styled.main`
+  max-width: 375px;
+  margin: 0 auto;
   min-height: calc(100vh - ${HeaderHeight + FooterHeight}px);
 `;
 
