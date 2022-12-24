@@ -43,10 +43,16 @@ export default function Layout({ children }: any) {
       <Header>
         <ul>
           <li>
+            <Link href={'/'}>홈</Link>
+          </li>
+          <li>
             <Link href={'/posts/list'}>게시판</Link>
           </li>
           <li>
             <Link href={'/posts/write'}>작성하기</Link>
+          </li>
+          <li>
+            <Link href={'/reduxTestPage'}>리덕스 테스트</Link>
           </li>
         </ul>
       </Header>
