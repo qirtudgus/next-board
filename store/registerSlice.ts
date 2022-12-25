@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import customAxios from '../utils/customAxios';
 
-export const GetTestBoolean = {
-  getTestBoolean: createAsyncThunk('checkId/GetTestBoolean', async (id: string, thunkApi) => {
+export const DuplicationCheckId = {
+  duplicationCheckId: createAsyncThunk('register/DuplicationCheckId', async (id: string, thunkApi) => {
     console.log(id);
     const { data } = await customAxios('post', '/join/duplicationCheckId', { id });
     return data;
   }),
 };
 
-export interface DuplicationCheckIdState {
+export interface registerState {
   idValue: boolean | null | undefined;
   idStatusText: string;
   passwordValue?: boolean;
@@ -18,7 +18,7 @@ export interface DuplicationCheckIdState {
   passwordConfirmStatusText?: string;
 }
 
-const initialState: DuplicationCheckIdState = {
+const initialState: registerState = {
   idValue: null,
   idStatusText: '',
   passwordValue: false,
@@ -27,8 +27,8 @@ const initialState: DuplicationCheckIdState = {
   passwordConfirmStatusText: 'string',
 };
 
-export const duplicationCheckIdSlice = createSlice({
-  name: 'checkId',
+export const registerSlice = createSlice({
+  name: 'register',
   initialState,
   reducers: {
     outOfSyncRegExpressionId: (state) => {
@@ -71,7 +71,7 @@ export const duplicationCheckIdSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(GetTestBoolean.getTestBoolean.fulfilled, (state, action) => {
+    builder.addCase(DuplicationCheckId.duplicationCheckId.fulfilled, (state, action) => {
       state.idValue = action.payload.idValue;
       state.idStatusText = action.payload.idStatusText;
     });
@@ -85,5 +85,5 @@ export const {
   duplicateId,
   blankPassword,
   pageUnmountResetValue,
-} = duplicationCheckIdSlice.actions;
-export default duplicationCheckIdSlice.reducer;
+} = registerSlice.actions;
+export default registerSlice.reducer;

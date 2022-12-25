@@ -8,11 +8,11 @@ import {
   canTakeRegExpressionId,
   canTakeRegExpressionPassword,
   duplicateId,
-  GetTestBoolean,
+  DuplicationCheckId,
   missingPassword,
   outOfSyncRegExpressionId,
   pageUnmountResetValue,
-} from '../../store/checkIdSlice';
+} from '../../store/registerSlice';
 import BasicButton, { SolidButton } from '../../components/BasicButton';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -26,7 +26,7 @@ const Wrap = styled.div`
 `;
 export default function Register() {
   const { idValue, idStatusText, passwordValue, passwordStatusText, passwordConfirmValue, passwordConfirmStatusText } =
-    useAppSelector((state) => state.duplicationCheckIdSlice);
+    useAppSelector((state) => state.registerSlice);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const idReg = /^[a-z0-9_-]{5,15}$/;
@@ -34,7 +34,7 @@ export default function Register() {
   function checkIdFunc2(id: string): void {
     if (idReg.test(id)) {
       console.log('아이디 정규식 테스트를 성공했습니다.');
-      dispatch(GetTestBoolean.getTestBoolean(id));
+      dispatch(DuplicationCheckId.duplicationCheckId(id));
     } else {
       console.log('아이디 정규식 테스트에 실패했습니다.');
       dispatch(outOfSyncRegExpressionId());
@@ -114,7 +114,7 @@ export default function Register() {
           const idValue = idRef.current.lastChild.value;
           if (idReg.test(idValue)) {
             console.log('아이디 정규식 테스트를 성공했습니다.');
-            dispatch(GetTestBoolean.getTestBoolean(idValue));
+            dispatch(DuplicationCheckId.duplicationCheckId(idValue));
           } else {
             console.log('아이디 정규식 테스트에 실패했습니다.');
             dispatch(outOfSyncRegExpressionId());

@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import excuteQuery from '../../../db/db';
-import { DuplicationCheckIdState } from '../../../store/checkIdSlice';
+import { registerState } from '../../../store/registerSlice';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<DuplicationCheckIdState>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<registerState>) {
   try {
     console.log(req.body.id);
     await excuteQuery({
