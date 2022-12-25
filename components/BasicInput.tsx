@@ -103,6 +103,10 @@ export const BasicInput = forwardRef<HTMLDivElement, BasicInputInterface>((props
     setFocus(false);
   };
   const setFocusTrue = () => {
+    //props로 OnBlur를 받았으면 실행
+    if (props.PropsOnFocusFunc) {
+      props.PropsOnFocusFunc();
+    }
     setFocus(true);
   };
 
