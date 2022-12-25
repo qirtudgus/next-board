@@ -4,10 +4,14 @@ import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import counterSlice, { CounterState } from './counterSlice';
 import logger from 'redux-logger';
 import nameSlice, { NameState } from './nameSlice';
+import duplicationCheckIdSlice, { DuplicationCheckIdState } from './checkIdSlice';
+import isLoadingSlice, { IsLoadingState } from './isLoadingSlice';
 // ### 리듀서 State 타입 정의
 export interface ReducerStates {
   counterSlice: CounterState;
   nameSlice: NameState;
+  duplicationCheckIdSlice: DuplicationCheckIdState;
+  isLoadingSlice: IsLoadingState;
 }
 // ### 루트 리듀서 생성
 // 1) next-redux-wrapper의 HYDRATE 액션을 정의해주고,
@@ -22,6 +26,8 @@ const rootReducer = (state: ReducerStates, action: AnyAction): CombinedState<Red
       const combinedReducer = combineReducers({
         counterSlice,
         nameSlice,
+        duplicationCheckIdSlice,
+        isLoadingSlice,
       });
       return combinedReducer(state, action);
     }
