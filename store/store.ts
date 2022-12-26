@@ -6,12 +6,14 @@ import logger from 'redux-logger';
 import nameSlice, { NameState } from './nameSlice';
 import registerSlice, { registerState } from './registerSlice';
 import isLoadingSlice, { IsLoadingState } from './isLoadingSlice';
+import userInfoSlice, { UserInfoState } from './userInfoSlice';
 // ### 리듀서 State 타입 정의
 export interface ReducerStates {
   counterSlice: CounterState;
   nameSlice: NameState;
   registerSlice: registerState;
   isLoadingSlice: IsLoadingState;
+  userInfoSlice: UserInfoState;
 }
 // ### 루트 리듀서 생성
 // 1) next-redux-wrapper의 HYDRATE 액션을 정의해주고,
@@ -28,6 +30,7 @@ const rootReducer = (state: ReducerStates, action: AnyAction): CombinedState<Red
         nameSlice,
         registerSlice,
         isLoadingSlice,
+        userInfoSlice,
       });
       return combinedReducer(state, action);
     }
