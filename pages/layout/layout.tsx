@@ -1,7 +1,9 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import LoadingSpinner from '../../components/LoadingSpinner';
-import { useAppSelector } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { logoutSuccess } from '../../store/userInfoSlice';
 
 const HeaderHeight = 50;
 const FooterHeight = 100;
@@ -59,37 +61,67 @@ const Main = styled.main`
 
 //레이아웃을 설정하는법
 //https://nextjs.org/docs/basic-features/layouts
-export default function Layout({ children }: any) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const isLoading = useAppSelector((state) => state.isLoadingSlice.value);
+  const isLogin = useAppSelector((state) => state.userInfoSlice.isLogin);
+  const id = useAppSelector((state) => state.userInfoSlice.id);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const checkNotLayoutPathname = (): boolean => {
+    let a = false;
+    if (router.pathname === '/login' || router.pathname === '/register') {
+      a = true;
+    }
+    return a;
+  };
+
   const menuArr = [
     { menu: '홈', href: '/' },
-    { menu: '로그인', href: '/login' },
-    { menu: '회원가입', href: '/login/register' },
+    { menu: '회원가입', href: '/register' },
     { menu: '게시판', href: '/posts/list' },
-    { menu: '작성하기', href: '/write' },
-    { menu: '리덕스 테스트', href: '/reduxTestPage' },
+    { menu: '작성하기', href: '/posts/write' },
   ];
+
   return (
     <>
       {isLoading && <LoadingSpinner />}
-      <Header>
-        <div>
-          <ul>
-            {menuArr.map((i, index) => (
-              <li key={index}>
-                <Link href={i.href}> {i.menu}</Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Header>
+      {!checkNotLayoutPathname() ? (
+        <Header>
+          <div>
+            {isLogin ? <p>{id}</p> : <p>로그인 중이지않습니다.</p>}
+            <ul>
+              {menuArr.map((i, index) => (
+                <li key={index}>
+                  <Link href={i.href}> {i.menu}</Link>
+                </li>
+              ))}
+              {isLogin === false && (
+                <li>
+                  <Link href={'/login'}>로그인</Link>
+                </li>
+              )}
+              {isLogin && (
+                <li
+                  onClick={() => {
+                    dispatch(logoutSuccess());
+                  }}
+                >
+                  로그아웃
+                </li>
+              )}
+            </ul>
+          </div>
+        </Header>
+      ) : null}
 
       <Main>
         <div>{children}</div>
       </Main>
-      <Footer>
-        <div>푸터영영입니다. </div>
-      </Footer>
+      {!checkNotLayoutPathname() ? (
+        <Footer>
+          <div>푸터영영입니다. </div>
+        </Footer>
+      ) : null}
     </>
   );
 }
