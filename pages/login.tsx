@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { ReactElement, RefObject, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
@@ -5,7 +6,7 @@ import { SolidButton } from '../components/BasicButton';
 import { BasicInput } from '../components/BasicInput';
 import BasicTitle from '../components/BasicTitle';
 import { useAppDispatch } from '../store/store';
-import { loginSuccess } from '../store/userInfoSlice';
+import { loginSuccess, logoutSuccess } from '../store/userInfoSlice';
 import customAxios from '../utils/customAxios';
 import LoginLayout from './layout/loginLayout';
 const Box = styled.div`
@@ -29,7 +30,7 @@ const Wrap = styled.div`
   }
 `;
 
-const Login = () => {
+const Login = (props: { returnUrl: string; isSession: string }) => {
   const [loginResult, setLoginResult] = useState({
     idValue: false,
     idStatusText: '',
@@ -54,12 +55,22 @@ const Login = () => {
           passwordInput.focus();
         } else if (!res.data.idValue && !res.data.passwordValue) {
           //로그인 성공
-          router.push('/');
+          router.push(`${props.returnUrl}`);
           dispatch(loginSuccess({ id: res.data.id }));
         }
       });
     }
   };
+
+  //로그인 링크마다 세션 유무를 식별할 수 있는 쿼리스트링을 넣는다,
+  //세션이 true(미들웨어에서 리다이렉트된 경우)에는 로그아웃 디스패치를 바로 실행한다.
+  //false에서 로그인하고 뒤로가기해도 로그인이 잘 유지된다.
+  //true에서 로그인하고 뒤로가도 로그아웃이 된다...
+  useEffect(() => {
+    if (props.isSession === 'true') {
+      dispatch(logoutSuccess());
+    }
+  }, []);
 
   return (
     <>
@@ -99,4 +110,18 @@ const Login = () => {
 export default Login;
 Login.getLayout = function getLayout(page: ReactElement) {
   return <LoginLayout>{page}</LoginLayout>;
+};
+
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
+  const url = new URL(context.req.headers.referer);
+  //url확인
+  //returnUrl이 들어있으면 그걸 넣고 없으면 pathname을 넣는다.
+  let returnUrl = context.query.returnUrl ? context.query.returnUrl : url.pathname;
+  let isSession = context.query.session;
+  return {
+    props: {
+      returnUrl,
+      isSession,
+    },
+  };
 };
