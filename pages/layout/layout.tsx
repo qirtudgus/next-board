@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { logoutSuccess } from '../../store/userInfoSlice';
+import { Logout } from '../../store/userInfoSlice';
 
 const HeaderHeight = 50;
 const FooterHeight = 100;
@@ -68,11 +68,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const checkNotLayoutPathname = (): boolean => {
-    let a = false;
-    if (router.pathname === '/login' || router.pathname === '/register') {
-      a = true;
+    let isLayoutRendering = false;
+    const notLayout = ['/login', '/register'];
+    if (notLayout.includes(router.pathname)) {
+      isLayoutRendering = true;
     }
-    return a;
+    return isLayoutRendering;
   };
 
   const menuArr = [
@@ -97,13 +98,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               ))}
               {isLogin === false && (
                 <li>
-                  <Link href={'/login'}>로그인</Link>
+                  {/* 로그인 링크에 패스네임을 추가해주자 */}
+                  <Link href={`/login?returnUrl=${router.pathname}&session=false`}>로그인</Link>
                 </li>
               )}
               {isLogin && (
                 <li
                   onClick={() => {
-                    dispatch(logoutSuccess());
+                    dispatch(Logout.logout()).then(() => {
+                      router.push('/');
+                    });
                   }}
                 >
                   로그아웃
