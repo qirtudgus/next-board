@@ -1,22 +1,33 @@
-import jwt from 'jsonwebtoken';
-type TokenType = string | unknown;
+import { JWTPayload, jwtVerify, SignJWT } from 'jose';
 
-export const createAccessToken = (id: string | any): TokenType => {
+export const createJoseAccessToken = async (id: string): Promise<string> => {
+  //시크릿키 생성
+  const secret = new TextEncoder().encode(process.env.SECRET_TOKEN);
+  //알고리즘 선택
+  const alg = process.env.JWT_ALG as string;
+  const jwt = await new SignJWT({ id }).setProtectedHeader({ alg }).setIssuedAt().setExpirationTime('1s').sign(secret);
+
+  return jwt;
+};
+
+export const createJoseRefreshToken = async (id: string): Promise<string> => {
+  //시크릿키 생성
+  const secret = new TextEncoder().encode(process.env.SECRET_TOKEN);
+  //알고리즘 선택
+  const alg = process.env.JWT_ALG as string;
+  const jwt = await new SignJWT({ id }).setProtectedHeader({ alg }).setIssuedAt().setExpirationTime('5s').sign(secret);
+
+  return jwt;
+};
+
+export const verifyJoseToken = async (token: string): Promise<JWTPayload | null> => {
+  const secret = new TextEncoder().encode(process.env.SECRET_TOKEN);
   try {
-    console.log(`${id}님의 액세스 토큰 생성`);
-    return jwt.sign({ id }, process.env.SECRET_TOKEN!, { expiresIn: '10h' });
+    const { payload } = await jwtVerify(token, secret);
+    return payload;
   } catch (err) {
-    return err;
+    return null;
   }
 };
 
-export const createRefreshToken = (id: string | any): TokenType => {
-  try {
-    console.log(`${id}님의 리프레쉬토큰 생성`);
-    return jwt.sign({}, process.env.SECRET_TOKEN!, { expiresIn: '360h' });
-  } catch (err) {
-    return err;
-  }
-};
-
-export default createAccessToken;
+export default createJoseAccessToken;
