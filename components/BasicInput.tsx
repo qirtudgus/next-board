@@ -1,8 +1,11 @@
 import React, { forwardRef, RefObject, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 
+const InputWrap = styled.div`
+  width: 100%;
+`;
+
 const WrapDiv = styled.div<BasicInputStyleInterface>`
-  max-width: 250px;
   width: 100%;
   height: 48px;
   margin-top: 25px;
@@ -59,7 +62,6 @@ const Input = styled.input`
   border-radius: 4px;
   border: 1px solid#9c9c9c;
   outline: none;
-
   &:focus {
     border: 2px solid ${({ theme }) => theme.colors.main};
     padding: 12px 14px;
@@ -67,8 +69,9 @@ const Input = styled.input`
 `;
 
 const StatusText = styled.p`
-  font-size: 14px;
+  font-size: 12px;
   word-break: keep-all;
+  margin: 2px 0 0 9px;
 `;
 
 interface BasicInputStyleInterface {
@@ -111,7 +114,7 @@ export const BasicInput = forwardRef<HTMLDivElement, BasicInputInterface>((props
   };
 
   return (
-    <>
+    <InputWrap>
       <WrapDiv
         ref={ref}
         isError={props.isError}
@@ -124,7 +127,7 @@ export const BasicInput = forwardRef<HTMLDivElement, BasicInputInterface>((props
         ></Input>
       </WrapDiv>
       {props.isError && <StatusText>{props.statusText}</StatusText>}
-    </>
+    </InputWrap>
   );
 });
 
