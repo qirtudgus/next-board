@@ -1,4 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import customAxios from '../utils/customAxios';
+
+export const Logout = {
+  logout: createAsyncThunk('userInfo/logout', async () => {
+    const { data } = await customAxios('post', '/join/logout');
+    return data;
+  }),
+};
 
 export interface UserInfoState {
   id: string;
@@ -23,6 +31,12 @@ export const registerSlice = createSlice({
       state.id = '';
       state.isLogin = false;
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(Logout.logout.fulfilled, (state) => {
+      state.id = '';
+      state.isLogin = false;
+    });
   },
 });
 
