@@ -5,7 +5,7 @@ interface BasicTitleInterface {
 }
 
 const TitleTag = styled.h1`
-  padding: 30px 0;
+  padding-top: 25px;
   font-size: 2em;
   font-weight: bold;
 `;
