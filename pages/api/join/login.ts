@@ -5,13 +5,14 @@ import excuteQuery from '../../../db/db';
 import checkHashPassword from '../../../utils/checkHashPassword';
 import { setCookie } from 'cookies-next';
 import { createJoseAccessToken, createJoseRefreshToken } from '../../../utils/createToken';
+import { idText } from 'typescript';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   try {
     const { id, password } = req.body;
     // id유무를 먼저 체크
     await excuteQuery({
-      query: 'SELECT userId,password,salt FROM user_table WHERE userId = ?',
+      query: 'SELECT idx,userId,password,salt FROM user_table WHERE userId = ?',
       values: id,
     }).then(async (checkIdRespones: any) => {
       //any가 아니려면 결과값을 인터페이스로 생성하여 as로 지정해주면 될 듯..?
@@ -28,10 +29,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         let result = checkHashPassword(password, checkIdRespones[0].password, checkIdRespones[0].salt);
         if (result) {
           console.log('로그인 성공!');
-          const accessToken = await createJoseAccessToken(id);
-          const refreshToken = await createJoseRefreshToken(id);
-          setCookie('accessToken', accessToken, { req, res, httpOnly: true });
-          setCookie('refreshToken', refreshToken, { req, res, httpOnly: true });
+          const accessToken = await createJoseAccessToken(id, checkIdRespones[0].idx);
+          const refreshToken = await createJoseRefreshToken(id, checkIdRespones[0].idx);
+          setCookie('accessToken', accessToken, { req, res, httpOnly: true, sameSite: 'lax' });
+          setCookie('refreshToken', refreshToken, { req, res, httpOnly: true, sameSite: 'lax' });
 
           // await excuteQuery({
           //   query: 'UPDATE user_table SET refreshToken = ? WHERE userId = ?',
@@ -48,6 +49,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
           // });
           res.status(200).json({
             id: id,
+            idx: checkIdRespones[0].idx,
             idValue: false,
             idStatusText: '로그인 완료!',
             passwordValue: false,
