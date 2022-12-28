@@ -32,12 +32,14 @@ export const registerSlice = createSlice({
     },
     logoutSuccess: (state) => {
       state.id = '';
+      state.idx = '';
       state.isLogin = false;
     },
   },
   extraReducers(builder) {
     builder.addCase(Logout.logout.fulfilled, (state) => {
       state.id = '';
+      state.idx = '';
       state.isLogin = false;
     });
   },
