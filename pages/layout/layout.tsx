@@ -65,6 +65,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const isLoading = useAppSelector((state) => state.isLoadingSlice.value);
   const isLogin = useAppSelector((state) => state.userInfoSlice.isLogin);
   const id = useAppSelector((state) => state.userInfoSlice.id);
+  const idx = useAppSelector((state) => state.userInfoSlice.idx);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const checkNotLayoutPathname = (): boolean => {
@@ -80,6 +81,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { menu: '홈', href: '/' },
     { menu: '회원가입', href: '/register' },
     { menu: '게시판', href: '/posts/list' },
+    { menu: '게시판2', href: '/board?page=1' },
     { menu: '작성하기', href: '/posts/write' },
   ];
 
@@ -89,7 +91,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {!checkNotLayoutPathname() ? (
         <Header>
           <div>
-            {isLogin ? <p>{id}</p> : <p>로그인 중이지않습니다.</p>}
+            {isLogin ? (
+              <p>
+                {idx}
+                {id}
+              </p>
+            ) : (
+              <p>로그인 중이지않습니다.</p>
+            )}
             <ul>
               {menuArr.map((i, index) => (
                 <li key={index}>
