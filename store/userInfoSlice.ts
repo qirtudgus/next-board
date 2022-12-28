@@ -10,11 +10,13 @@ export const Logout = {
 
 export interface UserInfoState {
   id: string;
+  idx: string | number;
   isLogin: boolean;
 }
 
 const initialState: UserInfoState = {
   id: '',
+  idx: '',
   isLogin: false,
 };
 
@@ -25,6 +27,7 @@ export const registerSlice = createSlice({
     loginSuccess: (state, action) => {
       console.log(action);
       state.id = action.payload.id;
+      state.idx = action.payload.idx;
       state.isLogin = true;
     },
     logoutSuccess: (state) => {
