@@ -81,7 +81,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { menu: '홈', href: '/' },
     { menu: '회원가입', href: '/register' },
     { menu: '게시판', href: '/posts/list' },
-    { menu: '게시판2', href: '/board?page=1' },
+    { menu: '게시판2', href: '/board' },
     { menu: '작성하기', href: '/posts/write' },
   ];
 
