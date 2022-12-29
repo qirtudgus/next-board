@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   compiler: {
-    styledComponents: { displayName: true },
+    styledComponents: { displayName: true, ssr: true, minify: true },
   },
   env: {
     customKey: 'my-value',
