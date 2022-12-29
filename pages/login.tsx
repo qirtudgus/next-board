@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactElement, RefObject, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
@@ -30,6 +31,17 @@ const Wrap = styled.div`
   }
 `;
 
+const RegisterLink = styled.p`
+
+width: 100%;
+text-align: left;
+& span {
+  text-decoration: underline;
+  color:${({ theme }) => theme.colors.main}}
+}
+
+`;
+
 const Login = (props: { returnUrl: string; isSession: string }) => {
   const [loginResult, setLoginResult] = useState({
     idValue: false,
@@ -56,7 +68,7 @@ const Login = (props: { returnUrl: string; isSession: string }) => {
         } else if (!res.data.idValue && !res.data.passwordValue) {
           //로그인 성공
           router.push(`${props.returnUrl}`);
-          dispatch(loginSuccess({ id: res.data.id }));
+          dispatch(loginSuccess({ id: res.data.id, idx: res.data.idx }));
         }
       });
     }
@@ -96,6 +108,12 @@ const Login = (props: { returnUrl: string; isSession: string }) => {
             isError={loginResult.passwordValue}
             statusText={loginResult.passwordStatusText}
           ></BasicInput>
+          <RegisterLink>
+            아직 회원이 아니시라면?...
+            <span>
+              <Link href={'/register'}> 회원가입</Link>
+            </span>
+          </RegisterLink>
           <SolidButton
             BasicButtonValue='로그인'
             width={400}
