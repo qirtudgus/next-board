@@ -177,6 +177,7 @@ export default function BoardList(props: BoardListInterface) {
         })}
       </ul>
       <PageBtnList>
+        {/* 한페이지씩 가는 화살표..잠시 주석 */}
         {/* <Link href={`/board?page=${props.currentPageNumber - 3}`}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -230,6 +231,7 @@ export default function BoardList(props: BoardListInterface) {
             )}
           </LastActive>
         )}
+        {/* 한페이지씩 가는 화살표..잠시 주석 */}
         {/* <Link href={`/board?page=${props.currentPageNumber + 3}`}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -256,18 +258,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const searchKeyword = context.query.keyword ? context.query.keyword : null;
   //검색 시 기본값은 제목으로 설정
   const searchTheme = context.query.theme ? context.query.theme : '제목';
-
-  // interface ListInterface {
-  //   idx: string;
-  //   userId: string;
-  //   date: string;
-  //   title: string;
-  //   viewCount: string;
-  //   likeCount: string;
-  //   commentCount: string;
-  // }
   let data: { [key: string]: any } = [];
-  // let data:{ data: ListInterface[],listNum:string} | []= [];
   //키워드 쿼리 유무(검색 유무)에 따라서 호출되는 axios문을 변경하자
   if (searchKeyword) {
     data = await customAxios(
