@@ -1,6 +1,12 @@
 import Head from 'next/head';
+import { RefObject, useRef, useState } from 'react';
 
 export default function Home() {
+  const [url, setUrl] = useState('');
+  const [path, setPath] = useState('');
+  const [params, setParams] = useState('');
+  const [query, setQuery] = useState('');
+  const inputRef = useRef() as RefObject<HTMLInputElement>;
   return (
     <>
       <Head>
@@ -21,6 +27,33 @@ export default function Home() {
 
       <main>
         <h1>메인페이지</h1>
+        <input
+          ref={inputRef}
+          style={{ width: '330px' }}
+          defaultValue='https://naver.com/path?query=test&query2=test2'
+        ></input>
+        <button
+          onClick={() => {
+            let value = inputRef.current?.value as string;
+            let url = new URL(value);
+            let queryJoin: string[] = [];
+            url.searchParams.forEach((i) => {
+              queryJoin.push(i);
+            });
+            let query = queryJoin.join(',');
+            console.log(query);
+            setUrl(value);
+            setPath(url.pathname);
+            setParams(url.search);
+            setQuery(query);
+          }}
+        >
+          패스 추출
+        </button>
+        <p>URL : {url}</p>
+        <p>Path : {path}</p>
+        <p>params : {params}</p>
+        <p>query : {query}</p>
       </main>
     </>
   );
