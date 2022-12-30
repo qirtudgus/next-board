@@ -8,6 +8,7 @@ const Button = styled.button<BasicButtonStyleInterface>`
   font-size: 1.1em;
   max-width: ${(props) => props.width}px;
   background-color: #fff;
+
   border: 1px solid#dfe1e5;
   &:hover {
     background-color: #dfdfdf;
@@ -17,7 +18,7 @@ const Button = styled.button<BasicButtonStyleInterface>`
 const Solid = styled(Button)`
   border: none;
   background-color: ${({ theme }) => theme.colors.main};
-  color: #fff;
+  color: #fff !important;
   &:hover {
     background-color: ${({ theme }) => theme.colors.mainHoverColor};
   }
