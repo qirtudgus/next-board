@@ -39,15 +39,9 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 /*함수표현식*/
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   try {
-    const result = await excuteQuery({
-      query:
-        'INSERT INTO board_table (title,content,date,nickname) VALUES (?,?,?,?)',
-      values: [
-        req.body.title,
-        req.body.content,
-        req.body.date,
-        req.body.nickname,
-      ],
+    await excuteQuery({
+      query: 'INSERT INTO board_table (title,content,date,userId) VALUES (?,?,?,?)',
+      values: [req.body.title, req.body.content, req.body.date, req.body.userId],
     }).then((request) => {
       console.log('게시물이 등록되었습니다.');
       res.status(201).end();
