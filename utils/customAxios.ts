@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-type AxiosMethod = 'post' | 'get' | 'put' | 'delete';
+type AxiosMethod = 'POST' | 'GET' | 'PUT' | 'DELETE';
 
 // const DOMAIN_ENV = process.env.NEXT_PUBLIC_SERVER_API;
 const DOMAIN_ENV = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_SERVER_API : 'http://localhost:3000';
