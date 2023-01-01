@@ -8,7 +8,7 @@ export const createJoseAccessToken = async (id: string, idx: string | number): P
   const jwt = await new SignJWT({ idx, id })
     .setProtectedHeader({ alg })
     .setIssuedAt()
-    .setExpirationTime('5s')
+    .setExpirationTime('1h')
     .sign(secret);
 
   return jwt;
@@ -22,7 +22,7 @@ export const createJoseRefreshToken = async (id: string, idx: string | number): 
   const jwt = await new SignJWT({ idx, id })
     .setProtectedHeader({ alg })
     .setIssuedAt()
-    .setExpirationTime('10s')
+    .setExpirationTime('24h')
     .sign(secret);
 
   return jwt;
