@@ -4,6 +4,10 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     await excuteQuery({
+      query: 'UPDATE board_table SET viewCount = viewCount + 1 WHERE idx = ?',
+      values: [req.query.idx],
+    });
+    await excuteQuery({
       query: 'SELECT * FROM board_table WHERE idx = ?',
       values: req.query.idx,
     }).then((respones) => {
