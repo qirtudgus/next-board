@@ -32,7 +32,8 @@ const BoardTitle = styled.div`
 
 const BoardFooterInfo = styled.div`
   display: flex;
-  text-align: left;
+  /* text-align: left; */
+  justify-content: flex-end;
   & span {
     display: flex;
     align-items: center;
