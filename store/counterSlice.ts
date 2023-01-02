@@ -4,7 +4,7 @@ import customAxios from '../utils/customAxios';
 
 export const GetTestApiCounter = {
   getTestApiCounter: createAsyncThunk('counter/testApiCounter', async (thunkApi) => {
-    const { data } = await customAxios('get', '/testCounterNumberApi', {});
+    const { data } = await customAxios('GET', '/testCounterNumberApi', {});
     return data;
   }),
 };

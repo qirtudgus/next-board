@@ -4,7 +4,7 @@ import customAxios from '../utils/customAxios';
 export const DuplicationCheckId = {
   duplicationCheckId: createAsyncThunk('register/DuplicationCheckId', async (id: string, thunkApi) => {
     console.log(id);
-    const { data } = await customAxios('post', '/join/duplicationCheckId', { id });
+    const { data } = await customAxios('POST', '/join/duplicationCheckId', { id });
     return data;
   }),
 };

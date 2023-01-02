@@ -19,7 +19,7 @@ const Write = () => {
         onClick={() => {
           console.log(nameRef.current?.value);
           axios
-            .post('/api/posts', {
+            .post('/posts', {
               userId,
               title: titleRef.current?.value,
               content: contentRef.current?.value,

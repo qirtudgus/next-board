@@ -3,7 +3,7 @@ import customAxios from '../utils/customAxios';
 
 export const Logout = {
   logout: createAsyncThunk('userInfo/logout', async () => {
-    const { data } = await customAxios('post', '/join/logout');
+    const { data } = await customAxios('POST', '/join/logout');
     return data;
   }),
 };
@@ -25,7 +25,6 @@ export const registerSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
-      console.log(action);
       state.id = action.payload.id;
       state.idx = action.payload.idx;
       state.isLogin = true;

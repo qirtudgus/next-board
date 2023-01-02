@@ -90,7 +90,7 @@ export default function Register() {
           //가입 진행 API
           console.log('이상 무, 회원 가입을 진행합니다.');
           dispatch(isLoading());
-          customAxios('post', '/join/join', { name: nameValue, id: idValue, password: pwdValue }).then((res) => {
+          customAxios('POST', '/join/join', { name: nameValue, id: idValue, password: pwdValue }).then((res) => {
             if (res.status === 201) {
               console.log('회원가입 완료');
               router.push('/');
