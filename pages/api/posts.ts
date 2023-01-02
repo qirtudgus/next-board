@@ -55,9 +55,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         await excuteQuery({
           query: 'UPDATE board_table SET title = ?, content = ? WHERE idx = ?',
           values: [req.body.title, req.body.content, Number(req.body.idx)],
-        }).then((respones) => {
-          console.log(respones);
-          res.status(201).json(respones);
+        }).then(() => {
+          res.status(200).end();
         });
       } catch (err) {
         console.log(err);
