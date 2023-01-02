@@ -18,9 +18,12 @@ const Button = styled.button<BasicButtonStyleInterface>`
 const Solid = styled(Button)`
   border: none;
   background-color: ${({ theme }) => theme.colors.main};
-  color: #fff !important;
+
   &:hover {
     background-color: ${({ theme }) => theme.colors.mainHoverColor};
+  }
+  & > span {
+    color: #fff !important;
   }
 `;
 
@@ -56,5 +59,9 @@ export function SolidButton(props: BasicButtonInterface) {
     </Solid>
   );
 }
+
+SolidButton.defaultProps = {
+  width: 100,
+};
 
 export default BasicButton;
