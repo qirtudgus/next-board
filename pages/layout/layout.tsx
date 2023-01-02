@@ -80,8 +80,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const menuArr = [
     { menu: '홈', href: '/' },
     { menu: '회원가입', href: '/register' },
-    { menu: '게시판', href: '/posts/list' },
-    { menu: '게시판2', href: '/board' },
+    { menu: '게시판', href: '/board' },
     { menu: '작성하기', href: '/posts/write' },
   ];
 
@@ -115,7 +114,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <li
                   onClick={() => {
                     dispatch(Logout.logout()).then(() => {
-                      router.push('/');
+                      // router.push('/');
+                      window.location.replace('/');
                     });
                   }}
                 >
