@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { RefObject, useEffect, useRef, useState } from 'react';
+import { SolidButton } from '../../components/BasicButton';
 import { useAppSelector } from '../../store/store';
 import customAxios from '../../utils/customAxios';
 import { BoardInterface } from './[idx]';
@@ -34,21 +35,20 @@ const Edit = (props: EditInterface) => {
         ref={contentRef}
         defaultValue={props.data[0].content}
       ></input>
-      <button
-        onClick={() => {
-          customAxios('PUT', '/api/posts', {
+      <SolidButton
+        BasicButtonValue='수정하기'
+        OnClick={() => {
+          customAxios('PUT', '/posts', {
             idx: props.idx,
             title: titleRef.current?.value,
             content: contentRef.current?.value,
           }).then((res) => {
-            if (res!.status === 201) {
+            if (res.status === 200) {
               router.push('/board');
             }
           });
         }}
-      >
-        수정하기
-      </button>
+      ></SolidButton>
     </>
   );
 };
