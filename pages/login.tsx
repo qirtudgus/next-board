@@ -54,20 +54,20 @@ const Login = (props: { returnUrl: string; isSession: string }) => {
   const passwordRef = useRef() as RefObject<HTMLDivElement>;
   const router = useRouter();
 
-  const tryLogin = () => {
+  const tryLogin = async () => {
     console.log('로그인 시도');
     if (idRef.current && passwordRef.current) {
       const idInput = idRef.current.lastChild as HTMLInputElement;
       const passwordInput = passwordRef.current.lastChild as HTMLInputElement;
-      customAxios('post', '/join/login', { id: idInput.value, password: passwordInput.value }).then((res) => {
+      customAxios('POST', '/join/login', { id: idInput.value, password: passwordInput.value }).then((res) => {
         setLoginResult(res.data);
         if (res.data.idValue) {
           idInput.focus();
         } else if (res.data.passwordValue) {
           passwordInput.focus();
         } else if (!res.data.idValue && !res.data.passwordValue) {
-          //로그인 성공
           router.push(`${props.returnUrl}`);
+          //로그인 성공
           dispatch(loginSuccess({ id: res.data.id, idx: res.data.idx }));
         }
       });
