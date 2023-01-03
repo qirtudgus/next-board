@@ -113,12 +113,25 @@ export interface BoardListInterface {
   btnArr: Number[];
   searchKeyword: string;
   searchTheme: string;
+  sortKeyword: string;
 }
 export default function BoardList(props: BoardListInterface) {
   const [searchTheme, setSearchTheme] = useState('제목');
+  const sortRef = useRef() as RefObject<HTMLSelectElement>;
   const searchThemeRef = useRef() as RefObject<HTMLSelectElement>;
   const searchKeywordRef = useRef() as RefObject<HTMLInputElement>;
   const router = useRouter();
+
+  //유동적인 Link컴포넌트를 생성해보자....
+  const UrlFunc = (queryKey: string, queryValue: string) => {
+    //현재 URL을 가져오고
+    let a = new URLSearchParams(location.search);
+    a.set(queryKey, queryValue);
+    let newParam = a.toString();
+    let b = new URL('?' + newParam, location.href);
+    return b;
+  };
+
   return (
     <>
       <BasicTitle BasicTitleValue='게시판'></BasicTitle>
@@ -138,7 +151,9 @@ export default function BoardList(props: BoardListInterface) {
             onClick={() => {
               console.log(`${searchTheme}검색기능 실행`);
               if (searchKeywordRef.current?.value) {
-                router.push(`/board?page=${1}&keyword=${searchKeywordRef.current?.value}&theme=${searchTheme}`);
+                const decode = encodeURIComponent(searchKeywordRef.current?.value);
+                console.log(decode);
+                router.push(`/board?page=${1}&keyword=${decode}&theme=${searchTheme}`);
               } else {
                 alert('검색어를 입력해주세요!');
               }
@@ -159,6 +174,20 @@ export default function BoardList(props: BoardListInterface) {
             </svg>
           </div>
         </SearchInputDiv>
+        {/* <select
+          ref={sortRef}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+            console.log(sortKeyword);
+            let a = new URLSearchParams(location.search);
+            a.set('sort', e.target.value);
+            let newParam = a.toString();
+            let b = new URL('?' + newParam, location.href);
+            router.push(b);
+          }}
+        >
+          <option>최신순</option>
+          <option>오래된순</option>
+        </select> */}
       </SearchInputWrap>
       <ul>
         {(props.data.list as ListInterface[]).map((el: ListInterface) => {
@@ -256,17 +285,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   //context 인자에는 다양한 키가 들어있다. 아래 코드는 context에서 동적 경로 페이지 정보를 가져와서 그 번호로 axios 요청을 한것
   const currentPageNumber = context.query.page ? Number(context.query.page) : 1;
   const searchKeyword = context.query.keyword ? context.query.keyword : null;
-  //검색 시 기본값은 제목으로 설정
+  const sortKeyword = context.query.sort ? context.query.sort : null; // 잘들어옴
   const searchTheme = context.query.theme ? context.query.theme : '제목';
+  console.log(context.query);
+  //검색 시 기본값은 제목으로 설정
+
   let data: { [key: string]: any } = [];
   //키워드 쿼리 유무(검색 유무)에 따라서 호출되는 axios문을 변경하자
-  if (searchKeyword) {
+  if (searchKeyword || sortKeyword) {
     data = await customAxios(
-      'get',
-      `/getSearchResultList?page=${currentPageNumber}&keyword=${searchKeyword}&theme=${searchTheme}`,
+      'GET',
+      `/getSearchResultList?page=${currentPageNumber}&keyword=${searchKeyword}&theme=${searchTheme}&sort=${sortKeyword}`,
     ).then((res) => res.data);
   } else {
-    data = await customAxios('get', `/getBoardList?page=${currentPageNumber}`).then((res) => res.data);
+    data = await customAxios('GET', `/getBoardList?page=${currentPageNumber}`).then((res) => res.data);
   }
   const PAGE_SIZE = 3;
   const btnArr: Number[] = [];
@@ -306,6 +338,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       btnArr,
       searchKeyword,
       searchTheme,
+      sortKeyword,
     },
   };
 };
