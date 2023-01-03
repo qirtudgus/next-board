@@ -54,25 +54,32 @@ import createJoseAccessToken, { verifyJoseToken } from './utils/createToken';
 // 4. 리프레쉬토큰도 만료일 때
 
 export async function middleware(req: NextRequest) {
-  const jwtRoutes = ['/posts/write'];
-  console.log(req.nextUrl.pathname);
+  const jwtRoutes = ['/posts/write', '/posts/:path*'];
   //jwt가 필요한 경로에 미들웨어를 설정
-  if (jwtRoutes.includes(req.nextUrl.pathname)) {
-    const accessCookie = req.cookies.get('accessToken');
-    const refreshCookie = req.cookies.get('refreshToken');
-    //일단 가져와서 리절트를 뽑으면 null or Payload 가 있을것이다.
-    const accessResult = await verifyJoseToken(accessCookie?.value);
-    const refreshResult = await verifyJoseToken(refreshCookie?.value);
+  // if (jwtRoutes.includes(req.nextUrl.pathname)) {
 
-    console.log(`액세스 토큰 검사 : ${accessResult}`);
-    console.log(`리프레시 토큰 검사 : ${refreshResult}`);
+  //여기서 각 http 메소드를 구분하여 더 분기할 수 있다..
 
-    //리프레쉬가 만료면 액세스는 무조건 만료다. 리프레쉬가 만료면 로그인창으로
+  const accessCookie = req.cookies.get('accessToken');
+  const refreshCookie = req.cookies.get('refreshToken');
+  //일단 가져와서 리절트를 뽑으면 null or Payload 가 있을것이다.
+  const accessResult = await verifyJoseToken(accessCookie?.value);
+  const refreshResult = await verifyJoseToken(refreshCookie?.value);
+
+  console.log(`액세스 토큰 검사 : ${accessResult}`);
+  console.log(`리프레시 토큰 검사 : ${refreshResult}`);
+  console.log('메소드확인');
+  // console.log(req.method);
+  // console.log(req.nextUrl);
+  // console.log(req.nextUrl.search);
+  if (req.method === 'DELETE' || req.method === 'POST')
     if (!refreshResult) {
+      //리프레쉬가 만료면 액세스는 무조건 만료다. 리프레쉬가 만료면 로그인창으로
       console.log('리프레쉬 만료 / 로그인 창으로');
       //https://github.com/vercel/next.js/discussions/34822
       //redirect로 쓰면 로그인 후 뒤로가기했을 시 주소에 세션때문에 로그아웃디스패치가 실행되어 rewrite로 변경
-      const response = NextResponse.rewrite(new URL(`/login?returnUrl=${req.nextUrl.pathname}&session=true`, req.url));
+
+      const response = NextResponse.rewrite(new URL(`/login?returnUrl=${req.nextUrl.pathname}&session=true`));
       response.cookies.delete('accessToken');
       response.cookies.delete('refreshToken');
       return response;
@@ -91,5 +98,14 @@ export async function middleware(req: NextRequest) {
         //액세스가 유효하여 그냥 진행
       }
     }
-  }
+  // }
 }
+
+// See "Matching Paths" below to learn more
+export const config = {
+  matcher: [
+    // '/posts/write',
+    // 이렇게 작성하면 패스네임까지 포함한 경로만 추적
+    '/posts/:path*',
+  ],
+};
