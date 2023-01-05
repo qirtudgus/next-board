@@ -125,7 +125,7 @@ export interface BoardListInterface {
   searchTheme: string;
   sortKeyword: string;
 }
-export default function BoardList(props: BoardListInterface) {
+export default function PostList(props: BoardListInterface) {
   const [searchTheme, setSearchTheme] = useState('제목');
   const sortRef = useRef() as RefObject<HTMLSelectElement>;
   const searchThemeRef = useRef() as RefObject<HTMLSelectElement>;

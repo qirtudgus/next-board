@@ -79,7 +79,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const menuArr = [
     { menu: '홈', href: '/' },
-    { menu: '게시판', href: '/board' },
+    { menu: '게시판', href: '/posts' },
   ];
 
   return (

@@ -27,7 +27,7 @@ const Write = () => {
             })
             .then((res) => {
               if (res.status === 201) {
-                router.push('/board');
+                router.push('/posts');
               }
             });
         }}
