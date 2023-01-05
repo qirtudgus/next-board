@@ -31,15 +31,15 @@ const Solid = styled(Button)`
 
 interface BasicButtonStyleInterface {
   width: number;
-  height: number;
-  marginTop: number;
+  height: number | undefined;
+  marginTop: number | undefined;
 }
 
 interface BasicButtonInterface {
   BasicButtonValue: string;
   width: number;
-  height: number;
-  marginTop: number;
+  height?: number | undefined;
+  marginTop?: number | undefined;
   children?: React.ReactNode;
   OnClick: () => void;
 }
@@ -47,8 +47,8 @@ interface BasicButtonInterface {
 export function BasicButton(props: BasicButtonInterface) {
   return (
     <Button
-      height={props.height}
-      marginTop={props.marginTop}
+      height={props?.height}
+      marginTop={props?.marginTop}
       width={props.width}
       onClick={props.OnClick}
     >
@@ -60,8 +60,8 @@ export function BasicButton(props: BasicButtonInterface) {
 export function SolidButton(props: BasicButtonInterface) {
   return (
     <Solid
-      height={props.height}
-      marginTop={props.marginTop}
+      height={props?.height}
+      marginTop={props?.marginTop}
       width={props.width}
       onClick={props.OnClick}
     >
