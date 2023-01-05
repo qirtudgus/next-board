@@ -4,6 +4,7 @@ import { GetServerSideProps } from 'next';
 import customAxios from '../../utils/customAxios';
 import { useAppSelector } from '../../store/store';
 import BasicButton from '../../components/BasicButton';
+import { useEffect, useState } from 'react';
 
 interface Data {
   idx: number;
@@ -11,6 +12,7 @@ interface Data {
   content: string;
   date: string;
   userId: string;
+  likeList: string;
 }
 
 export interface BoardInterface {
@@ -21,10 +23,14 @@ export default function Post({ data }: BoardInterface) {
   const router = useRouter();
   const idx = router.query.idx;
   const userId = useAppSelector((state) => state.userInfoSlice.id);
-  //하단에 getServerSideProps를 통해 응답받아온 데이터가 props에 들어있다.
+  const userIdx = useAppSelector((state) => state.userInfoSlice.idx);
+  const isLogin = useAppSelector((state) => state.userInfoSlice.isLogin);
+  const [isLike, setIsLike] = useState(data[0].likeList.includes(userIdx.toString()));
+
   return (
     <>
       <h1>api 라우트로 받아온 포스트 데이터</h1>
+
       <h3>{data[0].idx}</h3>
       <h3>{data[0].title}</h3>
       <h3>{data[0].content}</h3>
@@ -52,6 +58,54 @@ export default function Post({ data }: BoardInterface) {
             }}
           ></BasicButton>
         </>
+      )}
+      {isLogin ? (
+        isLike ? (
+          <button
+            onClick={() => {
+              console.log('좋아요 시도');
+              if (isLogin) {
+                customAxios('PUT', `/postlike?userIdx=${userIdx}&boardIdx=${idx}&behavior=unlike`)
+                  .then((res) => {
+                    console.log('좋아요 취소');
+                  })
+                  .then(() => setIsLike((prev) => !prev));
+              } else {
+                alert('로그인 후 이용 가능해요!');
+                return;
+              }
+            }}
+          >
+            좋아요 취소
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              if (isLogin) {
+                console.log('좋아요 시도');
+                customAxios('PUT', `/postlike?userIdx=${userIdx}&boardIdx=${idx}&behavior=like`)
+                  .then((res) => {
+                    console.log('좋아요 완료');
+                  })
+                  .then(() => setIsLike((prev) => !prev));
+              } else {
+                alert('로그인 후 이용 가능해요!');
+                return;
+              }
+            }}
+          >
+            좋아요
+          </button>
+        )
+      ) : (
+        <button
+          onClick={() => {
+            alert('로그인 후 이용 가능해요!');
+            return;
+          }}
+        >
+          좋아요
+        </button>
       )}
     </>
   );
