@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const BoardLi = styled.li`
   &:first-child {
     border-top: 1px solid#c4c4c4;
+    margin-top: 10px;
   }
   border-bottom: 1px solid#c4c4c4;
 `;
