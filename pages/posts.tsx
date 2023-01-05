@@ -24,7 +24,7 @@ interface activeInterface {
 }
 const Active = styled.div<activeInterface>`
   width: 30px;
-  height: 30px;
+  height: 50px;
   display: flex;
   margin-right: 10px;
   align-items: center;
@@ -175,7 +175,7 @@ export default function PostList(props: BoardListInterface) {
                 if (searchKeywordRef.current?.value) {
                   const decode = encodeURIComponent(searchKeywordRef.current?.value);
                   console.log(decode);
-                  router.push(`/board?page=${1}&keyword=${decode}&theme=${searchTheme}`);
+                  router.push(`/posts?page=${1}&keyword=${decode}&theme=${searchTheme}`);
                 } else {
                   alert('검색어를 입력해주세요!');
                 }
@@ -249,9 +249,9 @@ export default function PostList(props: BoardListInterface) {
         {props.currentPageNumber > 2 && (
           <FirstActive>
             {props.searchKeyword ? (
-              <Link href={`/board?page=${1}&keyword=${props.searchKeyword}&theme=${props.searchTheme}`}>1...</Link>
+              <Link href={`/posts?page=${1}&keyword=${props.searchKeyword}&theme=${props.searchTheme}`}>1...</Link>
             ) : (
-              <Link href={`/board?page=${1}`}>{1}...</Link>
+              <Link href={`/posts?page=${1}`}>{1}...</Link>
             )}
           </FirstActive>
         )}
@@ -264,9 +264,9 @@ export default function PostList(props: BoardListInterface) {
             >
               {/* 검색어가 있을 경우에만 해당 페이지로 이동 */}
               {props.searchKeyword ? (
-                <Link href={`/board?page=${i}&keyword=${props.searchKeyword}&theme=${props.searchTheme}`}>{i}</Link>
+                <Link href={`/posts?page=${i}&keyword=${props.searchKeyword}&theme=${props.searchTheme}`}>{i}</Link>
               ) : (
-                <Link href={`/board?page=${i}`}>{i}</Link>
+                <Link href={`/posts?page=${i}`}>{i}</Link>
               )}
             </Active>
           );
@@ -275,12 +275,12 @@ export default function PostList(props: BoardListInterface) {
           <LastActive>
             {props.searchKeyword ? (
               <Link
-                href={`/board?page=${props.data.listNum}&keyword=${props.searchKeyword}&theme=${props.searchTheme}`}
+                href={`/posts?page=${props.data.listNum}&keyword=${props.searchKeyword}&theme=${props.searchTheme}`}
               >
                 ...{props.data.listNum}
               </Link>
             ) : (
-              <Link href={`/board?page=${props.data.listNum}`}>...{props.data.listNum}</Link>
+              <Link href={`/posts?page=${props.data.listNum}`}>...{props.data.listNum}</Link>
             )}
           </LastActive>
         )}
