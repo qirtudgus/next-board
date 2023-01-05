@@ -5,7 +5,7 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { Logout } from '../../store/userInfoSlice';
 
-const HeaderHeight = 50;
+const HeaderHeight = 60;
 const FooterHeight = 100;
 
 const Header = styled.header`
@@ -15,9 +15,10 @@ const Header = styled.header`
   left: 0;
   width: 100%;
   height: ${HeaderHeight}px;
-  background-color: #aaa;
+  background-color: #fff;
   display: flex;
   justify-content: center;
+  border-bottom: 1px solid#c4c4c4;
   align-items: center;
   padding: 0 10px;
   & > div {
@@ -81,6 +82,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const menuArr = [
     { menu: '홈', href: '/' },
     { menu: '게시판', href: '/posts' },
+    { menu: '소개', href: '/intro' },
   ];
 
   return (
@@ -89,14 +91,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {!checkNotLayoutPathname() ? (
         <Header>
           <div>
-            {isLogin ? (
+            {/* {isLogin ? (
               <p>
                 {idx}
                 {id}
               </p>
             ) : (
               <p>로그인 중이지않습니다.</p>
-            )}
+            )} */}
             <ul>
               {menuArr.map((i, index) => (
                 <li key={index}>
