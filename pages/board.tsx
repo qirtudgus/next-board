@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { RefObject, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+import { SolidButton } from '../components/BasicButton';
 import BasicTitle from '../components/BasicTitle';
 import Posts, { ListInterface } from '../components/posts';
 import customAxios from '../utils/customAxios';
@@ -70,6 +71,14 @@ const PageBtnList = styled.div`
   align-items: center;
   width: 100%;
 `;
+const SearchInputBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  & > button {
+    width: 100px;
+  }
+`;
 
 const SearchInputWrap = styled.div`
   max-width: 500px;
@@ -82,6 +91,7 @@ const SearchInputDiv = styled.div`
   align-items: center;
   height: 40px;
   border-radius: 4px;
+  margin-left: 5px;
   border: 1px solid#9c9c9c;
   & input {
     width: 100%;
@@ -135,46 +145,59 @@ export default function BoardList(props: BoardListInterface) {
   return (
     <>
       <BasicTitle BasicTitleValue='게시판'></BasicTitle>
-      <SearchInputWrap>
-        <SearchInputDiv>
-          <select
-            ref={searchThemeRef}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-              setSearchTheme(e.target.value);
-            }}
-          >
-            <option>제목</option>
-            <option>글쓴이</option>
-          </select>
-          <input ref={searchKeywordRef}></input>
-          <div
-            onClick={() => {
-              console.log(`${searchTheme}검색기능 실행`);
-              if (searchKeywordRef.current?.value) {
-                const decode = encodeURIComponent(searchKeywordRef.current?.value);
-                console.log(decode);
-                router.push(`/board?page=${1}&keyword=${decode}&theme=${searchTheme}`);
-              } else {
-                alert('검색어를 입력해주세요!');
-              }
-            }}
-          >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              height='24px'
-              viewBox='0 0 24 24'
-              width='24px'
-              fill='#000000'
+      <SearchInputBox>
+        <SolidButton
+          width={100}
+          marginTop={0}
+          height={40}
+          BasicButtonValue='작성'
+          OnClick={() => {
+            router.push('/posts/write');
+          }}
+        >
+          작성
+        </SolidButton>
+        <SearchInputWrap>
+          <SearchInputDiv>
+            <select
+              ref={searchThemeRef}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                setSearchTheme(e.target.value);
+              }}
             >
-              <path
-                d='M0 0h24v24H0z'
-                fill='none'
-              />
-              <path d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />
-            </svg>
-          </div>
-        </SearchInputDiv>
-        {/* <select
+              <option>제목</option>
+              <option>글쓴이</option>
+            </select>
+            <input ref={searchKeywordRef}></input>
+            <div
+              onClick={() => {
+                console.log(`${searchTheme}검색기능 실행`);
+                if (searchKeywordRef.current?.value) {
+                  const decode = encodeURIComponent(searchKeywordRef.current?.value);
+                  console.log(decode);
+                  router.push(`/board?page=${1}&keyword=${decode}&theme=${searchTheme}`);
+                } else {
+                  alert('검색어를 입력해주세요!');
+                }
+              }}
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                height='24px'
+                viewBox='0 0 24 24'
+                width='24px'
+                fill='#000000'
+              >
+                <path
+                  d='M0 0h24v24H0z'
+                  fill='none'
+                />
+                <path d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />
+              </svg>
+            </div>
+          </SearchInputDiv>
+
+          {/* <select
           ref={sortRef}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             console.log(sortKeyword);
@@ -188,7 +211,8 @@ export default function BoardList(props: BoardListInterface) {
           <option>최신순</option>
           <option>오래된순</option>
         </select> */}
-      </SearchInputWrap>
+        </SearchInputWrap>
+      </SearchInputBox>
       <ul>
         {(props.data.list as ListInterface[]).map((el: ListInterface) => {
           return (
