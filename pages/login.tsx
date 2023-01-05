@@ -66,8 +66,9 @@ const Login = (props: { returnUrl: string; isSession: string }) => {
         } else if (res.data.passwordValue) {
           passwordInput.focus();
         } else if (!res.data.idValue && !res.data.passwordValue) {
-          router.push(`${props.returnUrl}`);
+          // router.push(`${props.returnUrl}`);
           //로그인 성공
+          router.push('/');
           dispatch(loginSuccess({ id: res.data.id, idx: res.data.idx }));
         }
       });
@@ -130,16 +131,16 @@ Login.getLayout = function getLayout(page: ReactElement) {
   return <LoginLayout>{page}</LoginLayout>;
 };
 
-export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  const url = new URL(context.req.headers.referer);
-  //url확인
-  //returnUrl이 들어있으면 그걸 넣고 없으면 pathname을 넣는다.
-  let returnUrl = context.query.returnUrl ? context.query.returnUrl : url.pathname;
-  let isSession = context.query.session;
-  return {
-    props: {
-      returnUrl,
-      isSession,
-    },
-  };
-};
+// export const getServerSideProps: GetServerSideProps = async (context: any) => {
+//   const url = new URL(context.req.headers.referer);
+//   //url확인
+//   //returnUrl이 들어있으면 그걸 넣고 없으면 pathname을 넣는다.
+//   let returnUrl = context.query.returnUrl ? context.query.returnUrl : url.pathname;
+//   let isSession = context.query.session;
+//   return {
+//     props: {
+//       // returnUrl,
+//       // isSession,
+//     },
+//   };
+// };
