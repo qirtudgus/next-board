@@ -2,6 +2,13 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
+const BoardLi = styled.li`
+  &:first-child {
+    border-top: 1px solid#c4c4c4;
+  }
+  border-bottom: 1px solid#c4c4c4;
+`;
+
 const BoardDiv = styled.div`
   width: 100%;
   padding: 0.5em 0;
@@ -58,7 +65,7 @@ export interface ListInterface {
 const Posts = ({ idx, userId, date, title, viewCount, commentCount, likeCount }: ListInterface) => {
   return (
     <React.Fragment key={idx}>
-      <li>
+      <BoardLi>
         <BoardDiv>
           <BoardUserInfo>
             {userId} {date}
@@ -117,7 +124,7 @@ const Posts = ({ idx, userId, date, title, viewCount, commentCount, likeCount }:
             </span>
           </BoardFooterInfo>
         </BoardDiv>
-      </li>
+      </BoardLi>
     </React.Fragment>
   );
 };
