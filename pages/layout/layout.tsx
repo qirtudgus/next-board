@@ -9,7 +9,8 @@ const HeaderHeight = 50;
 const FooterHeight = 100;
 
 const Header = styled.header`
-  position: relative;
+  position: sticky;
+  z-index: 1;
   top: 0;
   left: 0;
   width: 100%;
