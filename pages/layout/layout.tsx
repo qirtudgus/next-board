@@ -26,11 +26,11 @@ const Header = styled.header`
   }
   & ul {
     display: flex;
-
     list-style: none;
   }
   & ul li {
     margin: 0 10px;
+    cursor: pointer;
   }
 `;
 const Footer = styled.footer`
@@ -79,9 +79,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const menuArr = [
     { menu: '홈', href: '/' },
-    { menu: '회원가입', href: '/register' },
     { menu: '게시판', href: '/board' },
-    { menu: '작성하기', href: '/posts/write' },
   ];
 
   return (
@@ -104,13 +102,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <Link href={i.href}> {i.menu}</Link>
                 </li>
               ))}
-              {isLogin === false && (
-                <li>
-                  {/* 로그인 링크에 패스네임을 추가해주자 */}
-                  <Link href={`/login?returnUrl=${router.pathname}&session=false`}>로그인</Link>
-                </li>
-              )}
-              {isLogin && (
+              {!isLogin ? (
+                <>
+                  <li>
+                    {/* 로그인 링크에 패스네임을 추가해주자 */}
+                    <Link href={'/login'}>로그인</Link>
+                    {/* <Link href={`/login?returnUrl=${router.pathname}&session=false`}>로그인</Link> */}
+                  </li>
+                  <li>
+                    <Link href={'/register'}>회원가입</Link>
+                  </li>
+                </>
+              ) : (
                 <li
                   onClick={() => {
                     dispatch(Logout.logout()).then(() => {
