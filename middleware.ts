@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import createJoseAccessToken, { verifyJoseToken } from './utils/createToken';
+import { verifyJoseToken, createJoseAccessToken } from './utils/createToken';
 // https://nextjs.org/docs/messages/nested-middleware
 // 미들웨어가 중첩될 시 경로를 정의해야한다.
 

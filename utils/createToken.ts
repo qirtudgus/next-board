@@ -37,5 +37,3 @@ export const verifyJoseToken = async (token: string | undefined): Promise<JWTPay
     return null;
   }
 };
-
-export default createJoseAccessToken;

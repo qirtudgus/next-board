@@ -5,7 +5,6 @@ import excuteQuery from '../../../db/db';
 import checkHashPassword from '../../../utils/checkHashPassword';
 import { setCookie } from 'cookies-next';
 import { createJoseAccessToken, createJoseRefreshToken } from '../../../utils/createToken';
-import { idText } from 'typescript';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   try {
