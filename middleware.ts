@@ -70,42 +70,43 @@ export async function middleware(req: NextRequest) {
   console.log(`리프레시 토큰 검사 : ${refreshResult}`);
   console.log('메소드확인');
   // console.log(req.method);
-  // console.log(req.nextUrl);
+  console.log(req.nextUrl);
   // console.log(req.nextUrl.search);
-  if (req.method === 'DELETE' || req.method === 'POST')
-    if (!refreshResult) {
-      //리프레쉬가 만료면 액세스는 무조건 만료다. 리프레쉬가 만료면 로그인창으로
-      console.log('리프레쉬 만료 / 로그인 창으로');
-      //https://github.com/vercel/next.js/discussions/34822
-      //redirect로 쓰면 로그인 후 뒤로가기했을 시 주소에 세션때문에 로그아웃디스패치가 실행되어 rewrite로 변경
+  // if (req.method === 'DELETE' || req.method === 'POST')
+  if (!refreshResult) {
+    //리프레쉬가 만료면 액세스는 무조건 만료다. 리프레쉬가 만료면 로그인창으로
+    console.log('리프레쉬 만료 / 로그인 창으로');
+    //https://github.com/vercel/next.js/discussions/34822
+    //redirect로 쓰면 로그인 후 뒤로가기했을 시 주소에 세션때문에 로그아웃디스패치가 실행되어 rewrite로 변경
 
-      const response = NextResponse.rewrite(new URL(`/login?returnUrl=${req.nextUrl.pathname}&session=true`));
-      response.cookies.delete('accessToken');
-      response.cookies.delete('refreshToken');
+    // const response = NextResponse.rewrite(new URL(`/login?returnUrl=${req.nextUrl.pathname}&session=true`, req.url));
+    const response = NextResponse.redirect(new URL(`/login`, req.url));
+    response.cookies.delete('accessToken');
+    response.cookies.delete('refreshToken');
+    return response;
+  } else {
+    //리프레쉬가 유효할 때 액세스를 체크하고 만료일 때
+    if (!accessResult) {
+      console.log('리프레쉬 유효 / 액세스 토큰 발급');
+      let id = refreshResult.id as string;
+      let idx = refreshResult.id as string;
+      const newAccessToken = await createJoseAccessToken(id, idx);
+      const response = NextResponse.next();
+      response.cookies.set('accessToken', newAccessToken, { httpOnly: true, sameSite: 'lax' });
       return response;
     } else {
-      //리프레쉬가 유효할 때 액세스를 체크하고 만료일 때
-      if (!accessResult) {
-        console.log('리프레쉬 유효 / 액세스 토큰 발급');
-        let id = refreshResult.id as string;
-        let idx = refreshResult.id as string;
-        const newAccessToken = await createJoseAccessToken(id, idx);
-        const response = NextResponse.next();
-        response.cookies.set('accessToken', newAccessToken, { httpOnly: true, sameSite: 'lax' });
-        return response;
-      } else {
-        console.log('액세스 토큰 유효');
-        //액세스가 유효하여 그냥 진행
-      }
+      console.log('액세스 토큰 유효');
+      //액세스가 유효하여 그냥 진행
     }
+  }
   // }
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
   matcher: [
-    // '/posts/write',
-    // 이렇게 작성하면 패스네임까지 포함한 경로만 추적
-    '/posts/:path*',
+    '/posts/write',
+    // 이렇게 작성하면 패스네임까지 포함한 경로를 추적 ex) /posts = X, /posts/write = O
+    // '/posts/:path*',
   ],
 };
