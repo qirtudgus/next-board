@@ -12,18 +12,18 @@ const BoardLi = styled.li`
 
 const BoardDiv = styled.div`
   width: 100%;
-  padding: 0.5em 0;
+  padding: 0.3em 0;
   & > div {
     margin-top: 3px;
   }
 `;
 
 const BoardUserInfo = styled.div`
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 `;
 
 const BoardTitle = styled.div`
-  font-size: 1.2rem;
+  font-size: 0.9em;
 
   & a {
     display: block;
