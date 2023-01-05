@@ -5,7 +5,7 @@ import React, { RefObject, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { SolidButton } from '../components/BasicButton';
 import BasicTitle from '../components/BasicTitle';
-import Posts, { ListInterface } from '../components/posts';
+import Posts, { ListInterface } from '../components/post';
 import customAxios from '../utils/customAxios';
 
 /*
