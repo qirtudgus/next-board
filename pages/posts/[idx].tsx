@@ -1,10 +1,9 @@
-import axios from 'axios';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import customAxios from '../../utils/customAxios';
 import { useAppSelector } from '../../store/store';
 import BasicButton from '../../components/BasicButton';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface Data {
   idx: number;
@@ -118,10 +117,6 @@ export default function Post({ data }: BoardInterface) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //context 인자에는 다양한 키가 들어있다. 아래 코드는 context에서 동적 경로 페이지 정보를 가져와서 그 번호로 axios 요청을 한것
   let { data }: BoardInterface = await customAxios('GET', `/posts?idx=${context.params?.idx}`);
-
-  // let { data }: BoardInterface = await axios.get(
-  //   `http://172.30.1.19:3000/api/getBoard?idx=${context.params.idx}`,
-  // );
 
   return {
     props: {
