@@ -6,7 +6,7 @@ const Button = styled.button<BasicButtonStyleInterface>`
   /* margin-top: 25px; */
   border: none;
   border-radius: 4px;
-  font-size: 1.1em;
+  font-size: 1em;
   max-width: ${(props) => props.width}px;
   margin-top: ${(props) => props.marginTop}px;
   background-color: #fff;
@@ -69,6 +69,11 @@ export function SolidButton(props: BasicButtonInterface) {
     </Solid>
   );
 }
+BasicButton.defaultProps = {
+  width: 100,
+  height: 48,
+  marginTop: 25,
+};
 
 SolidButton.defaultProps = {
   width: 100,
