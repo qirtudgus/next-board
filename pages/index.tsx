@@ -54,6 +54,14 @@ export default function Home() {
         <p>Path : {path}</p>
         <p>params : {params}</p>
         <p>query : {query}</p>
+
+        <button
+          onClick={() => {
+            console.log(process.env);
+          }}
+        >
+          할당된 환경변수 체크
+        </button>
       </main>
     </>
   );
