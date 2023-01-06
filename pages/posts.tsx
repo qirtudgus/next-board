@@ -321,10 +321,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (searchKeyword || sortKeyword) {
     data = await customAxios(
       'GET',
-      `/getSearchResultList?page=${currentPageNumber}&keyword=${searchKeyword}&theme=${searchTheme}&sort=${sortKeyword}`,
+      `/getSearchPosts?page=${currentPageNumber}&keyword=${searchKeyword}&theme=${searchTheme}&sort=${sortKeyword}`,
     ).then((res) => res.data);
   } else {
-    data = await customAxios('GET', `/getBoardList?page=${currentPageNumber}`).then((res) => res.data);
+    data = await customAxios('GET', `/getPosts?page=${currentPageNumber}`).then((res) => res.data);
   }
   const PAGE_SIZE = 3;
   const btnArr: Number[] = [];
