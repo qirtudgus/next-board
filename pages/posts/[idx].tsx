@@ -43,7 +43,7 @@ export default function Post({ data }: BoardInterface) {
             OnClick={() => {
               if (confirm('게시물을 삭제하시겠어요?')) {
                 customAxios('DELETE', `/posts?idx=${idx}`).then(() => {
-                  router.push('/board');
+                  router.push('/posts');
                 });
                 console.log('삭제 시도');
               }

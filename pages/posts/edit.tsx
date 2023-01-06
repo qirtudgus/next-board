@@ -44,7 +44,7 @@ const Edit = (props: EditInterface) => {
             content: contentRef.current?.value,
           }).then((res) => {
             if (res.status === 200) {
-              router.push('/board');
+              router.push('/posts');
             }
           });
         }}
