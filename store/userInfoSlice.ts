@@ -16,7 +16,7 @@ export interface UserInfoState {
 
 const initialState: UserInfoState = {
   id: '',
-  idx: '',
+  idx: '0',
   isLogin: false,
 };
 
@@ -31,7 +31,7 @@ export const registerSlice = createSlice({
     },
     logoutSuccess: (state) => {
       state.id = '';
-      state.idx = '';
+      state.idx = '0';
       state.isLogin = false;
     },
   },
