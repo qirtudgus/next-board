@@ -136,7 +136,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const menuRenderControl = (e: MouseEvent) => {
       if (!e.target) return;
       let dom = e.target as Element;
-      console.log(dom.getAttribute('id'));
       if (dom.getAttribute('id') === 'menuList') {
         setIsMenu(true);
         return;

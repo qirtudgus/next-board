@@ -57,7 +57,8 @@ export default function Home() {
 
         <button
           onClick={() => {
-            console.log(process.env);
+            console.log(`NEXT_PUBLIC_MYSQL_DATABASE : ${process.env.NEXT_PUBLIC_MYSQL_DATABASE}`);
+            console.log(`NEXT_PUBLIC_SERVER_API : ${process.env.NEXT_PUBLIC_SERVER_API}`);
           }}
         >
           할당된 환경변수 체크
