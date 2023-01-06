@@ -163,6 +163,8 @@ export default function PostList(props: BoardListInterface) {
               ref={searchThemeRef}
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                 setSearchTheme(e.target.value);
+                searchKeywordRef.current!.value = '';
+                searchKeywordRef.current?.focus();
               }}
             >
               <option>제목</option>
