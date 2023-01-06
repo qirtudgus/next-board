@@ -70,6 +70,7 @@ const PageBtnList = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-bottom: 50px;
 `;
 const SearchInputBox = styled.div`
   width: 100%;
