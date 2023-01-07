@@ -21,16 +21,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           await excuteQuery({
             query: likeQuery,
             values: [userIdx, boardIdx],
-          }).then(() => {
-            res.status(200).end();
+          }).then(async () => {
+            let likeCount = await excuteQuery({
+              query: 'SELECT likeCount FROM board_table WHERE idx = ?',
+              values: [boardIdx],
+            });
+            res.status(200).json(likeCount);
           });
         } else {
           console.log(`${userIdx}님이 ${boardIdx}글을 추천 취소하였습니다.`);
           await excuteQuery({
             query: unlikeQuery,
             values: [userIdx2, boardIdx],
-          }).then(() => {
-            res.status(200).end();
+          }).then(async () => {
+            let likeCount = await excuteQuery({
+              query: 'SELECT likeCount FROM board_table WHERE idx = ?',
+              values: [boardIdx],
+            });
+            res.status(200).json(likeCount);
           });
         }
       } catch (err) {
