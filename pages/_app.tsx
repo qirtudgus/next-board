@@ -31,7 +31,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
             let idx = res.data.idx;
             store.dispatch(loginSuccess({ id, idx }));
           } else {
-            store.dispatch(logoutSuccess());
+            // store.dispatch(logoutSuccess());
           }
         })
         .then(() => {
