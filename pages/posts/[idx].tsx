@@ -134,12 +134,11 @@ export default function Post({ data }: BoardInterface) {
         <button
           onClick={() => {
             console.log('좋아요 시도');
+            setIsLike((prev) => !prev);
             if (isLogin) {
-              customAxios('PUT', `/postlike?userIdx=${userIdx}&boardIdx=${idx}&behavior=unlike`)
-                .then((res) => {
-                  console.log('좋아요 취소');
-                })
-                .then(() => setIsLike((prev) => !prev));
+              customAxios('PUT', `/postlike?userIdx=${userIdx}&boardIdx=${idx}&behavior=unlike`).then((res) => {
+                console.log('좋아요 취소');
+              });
             } else {
               alert('로그인 후 이용 가능해요!');
               return;
@@ -152,12 +151,11 @@ export default function Post({ data }: BoardInterface) {
         <button
           onClick={() => {
             if (isLogin) {
+              setIsLike((prev) => !prev);
               console.log('좋아요 시도');
-              customAxios('PUT', `/postlike?userIdx=${userIdx}&boardIdx=${idx}&behavior=like`)
-                .then((res) => {
-                  console.log('좋아요 완료');
-                })
-                .then(() => setIsLike((prev) => !prev));
+              customAxios('PUT', `/postlike?userIdx=${userIdx}&boardIdx=${idx}&behavior=like`).then((res) => {
+                console.log('좋아요 완료');
+              });
             } else {
               alert('로그인 후 이용 가능해요!');
               return;
