@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { useAppDispatch, useAppSelector } from '../../store/store';
@@ -273,7 +273,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         setIsMenu(false);
       }
     };
-
     document.addEventListener('click', menuRenderControl);
     return () => {
       document.removeEventListener('click', menuRenderControl);
@@ -301,25 +300,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       {isLoading && <LoadingSpinner />}
-      {!checkNotLayoutPathname() ? (
+      {!checkNotLayoutPathname() && (
         <Header>
           <div>
-            <LogoDiv
-              onClick={() => {
-                router.push('/');
-              }}
-            >
-              <Logo>LOGO</Logo>
+            <LogoDiv>
+              <Logo
+                onClick={() => {
+                  router.push('/');
+                }}
+              >
+                LOGO
+              </Logo>
               <ul className='leftMenu'>
                 {menuArr.map((i, index) => (
-                  <li
-                    key={index}
-                    onClick={() => {
-                      router.push(i.href);
-                    }}
-                  >
-                    {i.menu}
-                    {/* <Link href={i.href}> {i.menu}</Link> */}
+                  <li key={index}>
+                    <Link href={i.href}>{i.menu}</Link>
                   </li>
                 ))}
               </ul>
@@ -329,7 +324,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 setIsSlideOpenMenu((prev) => !prev);
               }}
             >
-              {' '}
               {isSlideMenuOpen ? (
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -391,7 +385,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </ul>
             </MobileLoginButtonDiv>{' '}
             {isSlideMenuOpen && <Bg></Bg>}
-            {/* <Bg className={isSlideMenuOpen ? 'active' : ''}></Bg> */}
             <PcLoginButtonUl>
               {!isLogin ? (
                 <>
@@ -445,16 +438,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </PcLoginButtonUl>
           </div>
         </Header>
-      ) : null}
+      )}
 
       <Main>
         <div>{children}</div>
       </Main>
-      {!checkNotLayoutPathname() ? (
+      {!checkNotLayoutPathname() && (
         <Footer>
           <div>안녕하세요.</div>
         </Footer>
-      ) : null}
+      )}
     </>
   );
 }
