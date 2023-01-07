@@ -312,8 +312,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <Logo>LOGO</Logo>
               <ul className='leftMenu'>
                 {menuArr.map((i, index) => (
-                  <li key={index}>
-                    <Link href={i.href}> {i.menu}</Link>
+                  <li
+                    key={index}
+                    onClick={() => {
+                      router.push(i.href);
+                    }}
+                  >
+                    {i.menu}
+                    {/* <Link href={i.href}> {i.menu}</Link> */}
                   </li>
                 ))}
               </ul>
