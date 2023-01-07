@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { Logout } from '../../store/userInfoSlice';
 
 const HeaderHeight = 60;
-const FooterHeight = 100;
+const FooterHeight = 180;
 
 const Header = styled.header`
   position: sticky;
@@ -45,19 +45,44 @@ const Header = styled.header`
   & > div > ul > #openMenu li {
     width: 100px;
   }
+
+  & .leftMenu {
+    display: flex;
+    @media ${({ theme }) => theme.device.tablet} {
+      display: none;
+    }
+    @media ${({ theme }) => theme.device.mobile} {
+    }
+  }
 `;
+
+const LogoDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const Logo = styled.div`
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding-right: 15px;
+  user-select: none;
+`;
+
 const Footer = styled.footer`
   position: relative;
   top: 0;
   left: 0;
   width: 100%;
   height: ${FooterHeight}px;
-  background-color: #aaa;
+  background-color: #eee;
   padding: 0 10px;
+  border-top: 1px solid#c4c4c4;
   & > div {
     /* width: 95%; */
+
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 15px auto;
   }
 `;
 const Main = styled.main`
@@ -66,6 +91,7 @@ const Main = styled.main`
   margin: 0 auto;
   background-color: #fff;
   min-height: calc(100vh - ${HeaderHeight + FooterHeight}px);
+  /* min-height: 100vh; */
   padding: 0 10px;
   & > div {
     margin: 0 auto;
@@ -107,6 +133,101 @@ const MenuDiv = styled.div<MenuInterface>`
     `}
 `;
 
+const PcLoginButtonUl = styled.ul`
+  display: block;
+  @media ${({ theme }) => theme.device.tablet} {
+    display: none !important;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+  }
+`;
+
+const MobileLoginButtonUl = styled.div`
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  display: none;
+  position: relative;
+  user-select: none;
+  z-index: 101;
+  @media ${({ theme }) => theme.device.tablet} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+  }
+`;
+
+const MobileLoginButtonDiv = styled.div<SlideMenu>`
+  position: fixed;
+  right: -230px;
+  top: 0;
+  height: 100%;
+  /* width: 100%; */
+  width: 230px;
+  background: #fff;
+  transition: none;
+  z-index: 100;
+  display: none;
+  @media ${({ theme }) => theme.device.tablet} {
+    display: flex;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+  }
+
+  ${(props) =>
+    props.isOpen &&
+    css`
+      right: 0;
+      transition: all 0.3s ease;
+    `}
+
+  & ul {
+    width: 100%;
+    margin-top: ${HeaderHeight}px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 17px;
+  }
+  & ul li {
+    margin: 10px 30px;
+    width: 100%;
+  }
+  & ul li a {
+    width: 100px;
+  }
+`;
+
+const MobileCenterLine = styled.div`
+  width: 80%;
+  background: #c4c4c4;
+  height: 1px;
+  margin: 15px auto;
+`;
+
+const Bg = styled.div`
+  position: fixed;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+  /* &.active {
+    display: block;
+  } */
+  @media ${({ theme }) => theme.device.tablet} {
+    display: block;
+  }
+`;
+
+interface SlideMenu {
+  isOpen: boolean;
+}
+
 //레이아웃을 설정하는법
 //https://nextjs.org/docs/basic-features/layouts
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -115,6 +236,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const id = useAppSelector((state) => state.userInfoSlice.id);
   const idx = useAppSelector((state) => state.userInfoSlice.idx);
   const [isMenu, setIsMenu] = useState(false);
+  const [isSlideMenuOpen, setIsSlideOpenMenu] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const checkNotLayoutPathname = (): boolean => {
@@ -131,6 +253,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { menu: '게시판', href: '/posts' },
     { menu: '소개', href: '/intro' },
   ];
+
+  const logout = () => {
+    setIsSlideOpenMenu(false);
+    dispatch(Logout.logout()).then(() => {
+      window.location.replace('/');
+    });
+  };
 
   useEffect(() => {
     const menuRenderControl = (e: MouseEvent) => {
@@ -151,20 +280,113 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
+  useEffect(() => {
+    //모바일 메뉴창이 타블렛 사이즈를 넘어갈 시 상태값을 false 초기화 시키기 위함
+    //쓰로틀링을 통해 과부하 방지
+    //타임아웃 타입 지정
+    //https://stackoverflow.com/questions/45802988/typescript-use-correct-version-of-settimeout-node-vs-window
+    let timer: number | null;
+    window.onresize = () => {
+      if (!timer) {
+        timer = window.setTimeout(function () {
+          timer = null;
+          if (window.innerWidth > 768) {
+            setIsSlideOpenMenu(false);
+          }
+        }, 300);
+      }
+    };
+  }, []);
+
   return (
     <>
       {isLoading && <LoadingSpinner />}
       {!checkNotLayoutPathname() ? (
         <Header>
           <div>
-            <ul>
-              {menuArr.map((i, index) => (
-                <li key={index}>
-                  <Link href={i.href}> {i.menu}</Link>
-                </li>
-              ))}
-            </ul>
-            <ul>
+            <LogoDiv
+              onClick={() => {
+                router.push('/');
+              }}
+            >
+              <Logo>LOGO</Logo>
+              <ul className='leftMenu'>
+                {menuArr.map((i, index) => (
+                  <li key={index}>
+                    <Link href={i.href}> {i.menu}</Link>
+                  </li>
+                ))}
+              </ul>
+            </LogoDiv>
+            <MobileLoginButtonUl
+              onClick={() => {
+                setIsSlideOpenMenu((prev) => !prev);
+              }}
+            >
+              {' '}
+              {isSlideMenuOpen ? (
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  height='35px'
+                  viewBox='0 0 24 24'
+                  width='35px'
+                  fill='#000000'
+                >
+                  <path
+                    d='M0 0h24v24H0z'
+                    fill='none'
+                  />
+                  <path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' />
+                </svg>
+              ) : (
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  height='35px'
+                  viewBox='0 0 24 24'
+                  width='35px'
+                  fill='#366bff'
+                >
+                  <path
+                    d='M0 0h24v24H0V0z'
+                    fill='none'
+                  />
+                  <path d='M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z' />
+                </svg>
+              )}
+            </MobileLoginButtonUl>
+            <MobileLoginButtonDiv isOpen={isSlideMenuOpen}>
+              <ul>
+                {menuArr.map((i, index) => (
+                  <li
+                    key={index}
+                    onClick={() => {
+                      setIsSlideOpenMenu((prev) => !prev);
+                      router.push(i.href);
+                    }}
+                  >
+                    {i.menu}
+                  </li>
+                ))}
+                <MobileCenterLine />
+                {isLogin ? (
+                  <>
+                    <li>마이페이지</li>
+                    <li onClick={logout}>로그아웃</li>
+                  </>
+                ) : (
+                  <li
+                    onClick={() => {
+                      router.push('/login');
+                    }}
+                  >
+                    로그인
+                  </li>
+                )}
+              </ul>
+            </MobileLoginButtonDiv>{' '}
+            {isSlideMenuOpen && <Bg></Bg>}
+            {/* <Bg className={isSlideMenuOpen ? 'active' : ''}></Bg> */}
+            <PcLoginButtonUl>
               {!isLogin ? (
                 <>
                   <li>
@@ -187,9 +409,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       enableBackground='new 0 0 24 24'
-                      height='40px'
+                      height='35px'
                       viewBox='0 0 24 24'
-                      width='40px'
+                      width='35px'
                       fill='#366bff'
                     >
                       <g>
@@ -209,21 +431,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     >
                       <li>{id}</li>
                       <li>마이페이지</li>
-                      <li
-                        onClick={() => {
-                          dispatch(Logout.logout()).then(() => {
-                            // router.push('/');
-                            window.location.replace('/');
-                          });
-                        }}
-                      >
-                        로그아웃
-                      </li>
+                      <li onClick={logout}>로그아웃</li>
                     </MenuDiv>
                   </MyMenu>
                 </>
               )}
-            </ul>
+            </PcLoginButtonUl>
           </div>
         </Header>
       ) : null}
@@ -233,7 +446,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </Main>
       {!checkNotLayoutPathname() ? (
         <Footer>
-          <div>푸터영영입니다. </div>
+          <div>안녕하세요.</div>
         </Footer>
       ) : null}
     </>
