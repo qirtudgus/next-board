@@ -3,6 +3,7 @@ import customAxios from '../utils/customAxios';
 
 export const Logout = {
   logout: createAsyncThunk('userInfo/logout', async () => {
+    window.location.replace('/');
     const { data } = await customAxios('POST', '/join/logout');
     return data;
   }),
@@ -38,7 +39,7 @@ export const registerSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(Logout.logout.fulfilled, (state) => {
       state.id = '';
-      state.idx = '';
+      state.idx = '0';
       state.isLogin = false;
     });
   },

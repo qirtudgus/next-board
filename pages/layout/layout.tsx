@@ -254,11 +254,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { menu: '소개', href: '/intro' },
   ];
 
-  const logout = () => {
+  const logout = async () => {
     setIsSlideOpenMenu(false);
-    dispatch(Logout.logout()).then(() => {
-      window.location.replace('/');
-    });
+    dispatch(Logout.logout());
   };
 
   useEffect(() => {
