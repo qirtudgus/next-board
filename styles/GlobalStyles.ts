@@ -19,6 +19,8 @@ const colors = {
   blue: '#000080',
 };
 
+const boxShadow = '0 0 3px 3px rgb(0 0 0 / 10%)';
+
 // 자주 사용하는 스타일 속성을 theme으로 만들어보자.
 const common = {
   flexCenter: `
@@ -47,10 +49,26 @@ const device = {
 };
 
 interface ThemeInterface {
-  fontSizes: any;
-  colors: any;
-  common: any;
-  device: any;
+  fontSizes: { title: string; subtitle: string; paragraph: string };
+  colors: {
+    main: string;
+    mainHoverColor: string;
+    borderColor: string;
+    black: string;
+    grey: string;
+    green: string;
+    blue: string;
+  };
+  common: {
+    flexCenter: string;
+    flexCenterColumn: string;
+  };
+  device: {
+    mobile: string;
+    tablet: string;
+    laptop: string;
+  };
+  boxShadow: '0 0 3px 3px rgb(0 0 0 / 10%)';
 }
 
 // theme 객체에 감싸서 반환한다.
@@ -59,6 +77,7 @@ const theme: ThemeInterface = {
   colors,
   common,
   device,
+  boxShadow,
 };
 
 export default theme;
