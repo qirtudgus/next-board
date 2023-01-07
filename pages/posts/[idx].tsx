@@ -80,6 +80,42 @@ export default function Post({ data }: BoardInterface) {
     likeCount: data[0].likeCount,
   });
 
+  const deletePost = () => {
+    if (confirm('게시물을 삭제하시겠어요?')) {
+      customAxios('DELETE', `/posts?idx=${idx}`).then(() => {
+        router.push('/posts');
+      });
+    }
+  };
+
+  const moveEditPost = () => {
+    router.push(`/posts/edit?idx=${idx}`);
+  };
+
+  const doNotLike = () => {
+    setIsLike((prev) => !prev);
+    if (isLogin) {
+      customAxios('PUT', `/postlike?userIdx=${userIdx}&boardIdx=${idx}&behavior=unlike`).then((res) => {
+        setPost({ ...post, likeCount: res.data[0].likeCount });
+      });
+    } else {
+      alert('로그인 후 이용 가능해요!');
+      return;
+    }
+  };
+
+  const doLike = () => {
+    if (isLogin) {
+      setIsLike((prev) => !prev);
+      customAxios('PUT', `/postlike?userIdx=${userIdx}&boardIdx=${idx}&behavior=like`).then((res) => {
+        setPost({ ...post, likeCount: res.data[0].likeCount });
+      });
+    } else {
+      alert('로그인 후 이용 가능해요!');
+      return;
+    }
+  };
+
   return (
     <>
       <Head>
@@ -106,65 +142,17 @@ export default function Post({ data }: BoardInterface) {
           <BasicButton
             width={100}
             BasicButtonValue='삭제'
-            OnClick={() => {
-              if (confirm('게시물을 삭제하시겠어요?')) {
-                customAxios('DELETE', `/posts?idx=${idx}`).then(() => {
-                  router.push('/posts');
-                });
-                console.log('삭제 시도');
-              }
-            }}
+            OnClick={deletePost}
           ></BasicButton>
           <BasicButton
             width={100}
             BasicButtonValue='수정'
-            OnClick={() => {
-              router.push(`/posts/edit?idx=${idx}`);
-              console.log('수정 시도');
-            }}
+            OnClick={moveEditPost}
           ></BasicButton>
         </>
       )}
       <p>{post.likeCount}</p>
-      {isLike ? (
-        <button
-          onClick={() => {
-            console.log('좋아요 시도');
-            setIsLike((prev) => !prev);
-            if (isLogin) {
-              customAxios('PUT', `/postlike?userIdx=${userIdx}&boardIdx=${idx}&behavior=unlike`).then((res) => {
-                console.log(res.data[0].likeCount);
-                console.log('좋아요 취소');
-                setPost({ ...post, likeCount: res.data[0].likeCount });
-              });
-            } else {
-              alert('로그인 후 이용 가능해요!');
-              return;
-            }
-          }}
-        >
-          좋아요 취소
-        </button>
-      ) : (
-        <button
-          onClick={() => {
-            if (isLogin) {
-              setIsLike((prev) => !prev);
-              console.log('좋아요 시도');
-              customAxios('PUT', `/postlike?userIdx=${userIdx}&boardIdx=${idx}&behavior=like`).then((res) => {
-                console.log(res.data[0].likeCount);
-                console.log('좋아요 완료');
-                setPost({ ...post, likeCount: res.data[0].likeCount });
-              });
-            } else {
-              alert('로그인 후 이용 가능해요!');
-              return;
-            }
-          }}
-        >
-          좋아요
-        </button>
-      )}
+      {isLike ? <button onClick={doNotLike}>좋아요 취소</button> : <button onClick={doLike}>좋아요</button>}
     </>
   );
 }
@@ -176,7 +164,6 @@ export default function Post({ data }: BoardInterface) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //context 인자에는 다양한 키가 들어있다. 아래 코드는 context에서 동적 경로 페이지 정보를 가져와서 그 번호로 axios 요청을 한것
   let { data }: BoardInterface = await customAxios('GET', `/posts?idx=${context.params?.idx}`);
-
   return {
     props: {
       data,
