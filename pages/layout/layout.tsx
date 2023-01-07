@@ -376,7 +376,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 ) : (
                   <li
                     onClick={() => {
-                      router.push('/login');
+                      router.push(`/login?returnUrl=${router.asPath}&session=false`);
                     }}
                   >
                     로그인
@@ -390,8 +390,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <>
                   <li>
                     {/* 로그인 링크에 패스네임을 추가해주자 */}
-                    <Link href={'/login'}>로그인</Link>
-                    {/* <Link href={`/login?returnUrl=${router.pathname}&session=false`}>로그인</Link> */}
+                    <Link href={`/login?returnUrl=${router.asPath}&session=false`}>로그인</Link>
                   </li>
                   <li>
                     <Link href={'/register'}>회원가입</Link>
