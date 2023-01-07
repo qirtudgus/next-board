@@ -3,7 +3,6 @@ import customAxios from '../utils/customAxios';
 
 export const Logout = {
   logout: createAsyncThunk('userInfo/logout', async () => {
-    window.location.replace('/');
     const { data } = await customAxios('POST', '/join/logout');
     return data;
   }),
