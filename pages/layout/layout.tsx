@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { Logout } from '../../store/userInfoSlice';
+import { modalAni } from '../posts/[idx]';
 
 const HeaderHeight = 60;
 const FooterHeight = 180;
@@ -115,7 +116,7 @@ const MyMenu = styled.div`
 
 const MenuDiv = styled.div<MenuInterface>`
   background-color: #fff;
-  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: 4px;
   position: absolute;
   top: 40px;
@@ -130,6 +131,7 @@ const MenuDiv = styled.div<MenuInterface>`
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      animation: ${modalAni} 0.15s;
     `}
 `;
 
@@ -210,7 +212,7 @@ const MobileCenterLine = styled.div`
 const Bg = styled.div`
   position: fixed;
   z-index: 99;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   width: 100%;
   height: 100%;
   top: 0;
@@ -221,6 +223,7 @@ const Bg = styled.div`
   } */
   @media ${({ theme }) => theme.device.tablet} {
     display: block;
+    animation: ${modalAni} 0.3s;
   }
 `;
 
