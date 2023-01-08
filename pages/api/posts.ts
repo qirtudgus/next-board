@@ -30,9 +30,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         await excuteQuery({
           query: 'SELECT * FROM board_table WHERE idx = ?',
           values: idx,
-        }).then((respones) => {
-          console.log(respones);
-          res.status(200).json(respones);
+        }).then(async (respones) => {
+          await excuteQuery({ query: 'SELECT * FROM comment_table WHERE postIdx = ?', values: [idx] }).then(
+            (result) => {
+              res.status(200).json({ post: respones, comment: result });
+            },
+          );
         });
       } catch (err) {
         console.log(err);
