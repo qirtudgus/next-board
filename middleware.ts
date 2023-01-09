@@ -79,8 +79,8 @@ export async function middleware(req: NextRequest) {
     //https://github.com/vercel/next.js/discussions/34822
     //redirect로 쓰면 로그인 후 뒤로가기했을 시 주소에 세션때문에 로그아웃디스패치가 실행되어 rewrite로 변경
 
-    // const response = NextResponse.rewrite(new URL(`/login?returnUrl=${req.nextUrl.pathname}&session=true`, req.url));
-    const response = NextResponse.redirect(new URL(`/login`, req.url));
+    const response = NextResponse.rewrite(new URL(`/login?returnUrl=${req.nextUrl.pathname}&session=true`, req.url));
+    // const response = NextResponse.redirect(new URL(`/login`, req.url));
     response.cookies.delete('accessToken');
     response.cookies.delete('refreshToken');
     return response;
