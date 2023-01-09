@@ -94,9 +94,6 @@ const Main = styled.main`
   min-height: calc(100vh - ${HeaderHeight + FooterHeight}px);
   /* min-height: 100vh; */
   padding: 0 10px;
-  & > div {
-    margin: 0 auto;
-  }
 `;
 
 interface MenuInterface {
@@ -455,9 +452,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </Header>
       )}
 
-      <Main>
-        <div>{children}</div>
-      </Main>
+      <Main>{children}</Main>
       {!checkNotLayoutPathname() && (
         <Footer>
           <div>안녕하세요.</div>
