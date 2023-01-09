@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     excuteQuery({ query: 'SELECT userId,name,joinedDate FROM user_table WHERE idx = ?', values: [userIdx] }).then(
       (result) => {
-        res.status(200).json(result[0]);
+        res.status(200).json((result as any[])[0]);
       },
     );
   } catch (err) {
