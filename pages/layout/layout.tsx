@@ -373,7 +373,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <MobileCenterLine />
                 {isLogin ? (
                   <>
-                    <li>마이페이지</li>
+                    <li
+                      onClick={() => {
+                        setIsSlideOpenMenu((prev) => !prev);
+                        router.push('/mypage');
+                      }}
+                    >
+                      내 정보
+                    </li>
                     <li onClick={logout}>로그아웃</li>
                   </>
                 ) : (
@@ -431,7 +438,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       id='menuList'
                     >
                       <li>{id}</li>
-                      <li>마이페이지</li>
+                      <li
+                        onClick={() => {
+                          router.push('/mypage');
+                        }}
+                      >
+                        내 정보
+                      </li>
                       <li onClick={logout}>로그아웃</li>
                     </MenuDiv>
                   </MyMenu>
