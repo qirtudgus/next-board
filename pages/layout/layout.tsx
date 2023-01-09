@@ -252,7 +252,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const menuArr = [
     { menu: '홈', href: '/' },
     { menu: '게시판', href: '/posts' },
-    { menu: '소개', href: '/intro' },
+    // { menu: '소개', href: '/intro' },
   ];
 
   const logout = () => {
@@ -382,13 +382,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <li onClick={logout}>로그아웃</li>
                   </>
                 ) : (
-                  <li
-                    onClick={() => {
-                      router.push(`/login?returnUrl=${router.asPath}&session=false`);
-                    }}
-                  >
-                    로그인
-                  </li>
+                  <>
+                    <li
+                      onClick={() => {
+                        router.push(`/login?returnUrl=${router.asPath}&session=false`);
+                      }}
+                    >
+                      로그인
+                    </li>
+                    <li
+                      onClick={() => {
+                        router.push(`/register`);
+                      }}
+                    >
+                      회원가입
+                    </li>
+                  </>
                 )}
               </ul>
             </MobileLoginButtonDiv>{' '}
