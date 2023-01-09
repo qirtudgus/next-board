@@ -5,7 +5,7 @@ import createHashPassword from '../../../utils/createHashPassword';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
   try {
-    const { name, id, password } = req.body;
+    const { name, id, password, joinedDate } = req.body;
     const { salt, hashPassword } = createHashPassword(password);
     await excuteQuery({
       query: 'SELECT userId FROM user_table WHERE userId = ?',
@@ -14,8 +14,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       if ((checkIdRespones as any[]).length === 0) {
         console.log('사용 가능한 아이디');
         excuteQuery({
-          query: 'INSERT INTO user_table (name,userId,password,salt) VALUES (?,?,?,?)',
-          values: [name, id, hashPassword, salt],
+          query: 'INSERT INTO user_table (name,userId,password,salt,joinedDate) VALUES (?,?,?,?,?)',
+          values: [name, id, hashPassword, salt, joinedDate],
         }).then((result) => {
           console.log(result);
           res.status(201).json('회원 가입이 완료되었습니다.');
