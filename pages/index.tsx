@@ -1,8 +1,6 @@
 import Head from 'next/head';
-import { ReactElement, useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import BasicTitle from '../components/BasicTitle';
-import IndexLayout from './layout/indexLayout';
 import { motion, useScroll, useSpring } from 'framer-motion';
 
 interface WrapInterface {
