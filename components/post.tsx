@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CommentCountSVG from './CommentCountSVG';
 import LikeCountSVG from './LikeCountSVG';
-import ViewCountSVG from './viewCountSVG';
+import ViewCountSVG from './ViewCountSVG';
 
 const BoardLi = styled.li`
   &:first-child {
