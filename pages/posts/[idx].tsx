@@ -24,7 +24,7 @@ export interface PostInterface {
     comment: commentPropsInterface[];
   };
 }
-interface postPropsInterface {
+export interface postPropsInterface {
   idx: number;
   title: string;
   content: string;
