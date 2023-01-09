@@ -4,9 +4,9 @@ import { RefObject, useEffect, useRef, useState } from 'react';
 import { SolidButton } from '../../components/BasicButton';
 import { useAppSelector } from '../../store/store';
 import customAxios from '../../utils/customAxios';
-import { BoardInterface } from './[idx]';
+import { PostInterface } from './[idx]';
 
-interface EditInterface extends BoardInterface {
+interface EditInterface extends PostInterface {
   idx: string;
 }
 
@@ -58,7 +58,7 @@ export default Edit;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //context 인자에는 다양한 키가 들어있다. 아래 코드는 context에서 동적 경로 페이지 정보를 가져와서 그 번호로 axios 요청을 한것
 
-  let { data }: BoardInterface = await customAxios('GET', `/posts?idx=${context.query.idx}`);
+  let { data }: EditInterface = await customAxios('GET', `/posts?idx=${context.query.idx}`);
 
   //   console.log(context.query)
   // let { data }: BoardInterface = await axios.get(
