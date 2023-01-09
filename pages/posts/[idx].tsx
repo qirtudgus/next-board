@@ -6,7 +6,7 @@ import { SolidButton } from '../../components/BasicButton';
 import React, { RefObject, useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import styled, { css, keyframes } from 'styled-components';
-import ViewCountSVG from '../../components/viewCountSVG';
+import ViewCountSVG from '../../components/ViewCountSVG';
 import Comment from '../../components/Comment';
 
 interface commentPropsInterface {
