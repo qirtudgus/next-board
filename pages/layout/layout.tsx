@@ -239,6 +239,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [isSlideMenuOpen, setIsSlideOpenMenu] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
+
   const checkNotLayoutPathname = (): boolean => {
     let isLayoutRendering = false;
     const notLayout = ['/login', '/register'];
@@ -451,8 +452,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </Header>
       )}
+      {router.pathname === '/' ? <main>{children}</main> : <Main>{children}</Main>}
 
-      <Main>{children}</Main>
       {!checkNotLayoutPathname() && (
         <Footer>
           <div>안녕하세요.</div>
