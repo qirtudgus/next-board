@@ -100,6 +100,11 @@ interface MenuInterface {
   isOpen: boolean;
 }
 
+const IndexMain = styled.main`
+  display: block;
+  /* height: 4800px; */
+`;
+
 const MyMenu = styled.div`
   position: relative;
   cursor: pointer;
@@ -249,8 +254,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return isLayoutRendering;
   };
 
+  const checkNotLayoutPathname2 = (): boolean => {
+    let isLayoutRendering = false;
+    const notLayout = ['/', '/go'];
+    if (notLayout.includes(router.pathname)) {
+      isLayoutRendering = true;
+    }
+    return isLayoutRendering;
+  };
+
   const menuArr = [
-    { menu: '홈', href: '/' },
+    // { menu: '홈', href: '/' },
     { menu: '게시판', href: '/posts' },
     // { menu: '소개', href: '/intro' },
   ];
@@ -461,7 +475,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </Header>
       )}
-      {router.pathname === '/' ? <main>{children}</main> : <Main>{children}</Main>}
+      {checkNotLayoutPathname2() ? <IndexMain>{children}</IndexMain> : <Main>{children}</Main>}
 
       {!checkNotLayoutPathname() && (
         <Footer>
