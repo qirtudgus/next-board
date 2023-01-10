@@ -15,6 +15,8 @@ import GitSVG from '../components/GitSVG';
 import AwsSVG from '../components/AwsSVG';
 import Intro_Poraid from '../components/Intro_Poraid';
 import Intro_DungeonNote from '../components/Intro_DungeonNote';
+import 포폴 from '../img/클레이목업.png';
+import Image from 'next/image';
 
 interface ViewportProps {
   width: number;
@@ -32,6 +34,17 @@ const SectionText = styled(motion.div)`
     font-size: 2rem;
   }
 `;
+const SectionText_Portfolio = styled(motion.div)`
+  font-size: 4rem;
+  font-weight: bold;
+  position: absolute;
+  z-index: 10000;
+  word-break: keep-all;
+  text-align: center;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 3rem;
+  }
+`;
 const SectionDiv = styled(motion.div)`
   width: 95%;
   height: calc(100vh * 1);
@@ -41,6 +54,17 @@ const SectionDiv = styled(motion.div)`
   align-items: center;
   justify-content: center;
   color: #fff;
+`;
+const SectionDiv2 = styled(motion.div)`
+  width: 95%;
+  height: calc(100vh * 1);
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 1000;
 `;
 
 const SectionWrap = styled(motion.div)<ViewportProps>`
@@ -54,10 +78,11 @@ const SectionWrap = styled(motion.div)<ViewportProps>`
 const SectionWrap2 = styled(motion.div)<ViewportProps>`
   //스크롤바 너비를 빼준다
   width: 100%;
-  height: calc(${(props) => props.height}px * 1);
+  height: calc(${(props) => props.height}px * 2);
   background-color: ${(props) => props.BgColor};
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const CurrentProg = styled.div`
@@ -76,7 +101,7 @@ const DownArrow = styled.div`
 const StackList = styled(motion.div)`
   display: flex;
   position: relative;
-  top: 100px;
+  top: 140px;
   & div {
     margin: 10px;
   }
@@ -147,11 +172,10 @@ const Go = () => {
             박성현입니다. <br />
             &lt;&#47;&gt;
           </SectionText>
-          <Section_Text scrollY={scrollYProgress}>다양한 경험을 하고있습니다.</Section_Text>
+          <Section_Text scrollY={scrollYProgress}>다양한 경험을 쌓고있습니다.</Section_Text>
           <Stack_List scrollY={scrollYProgress} />
           <Section_Text2 scrollY={scrollYProgress}>Portfolio</Section_Text2>
         </SectionDiv>
-
         <DownArrow>
           <DownArrowSVG />
         </DownArrow>
@@ -166,15 +190,24 @@ const Go = () => {
   );
 };
 
+const PortfolioImg = styled(motion.div)`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  & img {
+    object-fit: cover;
+  }
+  @media ${({ theme }) => theme.device.tablet} {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 const Section2 = ({ width, height, children }: { width: number; height: number; children?: React.ReactNode }) => {
   const ref = useRef(null);
-  const { scrollY } = useScroll({
-    target: ref,
-    offset: ['start start', 'end end'],
-  });
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start end', 'end end'],
+    offset: ['start end', 'end start'],
   });
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
@@ -183,7 +216,7 @@ const Section2 = ({ width, height, children }: { width: number; height: number; 
   }, []);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.6], [0, 0, 1]);
   const display = useTransform(scrollYProgress, [0, 0.9999, 1], ['flex', 'flex', 'none']);
-
+  // const scale = useTransform(scrollYProgress, [0, 0.5], [0.5, 1]);
   return (
     <>
       <SectionWrap2
@@ -193,9 +226,19 @@ const Section2 = ({ width, height, children }: { width: number; height: number; 
         height={height}
         BgColor={'white'}
       >
-        <SectionDiv style={{ display }}>
+        <SectionDiv2 style={{ display }}>
           <Section_Text3 scrollY={scrollYProgress}>Portfolio</Section_Text3>
-        </SectionDiv>
+        </SectionDiv2>
+        <PortfolioImg style={{}}>
+          <Image
+            src={포폴}
+            alt='사진'
+            loading='eager'
+            fill
+            priority
+            quality={100}
+          ></Image>
+        </PortfolioImg>
       </SectionWrap2>
     </>
   );
@@ -228,7 +271,7 @@ const Section_Text2 = ({
   children: React.ReactNode;
 }) => {
   const opacity = useTransform(scrollY, [0.78, 0.85], [0, 1]);
-  return <SectionText style={{ opacity }}>{children}</SectionText>;
+  return <SectionText_Portfolio style={{ opacity }}>{children}</SectionText_Portfolio>;
 };
 
 const Section_Text3 = ({
@@ -242,8 +285,8 @@ const Section_Text3 = ({
   outputRange?: number[];
   children: React.ReactNode;
 }) => {
-  const opacity = useTransform(scrollY, [0, 0.7, 1], [0, 1, 0]);
-  return <SectionText style={{ opacity, color: '#000000' }}>{children}</SectionText>;
+  const opacity = useTransform(scrollY, [0, 0.5, 0.8], [0, 1, 0]);
+  return <SectionText_Portfolio style={{ opacity, color: '#000000' }}>{children}</SectionText_Portfolio>;
 };
 
 const Stack_List = ({ scrollY, children }: { scrollY: MotionValue<number>; children?: React.ReactNode }) => {
