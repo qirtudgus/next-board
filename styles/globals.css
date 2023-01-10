@@ -1,11 +1,11 @@
 * {
   box-sizing: border-box;
-  color: #202124;
   margin: 0;
   padding: 0;
 }
 
 body {
+  color: #202124;
   background: #fff;
 }
 h1,
