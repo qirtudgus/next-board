@@ -171,6 +171,7 @@ const Intro_Poraid = () => {
               src={포레이드1}
               //   width={800}
               //   height={533}
+              loading='eager'
               alt='image'
               fill
             ></Image>

@@ -210,6 +210,7 @@ const Intro_DungeonNote = () => {
               src={던전노트1}
               //   width={800}
               //   height={533}
+              loading='eager'
               alt='image'
               fill
             ></Image>
