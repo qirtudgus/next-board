@@ -1,7 +1,10 @@
 import Head from 'next/head';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion, useScroll, useSpring } from 'framer-motion';
+import Intro_Poraid from '../components/Intro_Poraid';
+import Intro_DungeonNote from '../components/Intro_DungeonNote';
+import Intro_First from '../components/Intro_first';
 
 interface WrapInterface {
   bgColor: string;
@@ -16,13 +19,35 @@ const ContentWrap = styled.div<WrapInterface>`
   align-items: center;
   flex-direction: column;
   & div {
-    width: 100%;
+    width: 90%;
     max-width: 1000px;
   }
-  & p {
+  & > div > p {
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 4rem;
     color: #fff;
+  }
+  @media ${({ theme }) => theme.device.tablet} {
+    & > div > p {
+      font-size: 3rem;
+    }
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    & > div > p {
+      font-size: 2rem;
+    }
+  }
+`;
+
+export const ContentText = styled(motion.p)`
+  font-weight: bold;
+  font-size: 4rem;
+  color: #000;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 3rem;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 2rem;
   }
 `;
 
@@ -39,30 +64,21 @@ const ContentWrapWhite = styled.div`
     width: 100%;
     max-width: 1200px;
   }
-  & p {
-    text-align: center;
+  & > div > p {
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 4rem;
     color: #000;
+    margin-left: 20px;
   }
-`;
-
-const ContentWrapPoraid = styled.div<WrapInterface>`
-  width: 100%;
-  height: calc((100vh) * 1);
-  background-color: ${(props) => props.bgColor};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  & div {
-    width: 100%;
-    max-width: 1000px;
+  @media ${({ theme }) => theme.device.tablet} {
+    & > div > p {
+      font-size: 3rem;
+    }
   }
-  & p {
-    font-weight: bold;
-    font-size: 2rem;
-    color: #fff;
+  @media ${({ theme }) => theme.device.mobile} {
+    & > div > p {
+      font-size: 2rem;
+    }
   }
 `;
 
@@ -149,17 +165,25 @@ const JsSvg = styled.svg`
   height: 100px;
 `;
 
+const CurrentYScroll = styled.div`
+  position: fixed;
+  color: red;
+  top: 100px;
+  left: 0;
+  z-index: 100;
+`;
+
 export default function Home() {
   const { scrollY } = useScroll();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress);
-
+  const [Ystate, SetYstate] = useState(Number(0));
   useEffect(() => {
     return scrollY.onChange((latest) => {
-      console.log(scrollYProgress);
-      // console.log('Page scroll: ', latest);
+      console.log('Page scroll: ', latest);
+      SetYstate(latest);
     });
-  }, []);
+  }, [scrollY]);
 
   return (
     <>
@@ -178,40 +202,19 @@ export default function Home() {
           href='/favicon.ico'
         />
       </Head>{' '}
-      <ProgressBar style={{ scaleX }} />
-      <ContentWrap bgColor='black'>
-        <div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            안녕하세요.
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            Web FrontEnd Developer
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            박성현입니다.
-          </motion.p>
-        </div>
-      </ContentWrap>
-      <ContentWrapWhite>
+      {/* <ProgressBar style={{ scaleX }} /> */}
+      <CurrentYScroll>{Ystate}</CurrentYScroll>
+      {/* <Intro_First></Intro_First> */}
+      {/* <Intro_Second></Intro_Second> */}
+      {/* <ContentWrapWhite>
         <div>
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
           >
-            저는 이것을 위주로 공부하고있습니다!
+            아래의 기술들로 경험을 쌓고 있습니다!
           </motion.p>
           <StackDiv>
             <StackCard
@@ -502,8 +505,9 @@ export default function Home() {
             </StackCard>
           </StackDiv>
         </div>
-      </ContentWrapWhite>
-      <ContentWrapPoraid bgColor='black'> </ContentWrapPoraid>
+      </ContentWrapWhite> */}
+      {/* <Intro_Poraid></Intro_Poraid>
+      <Intro_DungeonNote></Intro_DungeonNote> */}
     </>
   );
 }
