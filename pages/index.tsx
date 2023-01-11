@@ -18,6 +18,7 @@ import Intro_DungeonNote from '../components/Intro_DungeonNote';
 // import 포폴 from '../img/클레이목업.png';
 import 포폴 from '../img/포트폴리오_이미지추가.jpg';
 import Image from 'next/image';
+import VercelSVG from '../components/VercelSVG';
 
 interface ViewportProps {
   width: number;
@@ -102,7 +103,17 @@ const DownArrow = styled.div`
 const StackList = styled(motion.div)`
   display: flex;
   position: relative;
-  top: 140px;
+  /* top: 140px; */
+  top: 25vh;
+  & div {
+    margin: 10px;
+  }
+`;
+
+const StackList2 = styled(motion.div)`
+  display: flex;
+  position: relative;
+  top: -25vh;
   & div {
     margin: 10px;
   }
@@ -158,7 +169,7 @@ const Go = () => {
         height={viewport.height}
         backgroundcolors={'#1d1d1f'}
       >
-        {/* <CurrentProg>{currentProg}</CurrentProg> */}
+        <CurrentProg>{currentProg}</CurrentProg>
         <SectionDiv style={{ display }}>
           <SectionText
             style={{ opacity }}
@@ -173,6 +184,7 @@ const Go = () => {
             박성현입니다. <br />
             &lt;&#47;&gt;
           </SectionText>
+          <Stack_List2 scrollY={scrollYProgress} />
           <Section_Text scrollY={scrollYProgress}>다양한 경험을 쌓고있습니다.</Section_Text>
           <Stack_List scrollY={scrollYProgress} />
           <Section_Text2 scrollY={scrollYProgress}>Portfolio</Section_Text2>
@@ -288,26 +300,38 @@ const Section_Text3 = ({
   children: React.ReactNode;
 }) => {
   const opacity = useTransform(scrollY, [0, 0.5, 0.9], [0, 1, 0]);
-  return <SectionText_Portfolio style={{ opacity, color: '#000000' }}>{children}</SectionText_Portfolio>;
+  return <SectionText_Portfolio style={{ opacity, color: '#1d1d1f' }}>{children}</SectionText_Portfolio>;
+};
+
+const Stack_List2 = ({ scrollY, children }: { scrollY: MotionValue<number>; children?: React.ReactNode }) => {
+  const opacity = useTransform(scrollY, [0, 0.22, 0.3, 0.55, 0.78], [0, 0, 1, 1, 0]);
+  // const x = useTransform(scrollY, [0, 0.22, 0.6], [-1500, -1500, 1000]);
+  const x = useTransform(scrollY, [0, 0.22, 0.9], [1500, 1500, -1000]);
+  return (
+    <StackList2 style={{ x, opacity }}>
+      <ReactSVG />
+      <JsSVG />
+      <VercelSVG />
+      <GitSVG />
+      <SagaSVG />
+      <MysqlSVG />
+    </StackList2>
+  );
 };
 
 const Stack_List = ({ scrollY, children }: { scrollY: MotionValue<number>; children?: React.ReactNode }) => {
-  const opacity = useTransform(scrollY, [0, 0.22, 0.3, 0.48, 0.62], [0, 0, 1, 1, 0]);
-  const x = useTransform(scrollY, [0, 0.22, 0.6], [-1500, -1500, 1000]);
+  const opacity = useTransform(scrollY, [0, 0.22, 0.3, 0.55, 0.78], [0, 0, 1, 1, 0]);
+  const x = useTransform(scrollY, [0, 0.22, 0.9], [-1500, -1500, 1000]);
   return (
     <StackList style={{ x, opacity }}>
-      <ReactSVG />
-      <ReduxSVG />
-      <SagaSVG />
+      <AwsSVG />
       <NodeSVG />
+      <FigmaSVG />
       <NextSVG />
       <TsSVG />
-      <JsSVG />
-      <MysqlSVG />
-      <FigmaSVG />
-      <GitSVG />
-      <AwsSVG />
+      <ReduxSVG />
     </StackList>
   );
 };
+
 export default Go;
