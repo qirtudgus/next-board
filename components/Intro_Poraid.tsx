@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { Suspense } from 'react';
+import { RefObject, Suspense, useEffect, useRef } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { motion } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import 포레이드1 from '../img/포레이드1.png';
 import Image from 'next/image';
 import Swipers from './Swiper';
@@ -12,7 +12,7 @@ import p0 from '../img/poraid0_1200.webp';
 import p1 from '../img/poraid1_1200.webp';
 import p2 from '../img/poraid2_1200.webp';
 
-const ContentWrapPoraid = styled.div`
+const ContentWrapPoraid = styled(motion.div)`
   width: 100%;
   height: calc((100vh) * 1);
   background-color: #1d1d1f;
@@ -106,9 +106,32 @@ const ImgDiv = styled.div`
 `;
 
 const Intro_Poraid = () => {
+  const ref = useRef() as RefObject<HTMLDivElement>;
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  });
+
+  //해당 함수를 통해 data attribute 세팅
+  useEffect(() => {
+    return scrollYProgress.onChange((latest) => {
+      if (ref.current) {
+        ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
+        let progressNumber = Number(ref.current.getAttribute('data-progress'));
+        // console.log(`포레이드 : ${progressNumber}`);
+        if (progressNumber > 0.961) {
+          (document!.getElementById('header') as HTMLElement).classList.add('text_black');
+        }
+        if (progressNumber > 0 && progressNumber < 0.96) {
+          (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
+        }
+      }
+    });
+  }, []);
+
   return (
     <>
-      <ContentWrapPoraid>
+      <ContentWrapPoraid ref={ref}>
         <ContentBox>
           <DescDiv>
             <ContentName>
@@ -186,24 +209,3 @@ const Intro_Poraid = () => {
 };
 
 export default Intro_Poraid;
-{
-  /* <div>
-
-          <Canvas camera={{ position: [0, -0.2, 0.5] }}>
-            <ambientLight intensity={0.3} />
-            <Suspense fallback={null}>
-              <Scene />
-              <OrbitControls
-                //자동 회전
-                // autoRotate={true}
-                //줌 방지
-
-                enableZoom={false}
-                //   minPolarAngle={Math.PI / 2.5}
-                //   maxPolarAngle={Math.PI / 2.5}
-              />
-              <Environment preset='city' />
-            </Suspense>
-          </Canvas>
-        </div> */
-}
