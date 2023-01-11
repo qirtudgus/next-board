@@ -15,7 +15,7 @@ import p2 from '../img/poraid2_1200.webp';
 const ContentWrapPoraid = styled.div`
   width: 100%;
   height: calc((100vh) * 1);
-  background-color: black;
+  background-color: #1d1d1f;
   display: flex;
   justify-content: center;
   align-items: center;

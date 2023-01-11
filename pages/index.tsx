@@ -156,7 +156,7 @@ const Go = () => {
         data-progress={scrollYProgress.get()}
         width={viewport.width}
         height={viewport.height}
-        backgroundcolors={'black'}
+        backgroundcolors={'#1d1d1f'}
       >
         {/* <CurrentProg>{currentProg}</CurrentProg> */}
         <SectionDiv style={{ display }}>
@@ -217,7 +217,7 @@ const Section2 = ({ width, height, children }: { width: number; height: number; 
     });
   }, []);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.6], [0, 0, 1]);
-  const display = useTransform(scrollYProgress, [0, 0.77, 1], ['flex', 'flex', 'none']);
+  const display = useTransform(scrollYProgress, [0, 0.9, 1], ['flex', 'flex', 'none']);
   // const scale = useTransform(scrollYProgress, [0, 0.5], [0.5, 1]);
   return (
     <>
@@ -272,7 +272,7 @@ const Section_Text2 = ({
   outputRange?: number[];
   children: React.ReactNode;
 }) => {
-  const opacity = useTransform(scrollY, [0.78, 0.85], [0, 1]);
+  const opacity = useTransform(scrollY, [0.81, 0.9], [0, 1]);
   return <SectionText_Portfolio style={{ opacity }}>{children}</SectionText_Portfolio>;
 };
 
@@ -287,7 +287,7 @@ const Section_Text3 = ({
   outputRange?: number[];
   children: React.ReactNode;
 }) => {
-  const opacity = useTransform(scrollY, [0, 0.5, 0.8], [0, 1, 0]);
+  const opacity = useTransform(scrollY, [0, 0.5, 0.9], [0, 1, 0]);
   return <SectionText_Portfolio style={{ opacity, color: '#000000' }}>{children}</SectionText_Portfolio>;
 };
 
