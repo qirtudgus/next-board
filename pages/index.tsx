@@ -76,6 +76,14 @@ const SectionWrap = styled(motion.div)<ViewportProps>`
   background-color: ${(props) => props.backgroundcolors};
   display: flex;
   justify-content: center;
+
+  //잘먹히고 트랜지션까지 잘들어가서 보다 잘 활용할 수 있을듯
+  /* &[data-progress^='0.4'] {
+    background-color: #707070;
+  }
+  transition: all 1s; */
+
+  }
 `;
 const SectionWrap2 = styled(motion.div)<ViewportProps>`
   //스크롤바 너비를 빼준다
@@ -95,7 +103,7 @@ const CurrentProg = styled.div`
   z-index: 1000;
 `;
 
-const DownArrow = styled.div`
+const DownArrow = styled(motion.div)`
   position: fixed;
   bottom: 10px;
 `;
@@ -168,6 +176,7 @@ const Go = () => {
         width={viewport.width}
         height={viewport.height}
         backgroundcolors={'#1d1d1f'}
+        id='firstSection'
       >
         <CurrentProg>{currentProg}</CurrentProg>
         <SectionDiv style={{ display }}>
@@ -189,7 +198,7 @@ const Go = () => {
           <Stack_List scrollY={scrollYProgress} />
           <Section_Text2 scrollY={scrollYProgress}>Portfolio</Section_Text2>
         </SectionDiv>
-        <DownArrow>
+        <DownArrow style={{ display }}>
           <DownArrowSVG />
         </DownArrow>
       </SectionWrap>
