@@ -11,19 +11,31 @@ const HeaderHeight = 60;
 const FooterHeight = 180;
 
 const Header = styled.header`
-  position: sticky;
+  position: fixed;
   font-size: 0.95rem;
   z-index: 11;
   top: 0;
   left: 0;
   width: 100%;
   height: ${HeaderHeight}px;
-  background-color: #fff;
+  color: #fff;
+  /* background-color: rgba(0, 0, 0, 0); */
+  /* background: none; */
   display: flex;
   justify-content: center;
   border-bottom: 1px solid#c4c4c4;
   align-items: center;
   padding: 0 10px;
+  transition: all 0.7s ease;
+  top: -60px;
+  &.show {
+    top: 0;
+  }
+
+  &.text_black {
+    color: black !important;
+  }
+
   & > div {
     max-width: 1000px;
     margin: 0 auto;
@@ -101,7 +113,6 @@ interface MenuInterface {
 }
 
 const IndexMain = styled.main`
-  display: block;
   /* height: 4800px; */
 `;
 
@@ -316,7 +327,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       {isLoading && <LoadingSpinner />}
       {!checkNotLayoutPathname() && (
-        <Header>
+        <Header id={'header'}>
           <div>
             <LogoDiv>
               <Logo
