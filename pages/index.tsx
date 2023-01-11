@@ -15,13 +15,14 @@ import GitSVG from '../components/GitSVG';
 import AwsSVG from '../components/AwsSVG';
 import Intro_Poraid from '../components/Intro_Poraid';
 import Intro_DungeonNote from '../components/Intro_DungeonNote';
-import 포폴 from '../img/클레이목업.png';
+// import 포폴 from '../img/클레이목업.png';
+import 포폴 from '../img/포트폴리오_이미지추가.jpg';
 import Image from 'next/image';
 
 interface ViewportProps {
   width: number;
   height: number;
-  BgColor: string;
+  backgroundcolors: string;
 }
 
 const SectionText = styled(motion.div)`
@@ -64,14 +65,14 @@ const SectionDiv2 = styled(motion.div)`
   align-items: center;
   justify-content: center;
   color: #fff;
-  z-index: 1000;
+  z-index: 1;
 `;
 
 const SectionWrap = styled(motion.div)<ViewportProps>`
   //스크롤바 너비를 빼준다
   width: 100%;
   height: calc(${(props) => props.height}px * 5);
-  background-color: ${(props) => props.BgColor};
+  background-color: ${(props) => props.backgroundcolors};
   display: flex;
   justify-content: center;
 `;
@@ -79,7 +80,7 @@ const SectionWrap2 = styled(motion.div)<ViewportProps>`
   //스크롤바 너비를 빼준다
   width: 100%;
   height: calc(${(props) => props.height}px * 2);
-  background-color: ${(props) => props.BgColor};
+  background-color: ${(props) => props.backgroundcolors};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -155,7 +156,7 @@ const Go = () => {
         data-progress={scrollYProgress.get()}
         width={viewport.width}
         height={viewport.height}
-        BgColor={'black'}
+        backgroundcolors={'black'}
       >
         {/* <CurrentProg>{currentProg}</CurrentProg> */}
         <SectionDiv style={{ display }}>
@@ -186,6 +187,7 @@ const Go = () => {
       ></Section2>
       <Intro_Poraid />
       <Intro_DungeonNote />
+      {/* <Swipers /> */}
     </>
   );
 };
@@ -198,8 +200,8 @@ const PortfolioImg = styled(motion.div)`
     object-fit: cover;
   }
   @media ${({ theme }) => theme.device.tablet} {
-    width: 100%;
-    height: 100%;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
   }
 `;
 
@@ -215,7 +217,7 @@ const Section2 = ({ width, height, children }: { width: number; height: number; 
     });
   }, []);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.6], [0, 0, 1]);
-  const display = useTransform(scrollYProgress, [0, 0.9999, 1], ['flex', 'flex', 'none']);
+  const display = useTransform(scrollYProgress, [0, 0.77, 1], ['flex', 'flex', 'none']);
   // const scale = useTransform(scrollYProgress, [0, 0.5], [0.5, 1]);
   return (
     <>
@@ -224,7 +226,7 @@ const Section2 = ({ width, height, children }: { width: number; height: number; 
         data-progress={scrollYProgress.get()}
         width={width}
         height={height}
-        BgColor={'white'}
+        backgroundcolors={'white'}
       >
         <SectionDiv2 style={{ display }}>
           <Section_Text3 scrollY={scrollYProgress}>Portfolio</Section_Text3>
