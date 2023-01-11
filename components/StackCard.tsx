@@ -95,7 +95,7 @@ export default function StackCards() {
 
   return (
     <StackDiv style={{ x, opacity }}>
-      <StackCard>
+      {/* <StackCard>
         <ReactSvg
           xmlns='http://www.w3.org/2000/svg'
           viewBox='-11.5 -10.23174 23 20.46348'
@@ -498,7 +498,7 @@ export default function StackCards() {
 	C660.1,442.9,639.8,463.2,614.6,463.2'
           />
         </NginxSvg>
-      </StackCard>
+      </StackCard> */}
     </StackDiv>
   );
 }
