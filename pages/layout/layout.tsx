@@ -13,7 +13,7 @@ const FooterHeight = 180;
 const Header = styled.header`
   position: sticky;
   font-size: 0.95rem;
-  z-index: 1;
+  z-index: 11;
   top: 0;
   left: 0;
   width: 100%;
