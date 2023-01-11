@@ -6,6 +6,11 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { motion } from 'framer-motion';
 import 포레이드1 from '../img/포레이드1.png';
 import Image from 'next/image';
+import Swipers from './Swiper';
+
+import p0 from '../img/poraid0_1200.webp';
+import p1 from '../img/poraid1_1200.webp';
+import p2 from '../img/poraid2_1200.webp';
 
 const ContentWrapPoraid = styled.div`
   width: 100%;
@@ -20,9 +25,12 @@ const ContentWrapPoraid = styled.div`
 const ContentBox = styled.div`
   width: 90%;
   max-width: 1200px;
+  position: relative;
+  z-index: 10;
   align-items: center;
   justify-content: center;
   display: flex;
+
   @media ${({ theme }) => theme.device.tablet} {
     flex-direction: column;
   }
@@ -48,6 +56,7 @@ const DescDiv = styled.div`
   flex-direction: column;
   display: flex;
   color: #fff;
+
   @media ${({ theme }) => theme.device.tablet} {
     width: 100%;
   }
@@ -94,9 +103,6 @@ const ImgDiv = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
   }
-  & img {
-    position: relative !important;
-  }
 `;
 
 const Intro_Poraid = () => {
@@ -133,7 +139,7 @@ const Intro_Poraid = () => {
                   <span>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
-                      enable-background='new 0 0 24 24'
+                      enableBackground='new 0 0 24 24'
                       height='40px'
                       viewBox='0 0 24 24'
                       width='40px'
@@ -167,14 +173,11 @@ const Intro_Poraid = () => {
             <br />- 반응형 웹 구축
           </DescDiv>
           <ImgDiv>
-            <Image
-              src={포레이드1}
-              //   width={800}
-              //   height={533}
-              loading='eager'
-              alt='image'
-              fill
-            ></Image>
+            <Swipers
+              imgArr={[p0, p1, p2]}
+              bulletActiveColor='#ef5a34'
+              bulletBgColor='#ffffff'
+            ></Swipers>
           </ImgDiv>
         </ContentBox>
       </ContentWrapPoraid>

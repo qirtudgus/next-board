@@ -6,6 +6,12 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { motion } from 'framer-motion';
 import 던전노트1 from '../img/던전노트1.png';
 import Image from 'next/image';
+import Swipers from './Swiper';
+
+import note0 from '../img/note_1200.webp';
+import note1 from '../img/note0_1200.webp';
+import note2 from '../img/note1_1200.webp';
+import note3 from '../img/note2_1200.webp';
 
 const ContentWrapPoraid = styled.div`
   width: 100%;
@@ -47,6 +53,8 @@ const DescDiv = styled.div`
   width: 500px;
   flex-direction: column;
   display: flex;
+  position: relative;
+  z-index: 10;
   @media ${({ theme }) => theme.device.tablet} {
     width: 100%;
   }
@@ -105,9 +113,6 @@ const ImgDiv = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
   }
-  & img {
-    position: relative !important;
-  }
 `;
 const Intro_DungeonNote = () => {
   return (
@@ -143,7 +148,7 @@ const Intro_DungeonNote = () => {
                   <span>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
-                      enable-background='new 0 0 24 24'
+                      enableBackground='new 0 0 24 24'
                       height='40px'
                       viewBox='0 0 24 24'
                       width='40px'
@@ -174,46 +179,13 @@ const Intro_DungeonNote = () => {
             - 미니게임과 던전을 탐험하여 돈과 경험치를 획득!
             <br />- 내가 만났던 몬스터를 확인하는 도감 기능
             <br />- 제일 높은 던전까지 탐험한 자는 누구? 랭킹 기능
-            {/* <DesckBlock>
-              <DescP>프로젝트명</DescP>
-              <DescText>포레이드</DescText>
-            </DesckBlock>
-            <DesckBlock>
-              <DescP>기간</DescP>
-              <DescText>2022.10 ~ 2022.12</DescText>
-            </DesckBlock>
-            <DesckBlock>
-              <DescP>Frontend</DescP>
-              <DescText>React / TypeScript / Styled-Components / Redux / Redux-Toolkit</DescText>
-            </DesckBlock> */}
-            {/* <DescTitle>
-              <DescP>프로젝트명</DescP>
-              <DescP>기간</DescP>
-              <DescP>Frontend</DescP>
-              <DescP>Backend</DescP>
-              <DescP>Deploy</DescP>
-              <DescP>한줄소개</DescP>
-              <DescP>주소</DescP>
-            </DescTitle>
-            <DescContent>
-              <DescP>포레이드</DescP>
-              <DescP>2022.10 ~ 2022.12</DescP>
-              <DescP>React / TypeScript / Styled-Components / Redux / Redux-Toolkit</DescP>
-              <DescP>Node / MySQL</DescP>
-              <DescP>AWS-EC2-Linux / Nginx / Git Actions / GA</DescP>
-              <DescP>게임 진행 시 필요한 사용자들을 실시간으로 모집할 수 있는 서비스</DescP>
-              <DescP>https://poraid.com</DescP>
-            </DescContent> */}
           </DescDiv>
           <ImgDiv>
-            <Image
-              src={던전노트1}
-              //   width={800}
-              //   height={533}
-              loading='eager'
-              alt='image'
-              fill
-            ></Image>
+            <Swipers
+              imgArr={[note0, note1, note2, note3]}
+              bulletBgColor='#8b8b8b'
+              bulletActiveColor='black'
+            ></Swipers>
           </ImgDiv>
         </ContentBox>
       </ContentWrapPoraid>
