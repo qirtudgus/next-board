@@ -7,13 +7,13 @@ import Intro_DungeonNote from '../components/Intro_DungeonNote';
 import Intro_First from '../components/Intro_first';
 
 interface WrapInterface {
-  bgColor: string;
+  backgroundcolors: string;
 }
 
 const ContentWrap = styled.div<WrapInterface>`
   width: 100%;
   height: calc((100vh) * 1);
-  background-color: ${(props) => props.bgColor};
+  background-color: ${(props) => props.backgroundcolors};
   display: flex;
   justify-content: center;
   align-items: center;
