@@ -11,6 +11,13 @@ import { loginSuccess, logoutSuccess } from '../store/userInfoSlice';
 import customAxios from '../utils/customAxios';
 import { useScroll } from 'framer-motion';
 
+// replace console.* for disable log on production
+if (process.env.NODE_ENV === 'production') {
+  console.log = () => {};
+  console.error = () => {};
+  console.debug = () => {};
+}
+
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
