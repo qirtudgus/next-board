@@ -10,21 +10,9 @@ const SectionWrap3 = styled(motion.div)`
   //스크롤바 너비를 빼준다
   width: 100%;
   height: calc(100vh * 4);
-  /* background-color: ${(props) => props.backgroundcolors}; */
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* color: #fff; */
-  /* &.white {
-  background-color: #fff;
-  color: #000;
-} */
-  /* @media ${({ theme }) => theme.device.tablet} {
-  height: calc(${(props) => props.height}px * 5);
-}
-@media ${({ theme }) => theme.device.mobile} {
-} */
 `;
 
 const SectionDiv3 = styled(motion.div)`
