@@ -16,11 +16,12 @@ import note3 from '../img/note2_1200.webp';
 const ContentWrapPoraid = styled(motion.div)`
   width: 100%;
   height: calc((100vh) * 1);
-  background-color: white;
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: #1d1d1f;
 `;
 
 const ContentBox = styled.div`
@@ -78,7 +79,7 @@ const DescText = styled.p`
 
 const ContentName = styled.div`
   font-size: 2rem;
-  border-bottom: 1px solid#000;
+  border-bottom: 1px solid#fff;
   padding-bottom: 10px;
   margin-bottom: 15px;
   font-weight: bold;
@@ -207,7 +208,7 @@ const Intro_DungeonNote = () => {
             <Swipers
               imgArr={[note0, note1, note2, note3]}
               bulletBgColor='#8b8b8b'
-              bulletActiveColor='black'
+              bulletActiveColor='#fff'
             ></Swipers>
           </ImgDiv>
         </ContentBox>
