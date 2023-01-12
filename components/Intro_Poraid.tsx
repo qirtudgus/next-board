@@ -109,7 +109,7 @@ const Intro_Poraid = () => {
   const ref = useRef() as RefObject<HTMLDivElement>;
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start start', 'end start'],
+    offset: ['start end', 'end start'],
   });
 
   //해당 함수를 통해 data attribute 세팅
@@ -118,12 +118,17 @@ const Intro_Poraid = () => {
       if (ref.current) {
         ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
         let progressNumber = Number(ref.current.getAttribute('data-progress'));
-        // console.log(`포레이드 : ${progressNumber}`);
-        if (progressNumber > 0.961) {
-          (document!.getElementById('header') as HTMLElement).classList.add('text_black');
+        console.log(`포레이드 : ${progressNumber}`);
+        //0.479보다 크면 white 추가하기, 작으면 white 삭제하기
+        if (progressNumber > 0.4789) {
+          (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('white');
+
+          // (document!.getElementById('header') as HTMLElement).classList.add('text_black');
         }
-        if (progressNumber > 0 && progressNumber < 0.96) {
-          (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
+        if (progressNumber > 0 && progressNumber < 0.4789) {
+          (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('white');
+
+          // (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
         }
       }
     });
