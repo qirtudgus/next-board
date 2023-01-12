@@ -18,24 +18,15 @@ const Header = styled.header`
   left: 0;
   width: 100%;
   height: ${HeaderHeight}px;
-  color: #fff;
-  /* background-color: rgba(0, 0, 0, 0); */
-  /* background: none; */
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid#c4c4c4;
+  transition: top 0.6s ease;
   align-items: center;
   padding: 0 10px;
-  transition: all 0.7s ease;
   top: -60px;
   &.show {
     top: 0;
   }
-
-  &.text_black {
-    color: black !important;
-  }
-
   & > div {
     max-width: 1000px;
     margin: 0 auto;
