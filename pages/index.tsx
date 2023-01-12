@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { RefObject, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion, MotionValue, transform, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import DownArrowSVG from '../components/DownArrowSVG';
@@ -17,8 +17,12 @@ import Intro_Poraid from '../components/Intro_Poraid';
 import Intro_DungeonNote from '../components/Intro_DungeonNote';
 // import 포폴 from '../img/클레이목업.png';
 import 포폴 from '../img/포트폴리오_이미지추가.jpg';
+import 메타 from '../img/메타인지0.png';
+import 주인 from '../img/주인의식0.png';
+import 존중 from '../img/상호존중0.png';
 import Image from 'next/image';
 import VercelSVG from '../components/VercelSVG';
+import Intro_nextboard from '../components/Intro_nextboard';
 
 interface ViewportProps {
   width: number;
@@ -62,7 +66,9 @@ const SectionDiv2 = styled(motion.div)`
   height: calc(100vh * 1);
   position: fixed;
   top: 0;
-  display: flex;
+
+  //섹션3 만들동안 none처리
+  display: none !important;
   align-items: center;
   justify-content: center;
   color: #fff;
@@ -73,16 +79,9 @@ const SectionWrap = styled(motion.div)<ViewportProps>`
   //스크롤바 너비를 빼준다
   width: 100%;
   height: calc(${(props) => props.height}px * 5);
-  background-color: ${(props) => props.backgroundcolors};
+  /* background-color: ${(props) => props.backgroundcolors}; */
   display: flex;
   justify-content: center;
-
-  //잘먹히고 트랜지션까지 잘들어가서 보다 잘 활용할 수 있을듯
-  /* &[data-progress^='0.4'] {
-    background-color: #707070;
-  }
-  transition: all 1s; */
-
   }
 `;
 const SectionWrap2 = styled(motion.div)<ViewportProps>`
@@ -135,7 +134,8 @@ const Go = () => {
 
   const [currentProg, SetCurrentProg] = useState(0);
 
-  const ref = useRef(null);
+  // const ref = useRef(null);
+  const ref = useRef() as RefObject<HTMLDivElement>;
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
@@ -149,7 +149,8 @@ const Go = () => {
         timer = window.setTimeout(function () {
           timer = null;
           console.log('리사이즈');
-        }, 300);
+          setViewport({ width: window.innerWidth, height: window.innerHeight });
+        }, 100);
       }
     };
     window.addEventListener('resize', SetPort);
@@ -158,9 +159,26 @@ const Go = () => {
     };
   }, []);
 
+  //해당 함수를 통해 data attribute 세팅
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
-      SetCurrentProg(scrollYProgress.get());
+      if (ref.current) {
+        ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
+        let progressNumber = Number(scrollYProgress.get());
+        console.log(`1번섹션 : ${progressNumber}`);
+        if (progressNumber > 0.09) {
+          (document!.getElementById('header') as HTMLElement).classList.add('show');
+        } else {
+          (document!.getElementById('header') as HTMLElement).classList.remove('show');
+        }
+
+        // if (progressNumber > 0.991) {
+        //   (document!.getElementById('header') as HTMLElement).classList.add('text_black');
+        // }
+        // if (progressNumber < 0.991) {
+        //   (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
+        // }
+      }
     });
   }, []);
 
@@ -172,7 +190,6 @@ const Go = () => {
     <>
       <SectionWrap
         ref={ref}
-        data-progress={scrollYProgress.get()}
         width={viewport.width}
         height={viewport.height}
         backgroundcolors={'#1d1d1f'}
@@ -194,20 +211,33 @@ const Go = () => {
             &lt;&#47;&gt;
           </SectionText>
           <Stack_List2 scrollY={scrollYProgress} />
-          <Section_Text scrollY={scrollYProgress}>다양한 경험을 쌓고있습니다.</Section_Text>
+          <Section_Text scrollY={scrollYProgress}>
+            리액트를 필두로
+            <br />
+            다양한 경험을 쌓고있습니다.
+          </Section_Text>
           <Stack_List scrollY={scrollYProgress} />
-          <Section_Text2 scrollY={scrollYProgress}>Portfolio</Section_Text2>
+          {/* <Section_Text2 scrollY={scrollYProgress}>Portfolio</Section_Text2> */}
         </SectionDiv>
         <DownArrow style={{ display }}>
           <DownArrowSVG />
         </DownArrow>
       </SectionWrap>
+
+      {/* who am i? */}
+      <Section3
+        width={viewport.width}
+        height={viewport.height}
+      ></Section3>
+
       <Section2
         width={viewport.width}
         height={viewport.height}
       ></Section2>
+
       <Intro_Poraid />
       <Intro_DungeonNote />
+      <Intro_nextboard />
       {/* <Swipers /> */}
     </>
   );
@@ -220,23 +250,32 @@ const PortfolioImg = styled(motion.div)`
   & img {
     object-fit: cover;
   }
-  @media ${({ theme }) => theme.device.tablet} {
-  }
-  @media ${({ theme }) => theme.device.mobile} {
-  }
 `;
 
 const Section2 = ({ width, height, children }: { width: number; height: number; children?: React.ReactNode }) => {
-  const ref = useRef(null);
+  const ref = useRef() as RefObject<HTMLDivElement>;
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
+
+  //해당 함수를 통해 data attribute 세팅
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
-      console.log(scrollYProgress.get());
+      if (ref.current) {
+        ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
+        let progressNumber = Number(ref.current.getAttribute('data-progress'));
+        // console.log(progressNumber);
+        // if (progressNumber > 0.983) {
+        //   (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
+        // }
+        // if (progressNumber < 0.983) {
+        //   (document!.getElementById('header') as HTMLElement).classList.add('text_black');
+        // }
+      }
     });
   }, []);
+
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.6], [0, 0, 1]);
   const display = useTransform(scrollYProgress, [0, 0.9, 1], ['flex', 'flex', 'none']);
   // const scale = useTransform(scrollYProgress, [0, 0.5], [0.5, 1]);
@@ -267,6 +306,293 @@ const Section2 = ({ width, height, children }: { width: number; height: number; 
   );
 };
 
+const SectionWrap3 = styled(motion.div)<ViewportProps>`
+  //스크롤바 너비를 빼준다
+  width: 100%;
+  height: calc(100vh * 4);
+  /* background-color: ${(props) => props.backgroundcolors}; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* color: #fff; */
+  /* &.white {
+    background-color: #fff;
+    color: #000;
+  } */
+  /* @media ${({ theme }) => theme.device.tablet} {
+    height: calc(${(props) => props.height}px * 5);
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+  } */
+`;
+
+const SectionDiv3 = styled(motion.div)`
+  width: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  /* justify-content: center; */
+
+  z-index: 1;
+
+  /* margin: 0 200px; */
+
+  @media screen and (max-width: 1680px) {
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    align-items: center;
+  }
+  @media screen and (max-width: 1140px) {
+    & .section3_image {
+      width: 400px;
+      object-fit: contain;
+    }
+  }
+
+  @media ${({ theme }) => theme.device.tablet} {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* margin: 0 50px; */
+    & .section3_image {
+      width: 100%;
+      height: fit-content;
+    }
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    /* margin: 0 25px; */
+  }
+`;
+
+const Section3_title = styled(motion.div)`
+  position: sticky;
+  height: 100vh;
+  flex: 0 0 470px;
+  max-width: 470px;
+  font-size: 72px;
+  line-height: 1.28;
+  top: 0;
+  margin: 0;
+  text-align: left;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 54px;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 44px;
+  }
+`;
+const Section3_boxWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 100vh 0;
+`;
+
+const Section3_box = styled.div`
+  position: relative;
+  flex-shrink: 0;
+  max-width: 400px;
+  height: 480px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  flex-direction: row-reverse;
+
+  &:nth-child(1) {
+    margin-left: 340px;
+    & > div {
+      padding-right: 30px;
+      text-align: right;
+    }
+  }
+
+  &:nth-child(2) {
+    & > div {
+      padding-left: 30px;
+    }
+  }
+
+  &:nth-child(3) {
+    margin-left: 340px;
+    & > div {
+      position: absolute;
+      left: -200px;
+    }
+  }
+
+  @media ${({ theme }) => theme.device.tablet} {
+    margin-top: 0px;
+    flex-direction: column;
+    align-items: center;
+    &:nth-child(1) {
+      margin-left: 0px;
+      & > div {
+        padding-right: 0px;
+        text-align: left;
+      }
+    }
+
+    &:nth-child(2) {
+      flex-direction: column-reverse;
+      & > div {
+        padding-left: 0px;
+      }
+    }
+
+    &:nth-child(3) {
+      margin-left: 0px;
+      & > div {
+        position: relative;
+        left: 0px;
+      }
+    }
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    &:nth-child(1) {
+      & > div {
+      }
+    }
+
+    &:nth-child(2) {
+      & > div {
+      }
+    }
+
+    &:nth-child(3) {
+      & > div {
+      }
+    }
+  }
+`;
+
+const Section3_boxText = styled.div`
+  width: 200px;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  /* width: fit-content; */
+  word-break: keep-all;
+  line-height: 1.1em;
+  margin-top: 20px;
+
+  & .Title {
+    display: block;
+    font-weight: bold;
+    font-size: 30px;
+    /* padding-bottom: 5px; */
+    @media ${({ theme }) => theme.device.tablet} {
+      margin-top: 20px;
+    }
+  }
+`;
+
+const Section3 = ({ width, height, children }: { width: number; height: number; children?: React.ReactNode }) => {
+  const ref = useRef() as RefObject<HTMLDivElement>;
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+
+  //해당 함수를 통해 data attribute 세팅
+  useEffect(() => {
+    return scrollYProgress.onChange((latest) => {
+      if (ref.current) {
+        ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
+        let progressNumber = Number(ref.current.getAttribute('data-progress'));
+        console.log(`섹션3 :${progressNumber}`);
+        //섹션3에 돌입하면 1번섹션의 배경을 흰색으로 변경해주기
+        //섹션3은 기본 검은색 배경 흰색글씨 -> 흰 배경 검은 글씨로
+        //시작구간 값은 약 0.08 정도
+        if (progressNumber > 0.1) {
+          // (document!.getElementById('firstSection') as HTMLElement).classList.add('white');
+          // (document!.getElementById('thirdSection') as HTMLElement).classList.add('white');
+          // (document!.getElementById('Body') as HTMLElement).classList.add('white');
+
+          (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('white');
+        } else {
+          // (document!.getElementById('firstSection') as HTMLElement).classList.remove('white');
+          // (document!.getElementById('thirdSection') as HTMLElement).classList.remove('white');
+          (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('white');
+
+          // (document!.getElementById('Body') as HTMLElement).classList.remove('white');
+        }
+      }
+    });
+  }, []);
+
+  const opacity = useTransform(scrollYProgress, [0.22, 0.48, 0.75, 0.9], [1, 0, 0, 1]);
+  return (
+    <>
+      <SectionWrap3
+        ref={ref}
+        data-progress={scrollYProgress.get()}
+        width={width}
+        height={height}
+        backgroundcolors={'#1d1d1f'}
+        id={'thirdSection'}
+      >
+        <SectionDiv3 style={{}}>
+          {/* width 뷰포트가 769미만이면 opacity를 호출하고 이상이면 opacity를 1로 설정해준다. */}
+          <Section3_title style={width < 1681 ? { opacity } : { opacity: '1' }}>
+            이런 개발자가
+            <br /> 되기 위해
+            <br /> 노력합니다.
+          </Section3_title>
+          {/* 기존의 스타일 */}
+          <Section3_boxWrap>
+            <Section3_box>
+              <Image
+                className='section3_image'
+                src={존중}
+                alt='존중'
+                width={600}
+                quality={100}
+              ></Image>
+              <Section3_boxText>
+                <span className='Title'>상호존중</span>
+                <br />늘 존중하는 자세, 하지만 리뷰는 확실하게!
+              </Section3_boxText>
+            </Section3_box>
+            <Section3_box>
+              <Section3_boxText>
+                <span className='Title'>주인의식</span>
+                <br />
+                주어지는것뿐 아니라 스스로 찾아낼 수 있게!
+              </Section3_boxText>
+              <Image
+                className='section3_image'
+                src={주인}
+                alt='주인'
+                width={600}
+                quality={100}
+              ></Image>
+            </Section3_box>
+            <Section3_box>
+              <Image
+                className='section3_image'
+                src={메타}
+                alt='메타'
+                width={470}
+                quality={100}
+              ></Image>
+              <Section3_boxText>
+                <span className='Title'>메타인지</span>
+                <br />
+                무엇을 모르고, 무엇을 아는지 스스로 따져보는!
+              </Section3_boxText>
+            </Section3_box>
+          </Section3_boxWrap>
+        </SectionDiv3>
+      </SectionWrap3>
+    </>
+  );
+};
+
 const Section_Text = ({
   scrollY,
   inputRange,
@@ -278,7 +604,7 @@ const Section_Text = ({
   outputRange?: number[];
   children: React.ReactNode;
 }) => {
-  const opacity = useTransform(scrollY, [0, 0.13, 0.3, 0.62, 0.8], [0, 0, 1, 1, 0]);
+  const opacity = useTransform(scrollY, [0, 0.151, 0.3, 0.62, 0.9], [0, 0, 1, 1, 0]);
   return <SectionText style={{ opacity }}>{children}</SectionText>;
 };
 
