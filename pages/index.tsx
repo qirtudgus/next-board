@@ -15,14 +15,12 @@ import GitSVG from '../components/GitSVG';
 import AwsSVG from '../components/AwsSVG';
 import Intro_Poraid from '../components/Intro_Poraid';
 import Intro_DungeonNote from '../components/Intro_DungeonNote';
-// import 포폴 from '../img/클레이목업.png';
-import 포폴 from '../img/포트폴리오_이미지추가.jpg';
-import 메타 from '../img/메타인지0.png';
-import 주인 from '../img/주인의식0.png';
-import 존중 from '../img/상호존중0.png';
+import 포폴3 from '../img/포폴5.png';
 import Image from 'next/image';
 import VercelSVG from '../components/VercelSVG';
 import Intro_nextboard from '../components/Intro_nextboard';
+import Section_intro from '../components/Section_intro';
+import Intro_connect from '../components/Intro_connect';
 
 interface ViewportProps {
   width: number;
@@ -40,17 +38,7 @@ const SectionText = styled(motion.div)`
     font-size: 2rem;
   }
 `;
-const SectionText_Portfolio = styled(motion.div)`
-  font-size: 4rem;
-  font-weight: bold;
-  position: absolute;
-  z-index: 10000;
-  word-break: keep-all;
-  text-align: center;
-  @media ${({ theme }) => theme.device.tablet} {
-    font-size: 3rem;
-  }
-`;
+
 const SectionDiv = styled(motion.div)`
   width: 95%;
   height: calc(100vh * 1);
@@ -68,7 +56,7 @@ const SectionDiv2 = styled(motion.div)`
   top: 0;
 
   //섹션3 만들동안 none처리
-  display: none !important;
+  /* display: none !important; */
   align-items: center;
   justify-content: center;
   color: #fff;
@@ -186,6 +174,7 @@ const Go = () => {
   const display = useTransform(scrollYProgress, [0, 0.9999, 1], ['flex', 'flex', 'none']);
   const x = useTransform(scrollYProgress, [0.01, 0.06], [0, 30]);
   const y = useTransform(scrollYProgress, [0.01, 0.05], [-30, 0]);
+
   return (
     <>
       <SectionWrap
@@ -229,10 +218,12 @@ const Go = () => {
       </SectionWrap>
 
       {/* who am i? */}
-      <Section3
+      {/* <Section3
         width={viewport.width}
         height={viewport.height}
-      ></Section3>
+      ></Section3> */}
+
+      <Section_intro width={viewport.width} />
 
       <Section2
         width={viewport.width}
@@ -242,6 +233,7 @@ const Go = () => {
       <Intro_Poraid />
       <Intro_DungeonNote />
       <Intro_nextboard />
+      <Intro_connect />
       {/* <Swipers /> */}
     </>
   );
@@ -252,6 +244,7 @@ const PortfolioImg = styled(motion.div)`
   height: 100%;
   position: relative;
   & img {
+    /* width: 100%; */
     object-fit: cover;
   }
 `;
@@ -295,9 +288,10 @@ const Section2 = ({ width, height, children }: { width: number; height: number; 
         <SectionDiv2 style={{ display }}>
           <Section_Text3 scrollY={scrollYProgress}>Portfolio</Section_Text3>
         </SectionDiv2>
+
         <PortfolioImg style={{}}>
           <Image
-            src={포폴}
+            src={포폴3}
             alt='사진'
             loading='eager'
             fill
@@ -306,293 +300,6 @@ const Section2 = ({ width, height, children }: { width: number; height: number; 
           ></Image>
         </PortfolioImg>
       </SectionWrap2>
-    </>
-  );
-};
-
-const SectionWrap3 = styled(motion.div)<ViewportProps>`
-  //스크롤바 너비를 빼준다
-  width: 100%;
-  height: calc(100vh * 4);
-  /* background-color: ${(props) => props.backgroundcolors}; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* color: #fff; */
-  /* &.white {
-    background-color: #fff;
-    color: #000;
-  } */
-  /* @media ${({ theme }) => theme.device.tablet} {
-    height: calc(${(props) => props.height}px * 5);
-  }
-  @media ${({ theme }) => theme.device.mobile} {
-  } */
-`;
-
-const SectionDiv3 = styled(motion.div)`
-  width: 80%;
-  height: 100%;
-  display: flex;
-  justify-content: space-around;
-  /* justify-content: center; */
-
-  z-index: 1;
-
-  /* margin: 0 200px; */
-
-  @media screen and (max-width: 1680px) {
-    flex-direction: column;
-    /* justify-content: flex-start; */
-    align-items: center;
-  }
-  @media screen and (max-width: 1140px) {
-    & .section3_image {
-      width: 400px;
-      object-fit: contain;
-    }
-  }
-
-  @media ${({ theme }) => theme.device.tablet} {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    /* margin: 0 50px; */
-    & .section3_image {
-      width: 100%;
-      height: fit-content;
-    }
-  }
-  @media ${({ theme }) => theme.device.mobile} {
-    /* margin: 0 25px; */
-  }
-`;
-
-const Section3_title = styled(motion.div)`
-  position: sticky;
-  height: 100vh;
-  flex: 0 0 470px;
-  max-width: 470px;
-  font-size: 72px;
-  line-height: 1.28;
-  top: 0;
-  margin: 0;
-  text-align: left;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  @media ${({ theme }) => theme.device.tablet} {
-    font-size: 54px;
-  }
-  @media ${({ theme }) => theme.device.mobile} {
-    font-size: 44px;
-  }
-`;
-const Section3_boxWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 100vh 0;
-`;
-
-const Section3_box = styled.div`
-  position: relative;
-  flex-shrink: 0;
-  max-width: 400px;
-  height: 480px;
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 40px;
-  flex-direction: row-reverse;
-
-  &:nth-child(1) {
-    margin-left: 340px;
-    & > div {
-      padding-right: 30px;
-      text-align: right;
-    }
-  }
-
-  &:nth-child(2) {
-    & > div {
-      padding-left: 30px;
-    }
-  }
-
-  &:nth-child(3) {
-    margin-left: 340px;
-    & > div {
-      position: absolute;
-      left: -200px;
-    }
-  }
-
-  @media ${({ theme }) => theme.device.tablet} {
-    margin-top: 0px;
-    flex-direction: column;
-    align-items: center;
-    &:nth-child(1) {
-      margin-left: 0px;
-      & > div {
-        padding-right: 0px;
-        text-align: left;
-      }
-    }
-
-    &:nth-child(2) {
-      flex-direction: column-reverse;
-      & > div {
-        padding-left: 0px;
-      }
-    }
-
-    &:nth-child(3) {
-      margin-left: 0px;
-      & > div {
-        position: relative;
-        left: 0px;
-      }
-    }
-  }
-  @media ${({ theme }) => theme.device.mobile} {
-    &:nth-child(1) {
-      & > div {
-      }
-    }
-
-    &:nth-child(2) {
-      & > div {
-      }
-    }
-
-    &:nth-child(3) {
-      & > div {
-      }
-    }
-  }
-`;
-
-const Section3_boxText = styled.div`
-  width: 200px;
-  font-size: 1.2rem;
-  flex-shrink: 0;
-  /* width: fit-content; */
-  word-break: keep-all;
-  line-height: 1.1em;
-  margin-top: 20px;
-
-  & .Title {
-    display: block;
-    font-weight: bold;
-    font-size: 30px;
-    /* padding-bottom: 5px; */
-    @media ${({ theme }) => theme.device.tablet} {
-      margin-top: 20px;
-    }
-  }
-`;
-
-const Section3 = ({ width, height, children }: { width: number; height: number; children?: React.ReactNode }) => {
-  const ref = useRef() as RefObject<HTMLDivElement>;
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-
-  //해당 함수를 통해 data attribute 세팅
-  useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
-      if (ref.current) {
-        ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
-        let progressNumber = Number(ref.current.getAttribute('data-progress'));
-        console.log(`섹션3 :${progressNumber}`);
-        //섹션3에 돌입하면 1번섹션의 배경을 흰색으로 변경해주기
-        //섹션3은 기본 검은색 배경 흰색글씨 -> 흰 배경 검은 글씨로
-        //시작구간 값은 약 0.08 정도
-        if (progressNumber > 0.1) {
-          // (document!.getElementById('firstSection') as HTMLElement).classList.add('white');
-          // (document!.getElementById('thirdSection') as HTMLElement).classList.add('white');
-          // (document!.getElementById('Body') as HTMLElement).classList.add('white');
-
-          (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('white');
-        } else {
-          // (document!.getElementById('firstSection') as HTMLElement).classList.remove('white');
-          // (document!.getElementById('thirdSection') as HTMLElement).classList.remove('white');
-          (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('white');
-
-          // (document!.getElementById('Body') as HTMLElement).classList.remove('white');
-        }
-      }
-    });
-  }, []);
-
-  const opacity = useTransform(scrollYProgress, [0.22, 0.48, 0.75, 0.9], [1, 0, 0, 1]);
-  return (
-    <>
-      <SectionWrap3
-        ref={ref}
-        data-progress={scrollYProgress.get()}
-        width={width}
-        height={height}
-        backgroundcolors={'#1d1d1f'}
-        id={'thirdSection'}
-      >
-        <SectionDiv3 style={{}}>
-          {/* width 뷰포트가 769미만이면 opacity를 호출하고 이상이면 opacity를 1로 설정해준다. */}
-          <Section3_title style={width < 1681 ? { opacity } : { opacity: '1' }}>
-            이런 개발자가
-            <br /> 되기 위해
-            <br /> 노력합니다.
-          </Section3_title>
-          {/* 기존의 스타일 */}
-          <Section3_boxWrap>
-            <Section3_box>
-              <Image
-                className='section3_image'
-                src={존중}
-                alt='존중'
-                width={600}
-                quality={100}
-              ></Image>
-              <Section3_boxText>
-                <span className='Title'>상호존중</span>
-                <br />늘 존중하는 자세, 하지만 리뷰는 확실하게!
-              </Section3_boxText>
-            </Section3_box>
-            <Section3_box>
-              <Section3_boxText>
-                <span className='Title'>주인의식</span>
-                <br />
-                주어지는것뿐 아니라 스스로 찾아낼 수 있게!
-              </Section3_boxText>
-              <Image
-                className='section3_image'
-                src={주인}
-                alt='주인'
-                width={600}
-                quality={100}
-              ></Image>
-            </Section3_box>
-            <Section3_box>
-              <Image
-                className='section3_image'
-                src={메타}
-                alt='메타'
-                width={470}
-                quality={100}
-              ></Image>
-              <Section3_boxText>
-                <span className='Title'>메타인지</span>
-                <br />
-                무엇을 모르고, 무엇을 아는지 스스로 따져보는!
-              </Section3_boxText>
-            </Section3_box>
-          </Section3_boxWrap>
-        </SectionDiv3>
-      </SectionWrap3>
     </>
   );
 };
@@ -611,6 +318,16 @@ const Section_Text = ({
   const opacity = useTransform(scrollY, [0, 0.151, 0.3, 0.62, 0.9], [0, 0, 1, 1, 0]);
   return <SectionText style={{ opacity }}>{children}</SectionText>;
 };
+const SectionText_Portfolio = styled(motion.div)`
+  font-size: 4rem;
+  font-weight: bold;
+  z-index: 10000;
+  word-break: keep-all;
+  text-align: center;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 3rem;
+  }
+`;
 
 const Section_Text2 = ({
   scrollY,
@@ -638,12 +355,15 @@ const Section_Text3 = ({
   outputRange?: number[];
   children: React.ReactNode;
 }) => {
-  const opacity = useTransform(scrollY, [0, 0.5, 0.9], [0, 1, 0]);
-  return <SectionText_Portfolio style={{ opacity, color: '#1d1d1f' }}>{children}</SectionText_Portfolio>;
+  const opacity = useTransform(scrollY, [0.15, 0.5, 0.9], [0, 1, 0]);
+
+  const border = useTransform(scrollY, [0.15, 0.5, 0.9], ['0px solid#000', '100px solid#000', '100px solid#000']);
+  return <SectionText_Portfolio style={{ opacity, color: '#1d1d1f', border }}>{children}</SectionText_Portfolio>;
 };
 
 const Stack_List2 = ({ scrollY, children }: { scrollY: MotionValue<number>; children?: React.ReactNode }) => {
   const opacity = useTransform(scrollY, [0, 0.22, 0.3, 0.55, 0.78], [0, 0, 1, 1, 0]);
+
   // const x = useTransform(scrollY, [0, 0.22, 0.6], [-1500, -1500, 1000]);
   const x = useTransform(scrollY, [0, 0.22, 0.9], [1500, 1500, -1000]);
   return (
