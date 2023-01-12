@@ -16,6 +16,8 @@ const ContentWrapPoraid = styled.div`
   width: 100%;
   height: calc((100vh) * 1);
   background-color: #1d1d1f;
+  /* background: rgb(61, 61, 61); */
+  /* background: radial-gradient(circle, rgba(61, 61, 61, 1) -50%, rgba(18, 18, 19, 1) 100%); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +25,7 @@ const ContentWrapPoraid = styled.div`
 `;
 
 const ContentBox = styled.div`
-  width: 90%;
+  /* width: 90%;
   max-width: 1200px;
   position: relative;
   z-index: 10;
@@ -36,6 +38,24 @@ const ContentBox = styled.div`
   }
   @media ${({ theme }) => theme.device.mobile} {
     flex-direction: column;
+  } */
+  width: 90%;
+  max-width: 1300px;
+  position: relative;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 40px 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 70px 10px rgb(0 0 0 / 60%);
+  @media ${({ theme }) => theme.device.tablet} {
+    flex-direction: column;
+    box-shadow: 0 0 40px 7px rgb(0 0 0 / 60%);
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    flex-direction: column;
+    box-shadow: 0 0 15px 5px rgb(0 0 0 / 60%);
   }
 `;
 
