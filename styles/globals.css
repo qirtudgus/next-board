@@ -5,9 +5,16 @@
 }
 
 body {
-  color: #202124;
-  background: #fff;
+  transition: background-color 0.5s ease, color 0.3s ease;
+  color: #fff;
+  background: #202124;
 }
+
+body.white {
+  color: #202124 !important;
+  background-color: #fff;
+}
+
 h1,
 h2,
 h3,
