@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import { RefObject, Suspense, useEffect, useRef } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { motion, MotionValue, useScroll, useTransform } from 'framer-motion';
-import 포레이드1 from '../img/포레이드1.png';
 import Image from 'next/image';
 import Swipers from './Swiper';
 
@@ -25,21 +21,19 @@ const ContentWrapPoraid = styled(motion.div)`
   position: relative;
 `;
 
-const ContentBoxBorder = styled.div``;
-
 const ContentBox = styled(motion.div)`
   width: 90%;
   max-width: 1300px;
   position: relative;
-  z-index: 10;
   align-items: center;
   justify-content: center;
   display: flex;
-  padding: 40px 40px;
   border-radius: 20px;
   box-shadow: 0 0 70px 10px rgb(0 0 0 / 60%);
-  background-color: #fff;
+  background-color: #1d1d1f;
+  padding: 40px;
   @media ${({ theme }) => theme.device.tablet} {
+    padding: 15px;
     flex-direction: column;
     box-shadow: 0 0 40px 7px rgb(0 0 0 / 60%);
   }
@@ -48,48 +42,36 @@ const ContentBox = styled(motion.div)`
     box-shadow: 0 0 15px 5px rgb(0 0 0 / 60%);
   }
 
-  &::after {
+  &::before {
     content: '';
     position: absolute;
-    display: block;
-    z-index: -11;
-    padding: 40px;
-    width: 105%;
-    height: 105%;
-    left: 50px;
-    background: #ef5a34;
+    z-index: -1;
+    border-radius: 20px;
+    width: calc(100% + 5px);
+    height: calc(100% + 5px);
+    @property --rotate {
+      syntax: '<angle>';
+      initial-value: 132deg;
+      inherits: false;
+    }
+
+    @keyframes spin {
+      0% {
+        --rotate: 0deg;
+      }
+      100% {
+        --rotate: 360deg;
+      }
+    }
+    background-image: linear-gradient(
+      var(--rotate),
+      rgba(241, 87, 87, 1) 0%,
+      rgba(249, 167, 78, 1) 45%,
+      rgba(255, 214, 0, 1) 100%
+    );
+    animation: spin 2.5s linear infinite;
   }
-
-  /* & > .LightBorder {
-    position: relative;
-    width: 100%;
-    display: block;
-    z-index: -10;
-  } */
-
-  /* & > .LightBorder::before {
-    content: '';
-    position: absolute;
-    display: block;
-    z-index: -11;
-    padding: 40px;
-    width: 105%;
-    height: 105%;
-    background: #ef5a34;
-  } */
 `;
-
-function Scene(props: any) {
-  //   const gltf = useLoader(GLTFLoader, './Emoji.gltf');
-  const { scene } = useGLTF('./Emoji.gltf');
-  return (
-    <primitive
-      object={scene}
-      scale={15}
-      {...props}
-    />
-  );
-}
 
 const DescDiv = styled.div`
   width: 500px;
@@ -162,11 +144,13 @@ const Intro_Poraid = () => {
         //0.479보다 크면 white 추가하기, 작으면 white 삭제하기
         if (progressNumber > 0.4789) {
           (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('white');
+          (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('dark');
 
           // (document!.getElementById('header') as HTMLElement).classList.add('text_black');
         }
         if (progressNumber > 0 && progressNumber < 0.4789) {
           (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('white');
+          (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('dark');
 
           // (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
         }
