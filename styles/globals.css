@@ -5,14 +5,20 @@
 }
 
 body {
-  transition: background-color 0.5s ease, color 0.3s ease;
+  /* transition: background-color 0.5s ease, color 0.3s ease; */
   color: #fff;
   background: #202124;
 }
 
 body.white {
+  transition: background-color 0.5s ease, color 0.3s ease;
   color: #202124 !important;
   background-color: #fff;
+}
+
+body.outIndex {
+  color: #202124 !important;
+  background-color: #fff !important;
 }
 
 header .headerSVG {
