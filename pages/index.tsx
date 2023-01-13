@@ -149,11 +149,16 @@ const Go = () => {
 
   //해당 함수를 통해 data attribute 세팅
   useEffect(() => {
+    //다른페이지를 다녀와도 항상 초기화
+    (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('white');
+    (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('dark');
+
     return scrollYProgress.onChange((latest) => {
       if (ref.current) {
         ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
         let progressNumber = Number(scrollYProgress.get());
         console.log(`1번섹션 : ${progressNumber}`);
+
         // if (progressNumber > 0.09) {
         //   (document!.getElementById('header') as HTMLElement).classList.add('show');
         // } else {
