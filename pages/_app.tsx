@@ -10,6 +10,7 @@ import { ReactElement, ReactNode, RefObject, useEffect, useRef, useState } from 
 import { loginSuccess, logoutSuccess } from '../store/userInfoSlice';
 import customAxios from '../utils/customAxios';
 import { useScroll } from 'framer-motion';
+import { useRouter } from 'next/router';
 
 // replace console.* for disable log on production
 if (process.env.NODE_ENV === 'production') {
@@ -35,6 +36,26 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
     target: ref2,
     offset: ['start start', 'end end'],
   });
+
+  const router = useRouter();
+
+  useEffect(() => {
+    //인덱스일 경우 클래스 조정..
+    if (router.pathname === '/') {
+      if (document!.getElementsByTagName('body') && document!.getElementsByTagName('header')) {
+        (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0]?.classList.remove('white');
+        (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0]?.classList.remove('outIndex');
+        (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0]?.classList.remove('dark');
+        (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0]?.classList.add('inIndex');
+      }
+    } else {
+      if (document!.getElementsByTagName('body') && document!.getElementsByTagName('header')) {
+        (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0]?.classList.add('outIndex');
+        (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0]?.classList.remove('inIndex');
+      }
+    }
+  }, []);
+
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
       //전체스크롤 진행률 할당
@@ -48,50 +69,6 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
           (document!.getElementById('header') as HTMLElement).classList.remove('show');
         }
       }
-
-      // (document!.getElementById('header') as HTMLElement).classList.add('show');
-
-      // if (document.getElementById('__next')?.getAttribute('data-fullprogress') === '0') {
-      //   (document!.getElementById('header') as HTMLElement).classList.remove('show');
-      //   console.log('if문 비교1');
-      //   return;
-      // } else {
-      //   (document!.getElementById('header') as HTMLElement).classList.add('show');
-      // }
-
-      // //초반 구간 블랙
-      // if (prog > 0 && prog < 0.6004418762746431) {
-      //   (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
-      // }
-
-      // //포폴 구간 글씨 화이트
-      // if (prog > 0.6006 && prog < 0.8426) {
-      //   (document!.getElementById('header') as HTMLElement).classList.add('text_black');
-      // }
-      // //포레이드 구간 글씨 화이트
-      // if (prog > 0.8428 && prog < 0.9632) {
-      //   (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
-      // }
-      // if (prog > 0.964 && prog < 1) {
-      //   (document!.getElementById('header') as HTMLElement).classList.add('text_black');
-      // }
-
-      //던전노트 구간 글씨 블랙
-
-      // if (Number(document.getElementById('__next')?.getAttribute('data-fullprogress')) > 0.05) {
-      //   (document!.getElementById('header') as HTMLElement).classList.add('show');
-      //   console.log('if문 비교2');
-      //   //리턴하면 이 코드 블럭 바깥 아래로는 실행되지않음
-      // }
-      // if (Number(document.getElementById('__next')?.getAttribute('data-fullprogress')) > 0.85) {
-      //   (document!.getElementById('header') as HTMLElement).classList.add('text_white');
-      //   console.log('if문 비교3');
-      // }
-      // if (Number(document.getElementById('__next')?.getAttribute('data-fullprogress')) > 0.972) {
-      //   (document!.getElementById('header') as HTMLElement).classList.remove('text_white');
-      // } else {
-      //   (document!.getElementById('header') as HTMLElement).classList.add('text_white');
-      // }
     });
   }, []);
 
