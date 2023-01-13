@@ -123,19 +123,17 @@ const Go = () => {
     };
   }, []);
 
-  //해당 함수를 통해 data attribute 세팅
+  //인덱스페이지를 나갈 때 body값을 초기화해주자..!
   useEffect(() => {
-    //다른페이지를 다녀와도 항상 초기화
-    (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('white');
-    (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('dark');
+    (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0]?.classList.remove('white');
+    (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0]?.classList.remove('outIndex');
+    (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0]?.classList.remove('dark');
+    (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0]?.classList.add('inIndex');
 
-    return scrollYProgress.onChange((latest) => {
-      if (ref.current) {
-        ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
-        let progressNumber = Number(scrollYProgress.get());
-        console.log(`1번섹션 : ${progressNumber}`);
-      }
-    });
+    return () => {
+      (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0]?.classList.add('outIndex');
+      (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0]?.classList.remove('inIndex');
+    };
   }, []);
 
   const opacity = useTransform(scrollYProgress, [0.01, 0.15], [1, 0]);
