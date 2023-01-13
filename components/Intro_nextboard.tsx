@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { Suspense } from 'react';
+import { RefObject, Suspense, useEffect, useRef } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { motion } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import 포레이드1 from '../img/포레이드1.png';
 import Image from 'next/image';
 import Swipers from './Swiper';
@@ -142,9 +142,34 @@ const ImgDiv = styled.div`
 `;
 
 const Intro_nextboard = () => {
+  const ref = useRef() as RefObject<HTMLDivElement>;
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  useEffect(() => {
+    return scrollYProgress.onChange((latest) => {
+      //전체스크롤 진행률 할당
+      const progress = Number(scrollYProgress.get());
+      console.log(progress);
+      //0.479보다 크면 white 추가하기, 작으면 white 삭제하기
+      if (progress < 0.98279) {
+        (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('white');
+        (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('dark');
+
+        // (document!.getElementById('header') as HTMLElement).classList.add('text_black');
+      } else {
+        (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('white');
+        (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('dark');
+
+        // (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
+      }
+    });
+  }, []);
+
   return (
     <>
-      <ContentWrapPoraid>
+      <ContentWrapPoraid ref={ref}>
         <ContentBox>
           <DescDiv>
             <ContentName>
