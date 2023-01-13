@@ -39,6 +39,14 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
     return scrollYProgress.onChange((latest) => {
       //전체스크롤 진행률 할당
       document.getElementById('__next')?.setAttribute('data-fullprogress', scrollYProgress.get().toString());
+      const progress = Number(scrollYProgress.get());
+      if (progress > 0.0377) {
+        (document!.getElementById('header') as HTMLElement).classList.add('show');
+      } else {
+        (document!.getElementById('header') as HTMLElement).classList.remove('show');
+      }
+
+      // (document!.getElementById('header') as HTMLElement).classList.add('show');
 
       // if (document.getElementById('__next')?.getAttribute('data-fullprogress') === '0') {
       //   (document!.getElementById('header') as HTMLElement).classList.remove('show');
