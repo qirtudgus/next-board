@@ -173,7 +173,7 @@ const Intro_nextboard = () => {
         <ContentBox>
           <DescDiv>
             <ContentName>
-              <span>넥스트보드</span>
+              <span>NeB</span>
               <div>
                 <a
                   href='https://github.com/qirtudgus/next-board'
@@ -224,14 +224,12 @@ const Intro_nextboard = () => {
                 </a>
               </div>
             </ContentName>
-            닌텐도사의 포켓몬스터 게임 유저에게 도움을 줄 목적으로 제작한 사이트입니다. 실제로 서비스를 불특정다수에게
-            배포하였습니다.
+            Next.js Board를 줄여 NeB입니다. 포트폴리오 및 로그인 게시판 기능을 구현하며 프레임워크를 학습했습니다.
             <br />
-            - 사용자간 실시간 소통 및 접속자 수 안내
+            - framer를 통한 스크롤 기반의 애니메이션 구현
             <br />
-            - 기기별 알람 기능 구현
-            <br />- 주기별 서버 데이터 정리
-            <br />- 반응형 웹 구축
+            - 게시판, 댓글 기능 구현
+            <br />- 로그인, 회원가입 기능 구현
           </DescDiv>
           <ImgDiv>
             <Swipers
