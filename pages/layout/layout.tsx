@@ -127,6 +127,7 @@ const MenuDiv = styled.div<MenuInterface>`
   right: 0;
   display: none;
   padding: 15px;
+  color: #202124;
   cursor: default;
   ${(props) =>
     props.isOpen &&
@@ -480,11 +481,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       )}
       {checkNotLayoutPathname2() ? <IndexMain>{children}</IndexMain> : <Main>{children}</Main>}
 
-      {!checkNotLayoutPathname() && (
-        <Footer>
-          <div>안녕하세요.</div>
-        </Footer>
-      )}
+      {!checkNotLayoutPathname() && <Footer></Footer>}
     </>
   );
 }
