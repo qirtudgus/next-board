@@ -2,9 +2,6 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import Intro_Poraid from '../components/Intro_Poraid';
-import Intro_DungeonNote from '../components/Intro_DungeonNote';
-import Intro_First from '../components/Intro_first';
 
 interface WrapInterface {
   backgroundcolors: string;

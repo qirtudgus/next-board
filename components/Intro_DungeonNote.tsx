@@ -1,11 +1,6 @@
 import styled from 'styled-components';
-import { RefObject, Suspense, useEffect, useRef } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { RefObject, useEffect, useRef } from 'react';
 import { motion, useScroll } from 'framer-motion';
-import 던전노트1 from '../img/던전노트1.png';
-import Image from 'next/image';
 import Swipers from './Swiper';
 
 import note0 from '../img/note_1200.webp';

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { RefObject, Suspense, useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 import { motion, MotionValue, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
 import Swipers from './Swiper';
 
 import p0 from '../img/poraid0_1200.webp';

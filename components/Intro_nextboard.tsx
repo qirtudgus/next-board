@@ -1,13 +1,7 @@
 import styled from 'styled-components';
-import { RefObject, Suspense, useEffect, useRef } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { RefObject, useEffect, useRef } from 'react';
 import { motion, useScroll } from 'framer-motion';
-import 포레이드1 from '../img/포레이드1.png';
-import Image from 'next/image';
 import Swipers from './Swiper';
-
 import p0 from '../img/poraid0_1200.webp';
 import p1 from '../img/poraid1_1200.webp';
 import p2 from '../img/poraid2_1200.webp';
@@ -74,18 +68,6 @@ const ContentBox = styled(motion.div)`
     animation: spin 2.5s linear infinite;
   }
 `;
-
-function Scene(props: any) {
-  //   const gltf = useLoader(GLTFLoader, './Emoji.gltf');
-  const { scene } = useGLTF('./Emoji.gltf');
-  return (
-    <primitive
-      object={scene}
-      scale={15}
-      {...props}
-    />
-  );
-}
 
 const DescDiv = styled.div`
   width: 500px;
