@@ -71,18 +71,6 @@ const ContentBox = styled(motion.div)`
   }
 `;
 
-function Scene(props: any) {
-  //   const gltf = useLoader(GLTFLoader, './Emoji.gltf');
-  const { scene } = useGLTF('./Emoji.gltf');
-  return (
-    <primitive
-      object={scene}
-      scale={15}
-      {...props}
-    />
-  );
-}
-
 const DescDiv = styled.div`
   width: 500px;
   flex-direction: column;
