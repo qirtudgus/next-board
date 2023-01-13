@@ -154,11 +154,11 @@ const Go = () => {
         ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
         let progressNumber = Number(scrollYProgress.get());
         console.log(`1번섹션 : ${progressNumber}`);
-        if (progressNumber > 0.09) {
-          (document!.getElementById('header') as HTMLElement).classList.add('show');
-        } else {
-          (document!.getElementById('header') as HTMLElement).classList.remove('show');
-        }
+        // if (progressNumber > 0.09) {
+        //   (document!.getElementById('header') as HTMLElement).classList.add('show');
+        // } else {
+        //   (document!.getElementById('header') as HTMLElement).classList.remove('show');
+        // }
 
         // if (progressNumber > 0.991) {
         //   (document!.getElementById('header') as HTMLElement).classList.add('text_black');
