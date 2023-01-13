@@ -15,12 +15,11 @@ import GitSVG from '../components/GitSVG';
 import AwsSVG from '../components/AwsSVG';
 import Intro_Poraid from '../components/Intro_Poraid';
 import Intro_DungeonNote from '../components/Intro_DungeonNote';
-import 포폴3 from '../img/포폴5.png';
-import Image from 'next/image';
 import VercelSVG from '../components/VercelSVG';
 import Intro_nextboard from '../components/Intro_nextboard';
 import Section_intro from '../components/Section_intro';
 import Intro_connect from '../components/Intro_connect';
+import Section_Portfolio from '../components/Section_Portfolio';
 
 interface ViewportProps {
   width: number;
@@ -49,37 +48,14 @@ const SectionDiv = styled(motion.div)`
   justify-content: center;
   color: #fff;
 `;
-const SectionDiv2 = styled(motion.div)`
-  width: 95%;
-  height: calc(100vh * 1);
-  position: fixed;
-  top: 0;
-
-  //섹션3 만들동안 none처리
-  /* display: none !important; */
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  z-index: 1;
-`;
 
 const SectionWrap = styled(motion.div)<ViewportProps>`
-  //스크롤바 너비를 빼준다
   width: 100%;
   height: calc(${(props) => props.height}px * 5);
   /* background-color: ${(props) => props.backgroundcolors}; */
   display: flex;
   justify-content: center;
   }
-`;
-const SectionWrap2 = styled(motion.div)<ViewportProps>`
-  //스크롤바 너비를 빼준다
-  width: 100%;
-  height: calc(${(props) => props.height}px * 2);
-  background-color: ${(props) => props.backgroundcolors};
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const CurrentProg = styled.div`
@@ -158,19 +134,6 @@ const Go = () => {
         ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
         let progressNumber = Number(scrollYProgress.get());
         console.log(`1번섹션 : ${progressNumber}`);
-
-        // if (progressNumber > 0.09) {
-        //   (document!.getElementById('header') as HTMLElement).classList.add('show');
-        // } else {
-        //   (document!.getElementById('header') as HTMLElement).classList.remove('show');
-        // }
-
-        // if (progressNumber > 0.991) {
-        //   (document!.getElementById('header') as HTMLElement).classList.add('text_black');
-        // }
-        // if (progressNumber < 0.991) {
-        //   (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
-        // }
       }
     });
   }, []);
@@ -221,90 +184,15 @@ const Go = () => {
           <DownArrowSVG />
         </DownArrow>
       </SectionWrap>
-
-      {/* who am i? */}
-      {/* <Section3
-        width={viewport.width}
-        height={viewport.height}
-      ></Section3> */}
-
       <Section_intro width={viewport.width} />
-
-      <Section2
+      <Section_Portfolio
         width={viewport.width}
         height={viewport.height}
-      ></Section2>
-
+      />
       <Intro_Poraid />
       <Intro_DungeonNote />
       <Intro_nextboard />
       <Intro_connect />
-      {/* <Swipers /> */}
-    </>
-  );
-};
-
-const PortfolioImg = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  & img {
-    /* width: 100%; */
-    object-fit: cover;
-  }
-`;
-
-const Section2 = ({ width, height, children }: { width: number; height: number; children?: React.ReactNode }) => {
-  const ref = useRef() as RefObject<HTMLDivElement>;
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-
-  //해당 함수를 통해 data attribute 세팅
-  useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
-      if (ref.current) {
-        ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
-        let progressNumber = Number(ref.current.getAttribute('data-progress'));
-        // console.log(progressNumber);
-        // if (progressNumber > 0.983) {
-        //   (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
-        // }
-        // if (progressNumber < 0.983) {
-        //   (document!.getElementById('header') as HTMLElement).classList.add('text_black');
-        // }
-      }
-    });
-  }, []);
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.6], [0, 0, 1]);
-  const display = useTransform(scrollYProgress, [0, 0.9, 1], ['flex', 'flex', 'none']);
-  // const scale = useTransform(scrollYProgress, [0, 0.5], [0.5, 1]);
-  return (
-    <>
-      <SectionWrap2
-        ref={ref}
-        data-progress={scrollYProgress.get()}
-        width={width}
-        height={height}
-        backgroundcolors={'white'}
-      >
-        <SectionDiv2 style={{ display }}>
-          <Section_Text3 scrollY={scrollYProgress}>Portfolio</Section_Text3>
-        </SectionDiv2>
-
-        <PortfolioImg style={{}}>
-          <Image
-            src={포폴3}
-            alt='사진'
-            loading='eager'
-            fill
-            priority
-            quality={100}
-          ></Image>
-        </PortfolioImg>
-      </SectionWrap2>
     </>
   );
 };
@@ -333,39 +221,6 @@ const SectionText_Portfolio = styled(motion.div)`
     font-size: 3rem;
   }
 `;
-
-const Section_Text2 = ({
-  scrollY,
-  inputRange,
-  outputRange,
-  children,
-}: {
-  scrollY: MotionValue<number>;
-  inputRange?: number[];
-  outputRange?: number[];
-  children: React.ReactNode;
-}) => {
-  const opacity = useTransform(scrollY, [0.81, 0.9], [0, 1]);
-  return <SectionText_Portfolio style={{ opacity }}>{children}</SectionText_Portfolio>;
-};
-
-const Section_Text3 = ({
-  scrollY,
-  inputRange,
-  outputRange,
-  children,
-}: {
-  scrollY: MotionValue<number>;
-  inputRange?: number[];
-  outputRange?: number[];
-  children: React.ReactNode;
-}) => {
-  const opacity = useTransform(scrollY, [0.15, 0.5, 0.9], [0, 1, 0]);
-
-  const border = useTransform(scrollY, [0.15, 0.5, 0.9], ['0px solid#000', '100px solid#000', '100px solid#000']);
-  return <SectionText_Portfolio style={{ opacity, color: '#1d1d1f', border }}>{children}</SectionText_Portfolio>;
-};
-
 const Stack_List2 = ({ scrollY, children }: { scrollY: MotionValue<number>; children?: React.ReactNode }) => {
   const opacity = useTransform(scrollY, [0, 0.22, 0.3, 0.55, 0.78], [0, 0, 1, 1, 0]);
 
