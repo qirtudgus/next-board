@@ -90,8 +90,8 @@ const Section_Portfolio = ({
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
       if (ref.current) {
-        ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
-        let progressNumber = Number(ref.current.getAttribute('data-progress'));
+        // ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
+        // let progressNumber = Number(ref.current.getAttribute('data-progress'));
       }
     });
   }, []);

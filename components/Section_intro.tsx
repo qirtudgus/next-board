@@ -190,8 +190,9 @@ const Section_intro = ({ width, height, children }: { width: number; height?: nu
   useEffect(() => {
     return scrollYProgress.onChange((latest: any) => {
       if (ref.current) {
-        ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
-        let progressNumber = Number(ref.current.getAttribute('data-progress'));
+        // ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
+        // let progressNumber = Number(ref.current.getAttribute('data-progress'));
+        let progressNumber = Number(scrollYProgress.get());
         console.log(`섹션3 :${progressNumber}`);
         //섹션3에 돌입하면 1번섹션의 배경을 흰색으로 변경해주기
         //섹션3은 기본 검은색 배경 흰색글씨 -> 흰 배경 검은 글씨로
@@ -240,7 +241,6 @@ const Section_intro = ({ width, height, children }: { width: number; height?: nu
                 src={존중}
                 alt='존중'
                 width={600}
-                quality={100}
               ></Image>
               <Section3_boxText>
                 <span className='Title'>상호존중</span>
@@ -258,7 +258,6 @@ const Section_intro = ({ width, height, children }: { width: number; height?: nu
                 src={주인}
                 alt='주인'
                 width={600}
-                quality={100}
               ></Image>
             </Section3_box>
             <Section3_box>
@@ -267,7 +266,6 @@ const Section_intro = ({ width, height, children }: { width: number; height?: nu
                 src={메타}
                 alt='메타'
                 width={470}
-                quality={100}
               ></Image>
               <Section3_boxText>
                 <span className='Title'>메타인지</span>

@@ -147,8 +147,9 @@ const Intro_DungeonNote = () => {
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
       if (ref.current) {
-        ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
-        let progressNumber = Number(ref.current.getAttribute('data-progress'));
+        // ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
+        // let progressNumber = Number(ref.current.getAttribute('data-progress'));
+        let progressNumber = Number(scrollYProgress.get());
         // console.log(`던전노트 : ${progressNumber}`);
         if (progressNumber > 0.964) {
           (document!.getElementById('header') as HTMLElement).classList.remove('text_black');

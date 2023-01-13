@@ -137,8 +137,9 @@ const Intro_Poraid = () => {
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
       if (ref.current) {
-        ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
-        let progressNumber = Number(ref.current.getAttribute('data-progress'));
+        // ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
+        // let progressNumber = Number(ref.current.getAttribute('data-progress'));
+        let progressNumber = Number(scrollYProgress.get());
         console.log(`포레이드 : ${progressNumber}`);
         //0.479보다 크면 white 추가하기, 작으면 white 삭제하기
         if (progressNumber > 0.4789) {
