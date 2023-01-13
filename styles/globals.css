@@ -15,6 +15,14 @@ body.white {
   background-color: #fff;
 }
 
+header .headerSVG {
+  fill: #fff;
+}
+
+header.dark .headerSVG {
+  fill: #202124;
+}
+
 h1,
 h2,
 h3,
