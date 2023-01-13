@@ -23,10 +23,7 @@ const Header = styled.header`
   transition: top 0.6s ease;
   align-items: center;
   padding: 0 10px;
-  top: -60px;
-  &.show {
-    top: 0;
-  }
+  top: 0;
   & > div {
     max-width: 1000px;
     margin: 0 auto;
@@ -60,6 +57,64 @@ const Header = styled.header`
   }
 `;
 
+const IntroHeader = styled.header`
+  /* position: fixed; */
+  position: sticky;
+  /* background: #fff; */
+  font-size: 0.95rem;
+  z-index: 11;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: ${HeaderHeight}px;
+  display: flex;
+  justify-content: center;
+  transition: top 0.6s ease;
+  align-items: center;
+  padding: 0 10px;
+  /* top: -60px; */
+  &.show {
+    top: 0px !important;
+  }
+  & > div {
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  & ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+  }
+  & ul li {
+    cursor: pointer;
+    margin: 5px 10px;
+  }
+  & ul li:hover {
+    color: ${({ theme }) => theme.colors.main};
+  }
+  & > div > ul > #openMenu li {
+    width: 100px;
+  }
+
+  & .leftMenu {
+    display: flex;
+    @media ${({ theme }) => theme.device.tablet} {
+      display: none;
+    }
+    @media ${({ theme }) => theme.device.mobile} {
+    }
+  }
+
+  &.inIndex {
+    top: -60px;
+    position: fixed;
+    background: none;
+  }
+`;
+
 const LogoDiv = styled.div`
   display: flex;
   align-items: center;
@@ -71,6 +126,7 @@ const Logo = styled.div`
   font-weight: bold;
   padding-right: 15px;
   user-select: none;
+  letter-spacing: 5px;
 `;
 
 const Footer = styled.footer`
@@ -319,7 +375,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       {isLoading && <LoadingSpinner />}
       {!checkNotLayoutPathname() && (
-        <Header id={'header'}>
+        <IntroHeader id={'header'}>
           <div>
             <LogoDiv>
               <Logo
@@ -327,7 +383,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   router.push('/');
                 }}
               >
-                LOGO
+                NeB
               </Logo>
               <ul className='leftMenu'>
                 {menuArr.map((i, index) => (
@@ -477,7 +533,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               )}
             </PcLoginButtonUl>
           </div>
-        </Header>
+        </IntroHeader>
       )}
       {checkNotLayoutPathname2() ? <IndexMain>{children}</IndexMain> : <Main>{children}</Main>}
 
