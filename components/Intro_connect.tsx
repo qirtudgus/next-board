@@ -85,6 +85,11 @@ const InfoTitle = styled.span`
   padding: 5px 0 0;
 `;
 
+const InfoDesc = styled.span`
+  display: block;
+  margin-left: 5px;
+`;
+
 const Me = styled.div`
   width: 200px;
   height: 250px;
@@ -137,16 +142,18 @@ const Intro_connect = () => {
 
           <InfoWrap>
             <Info>
-              <InfoTitle>인적 사항</InfoTitle>- 박성현 <p>- 1996.01.12</p> <p>- wlslek0015@gmail.com</p>
-              <InfoTitle>경력</InfoTitle>
-              <p>- 스마트웰컴퍼니 웹디자이너 2020.02 ~ 2021.05</p>
-              <InfoTitle>학력</InfoTitle>
-              <p>- 인덕대학교 멀티미디어디자인과 졸업 2020.02</p>
-              <InfoTitle>교육 이수</InfoTitle>
-              <p>- 스파르타 코딩클럽 2021.05~2021.06</p>
-              <InfoTitle>자격증</InfoTitle>
-              <p>- 웹디자인기능사 2021.09.17</p>
-              <p>Git / Blog</p>
+              <InfoTitle>🙋‍♂️인적 사항</InfoTitle>
+              <InfoDesc>- 박성현</InfoDesc>
+              <InfoDesc>- 1996.01.12</InfoDesc> <InfoDesc>- wlslek0015@gmail.com</InfoDesc>
+              <InfoTitle>🧥경력</InfoTitle>
+              <InfoDesc>- 스마트웰컴퍼니 웹디자이너 2020.02 ~ 2021.05</InfoDesc>
+              <InfoTitle>🏤학력</InfoTitle>
+              <InfoDesc>- 인덕대학교 멀티미디어디자인과 졸업 2020.02</InfoDesc>
+              <InfoTitle>👨‍🎓교육 이수</InfoTitle>
+              <InfoDesc>- 스파르타 코딩클럽 2021.05~2021.06</InfoDesc>
+              <InfoTitle>📜자격증</InfoTitle>
+              <InfoDesc>- 웹디자인기능사 2021.09.17</InfoDesc>
+              <InfoDesc>Git / Blog</InfoDesc>
             </Info>
             <Me>
               <Image
