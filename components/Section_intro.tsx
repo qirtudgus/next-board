@@ -202,11 +202,12 @@ const Section_intro = ({ width, height, children }: { width: number; height?: nu
           // (document!.getElementById('Body') as HTMLElement).classList.add('white');
 
           (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('white');
+          (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('dark');
         } else {
           // (document!.getElementById('firstSection') as HTMLElement).classList.remove('white');
           // (document!.getElementById('thirdSection') as HTMLElement).classList.remove('white');
           (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('white');
-
+          (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('dark');
           // (document!.getElementById('Body') as HTMLElement).classList.remove('white');
         }
       }
