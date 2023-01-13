@@ -347,7 +347,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   height='35px'
                   viewBox='0 0 24 24'
                   width='35px'
-                  fill='#000000'
+                  fill='#202124'
                 >
                   <path
                     d='M0 0h24v24H0z'
@@ -357,11 +357,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </svg>
               ) : (
                 <svg
+                  className='headerSVG'
                   xmlns='http://www.w3.org/2000/svg'
                   height='35px'
                   viewBox='0 0 24 24'
                   width='35px'
-                  fill='#366bff'
+                  fill='#fff'
                 >
                   <path
                     d='M0 0h24v24H0V0z'
