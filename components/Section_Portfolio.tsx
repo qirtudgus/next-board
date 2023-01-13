@@ -115,7 +115,6 @@ const Section_Portfolio = ({
           <Image
             src={포폴3}
             alt='사진'
-            loading='eager'
             fill
             priority
             quality={100}

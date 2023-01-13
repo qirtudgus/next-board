@@ -209,16 +209,7 @@ const Section_Text = ({
   const opacity = useTransform(scrollY, [0, 0.151, 0.3, 0.62, 0.9], [0, 0, 1, 1, 0]);
   return <SectionText style={{ opacity }}>{children}</SectionText>;
 };
-const SectionText_Portfolio = styled(motion.div)`
-  font-size: 4rem;
-  font-weight: bold;
-  z-index: 10000;
-  word-break: keep-all;
-  text-align: center;
-  @media ${({ theme }) => theme.device.tablet} {
-    font-size: 3rem;
-  }
-`;
+
 const Stack_List2 = ({ scrollY, children }: { scrollY: MotionValue<number>; children?: React.ReactNode }) => {
   const opacity = useTransform(scrollY, [0, 0.22, 0.3, 0.55, 0.78], [0, 0, 1, 1, 0]);
 

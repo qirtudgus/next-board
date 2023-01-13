@@ -98,7 +98,6 @@ const Swipers = ({
               <SwiperSlide key={index}>
                 <Image
                   src={i}
-                  loading='eager'
                   alt='image'
                   fill
                   quality={100}
