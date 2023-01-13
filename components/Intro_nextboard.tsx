@@ -176,7 +176,7 @@ const Intro_nextboard = () => {
               <span>넥스트보드</span>
               <div>
                 <a
-                  href='https://github.com/qirtudgus/saemoi'
+                  href='https://github.com/qirtudgus/next-board'
                   rel='noreferrer'
                   target={'_blank'}
                 >
@@ -193,7 +193,7 @@ const Intro_nextboard = () => {
                   </span>
                 </a>
                 <a
-                  href='https://poraid.com'
+                  href='https://next-board-swart.vercel.app/'
                   rel='noreferrer'
                   target={'_blank'}
                 >
