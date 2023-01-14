@@ -4,16 +4,10 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import 포폴3 from '../img/포폴5.webp';
 
-interface ViewportProps {
-  width: number;
-  height: number;
-  backgroundcolors: string;
-}
-
-const SectionWrap2 = styled(motion.div)<ViewportProps>`
+const SectionWrap2 = styled(motion.div)`
   width: 100%;
-  height: calc(${(props) => props.height}px * 2);
-  background-color: ${(props) => props.backgroundcolors};
+  height: calc(100vh * 2);
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,15 +65,7 @@ const Section_Text3 = ({
   return <SectionText_Portfolio style={{ opacity, color: '#1d1d1f', border }}>{children}</SectionText_Portfolio>;
 };
 
-const Section_Portfolio = ({
-  width,
-  height,
-  children,
-}: {
-  width: number;
-  height: number;
-  children?: React.ReactNode;
-}) => {
+const Section_Portfolio = () => {
   const ref = useRef() as RefObject<HTMLDivElement>;
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -87,25 +73,20 @@ const Section_Portfolio = ({
   });
 
   //해당 함수를 통해 data attribute 세팅
-  useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
-      if (ref.current) {
-        // ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
-        // let progressNumber = Number(ref.current.getAttribute('data-progress'));
-      }
-    });
-  }, []);
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.6], [0, 0, 1]);
+  // useEffect(() => {
+  //   return scrollYProgress.onChange((latest) => {
+  //     if (ref.current) {
+  //       // ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
+  //       // let progressNumber = Number(ref.current.getAttribute('data-progress'));
+  //     }
+  //   });
+  // }, []);
   const display = useTransform(scrollYProgress, [0, 0.9, 1], ['flex', 'flex', 'none']);
   return (
     <>
       <SectionWrap2
         ref={ref}
         data-progress={scrollYProgress.get()}
-        width={width}
-        height={height}
-        backgroundcolors={'white'}
       >
         <SectionDiv2 style={{ display }}>
           <Section_Text3 scrollY={scrollYProgress}>Portfolio</Section_Text3>
@@ -116,7 +97,6 @@ const Section_Portfolio = ({
             src={포폴3}
             alt='사진'
             fill
-            priority
             quality={100}
           ></Image>
         </PortfolioImg>
