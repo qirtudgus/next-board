@@ -185,7 +185,7 @@ const Section3_boxText = styled.div`
   }
 `;
 
-const Section_intro = ({ width, height, children }: { width: number; height?: number; children?: React.ReactNode }) => {
+const Section_intro = () => {
   const ref = useRef() as RefObject<HTMLDivElement>;
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -222,19 +222,23 @@ const Section_intro = ({ width, height, children }: { width: number; height?: nu
   }, []);
 
   const opacity = useTransform(scrollYProgress, [0.22, 0.48, 0.75, 0.9], [1, 0, 0, 1]);
+
+  let currentWidth = () => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth as number;
+    }
+  };
+
   return (
     <>
       <SectionWrap3
         ref={ref}
         data-progress={scrollYProgress.get()}
-        //   width={width}
-        //   height={height}
-        //   backgroundcolors={'#1d1d1f'}
         id={'thirdSection'}
       >
         <SectionDiv3 style={{}}>
           {/* width 뷰포트가 769미만이면 opacity를 호출하고 이상이면 opacity를 1로 설정해준다. */}
-          <Section3_title style={width < 1681 ? { opacity } : { opacity: '1' }}>
+          <Section3_title style={(currentWidth() as number) < 1681 ? { opacity } : { opacity: '1' }}>
             이런 개발자가
             <br /> 되기 위해
             <br /> 노력합니다.
