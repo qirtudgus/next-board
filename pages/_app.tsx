@@ -29,7 +29,7 @@ type AppPropsWithLayout = AppProps & {
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const { store, props } = wrapper.useWrappedStore(pageProps);
   const getLayout = Component.getLayout ?? ((page) => page);
-  const [isLoadUser, setIsLoadUser] = useState(false);
+  // const [isLoadUser, setIsLoadUser] = useState(false);
 
   // const ref2 = useRef() as RefObject<HTMLElement>;
   // const { scrollYProgress } = useScroll({
@@ -38,8 +38,6 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
   // });
 
   const router = useRouter();
-
-  console.log('app이 렌더링');
 
   useEffect(() => {
     //인덱스일 경우 클래스 조정..
