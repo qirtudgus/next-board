@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { RefObject, useEffect, useRef } from 'react';
 import { motion, MotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import me from '../img/me.jpg';
+import me from '../img/me.webp';
 
 const SectionWrap = styled.div`
   height: fit-content;
@@ -157,7 +157,8 @@ const Intro_connect = () => {
               <Image
                 src={me}
                 alt='me'
-                fill
+                width={295}
+                height={354}
               ></Image>
             </Me>
           </InfoWrap>

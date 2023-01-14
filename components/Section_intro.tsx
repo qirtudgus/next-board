@@ -1,9 +1,9 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { RefObject, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import 메타 from '../img/메타인지0.png';
-import 주인 from '../img/주인의식0.png';
-import 존중 from '../img/상호존중0.png';
+import 메타 from '../img/메타인지0.webp';
+import 주인 from '../img/주인의식0.webp';
+import 존중 from '../img/상호존중0.webp';
 import Image from 'next/image';
 
 const SectionWrap3 = styled(motion.div)`

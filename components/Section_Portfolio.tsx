@@ -2,7 +2,7 @@ import { motion, MotionValue, useScroll, useTransform } from 'framer-motion';
 import { RefObject, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
-import 포폴3 from '../img/포폴5.png';
+import 포폴3 from '../img/포폴5.webp';
 
 interface ViewportProps {
   width: number;
