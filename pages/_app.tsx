@@ -29,7 +29,7 @@ type AppPropsWithLayout = AppProps & {
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const { store, props } = wrapper.useWrappedStore(pageProps);
   const getLayout = Component.getLayout ?? ((page) => page);
-  const [isLoadUser, setIsLoadUser] = useState(true);
+  const [isLoadUser, setIsLoadUser] = useState(false);
 
   const ref2 = useRef() as RefObject<HTMLElement>;
   const { scrollYProgress } = useScroll({
