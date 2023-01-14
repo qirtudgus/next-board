@@ -10,53 +10,6 @@ import { modalAni } from '../posts/[idx]';
 const HeaderHeight = 60;
 const FooterHeight = 180;
 
-const Header = styled.header`
-  position: fixed;
-  font-size: 0.95rem;
-  z-index: 11;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: ${HeaderHeight}px;
-  display: flex;
-  justify-content: center;
-  transition: top 0.6s ease;
-  align-items: center;
-  padding: 0 10px;
-  top: 0;
-  & > div {
-    max-width: 1000px;
-    margin: 0 auto;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-  & ul {
-    display: flex;
-    align-items: center;
-    list-style: none;
-  }
-  & ul li {
-    cursor: pointer;
-    margin: 5px 10px;
-  }
-  & ul li:hover {
-    color: ${({ theme }) => theme.colors.main};
-  }
-  & > div > ul > #openMenu li {
-    width: 100px;
-  }
-
-  & .leftMenu {
-    display: flex;
-    @media ${({ theme }) => theme.device.tablet} {
-      display: none;
-    }
-    @media ${({ theme }) => theme.device.mobile} {
-    }
-  }
-`;
-
 const IntroHeader = styled.header`
   /* position: fixed; */
   position: sticky;
@@ -359,16 +312,18 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     //타임아웃 타입 지정
     //https://stackoverflow.com/questions/45802988/typescript-use-correct-version-of-settimeout-node-vs-window
     let timer: number | null;
-    window.onresize = () => {
-      if (!timer) {
-        timer = window.setTimeout(function () {
-          timer = null;
-          if (window.innerWidth > 768) {
-            setIsSlideOpenMenu(false);
-          }
-        }, 300);
-      }
-    };
+    if (typeof window !== 'undefined') {
+      window.onresize = () => {
+        if (!timer) {
+          timer = window.setTimeout(function () {
+            timer = null;
+            if (window.innerWidth > 768) {
+              setIsSlideOpenMenu(false);
+            }
+          }, 300);
+        }
+      };
+    }
   }, []);
 
   return (
