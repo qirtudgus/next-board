@@ -99,11 +99,11 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         {/* isLoading이 true가 되고나면 페이지를 로드시켜준다, 이걸로 새로고침되었을 때에도 게시판에서 초기값이 0이라 좋아요 리스트가 무조건 좋아요로 나오던 오류가 수정된다. */}
-        {isLoadUser && (
-          <Layout>
-            <Component {...pageProps} />{' '}
-          </Layout>
-        )}
+        {/* {isLoadUser && ( */}
+        <Layout>
+          <Component {...pageProps} />{' '}
+        </Layout>
+        {/* )} */}
       </ThemeProvider>
     </Provider>,
   );
