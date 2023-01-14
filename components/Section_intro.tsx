@@ -9,10 +9,16 @@ import Image from 'next/image';
 const SectionWrap3 = styled(motion.div)`
   //스크롤바 너비를 빼준다
   width: 100%;
-  height: calc(100vh * 4);
+  height: calc(100vh * 3.5);
   display: flex;
   justify-content: center;
   align-items: center;
+  @media ${({ theme }) => theme.device.tablet} {
+    height: calc(100vh * 4.5);
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    height: calc(100vh * 4.5);
+  }
 `;
 
 const SectionDiv3 = styled(motion.div)`
