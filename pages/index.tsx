@@ -150,7 +150,10 @@ const Go = () => {
         backgroundcolors={'#1d1d1f'}
         id='firstSection'
       >
-        {process.env.NODE_ENV !== 'production' && <CurrentProg>{currentProg}</CurrentProg>}
+        {
+          // replace console.* for disable log on production
+          process.env.NODE_ENV !== 'production' && <CurrentProg>{currentProg}</CurrentProg>
+        }
 
         <SectionDiv style={{ display }}>
           <SectionText
