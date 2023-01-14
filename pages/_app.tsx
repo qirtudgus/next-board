@@ -72,28 +72,6 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
     });
   }, []);
 
-  // useEffect(() => {
-  //   const loadUser = async () => {
-  //     //해당주소는 클라이언트의 쿠키를 검증한 뒤 아이디와 인덱스를 반환해준다.
-  //     await customAxios('GET', '/loadUser')
-  //       .then((res) => {
-  //         if (res.status === 200) {
-  //           let id = res.data.id;
-  //           let idx = res.data.idx;
-  //           store.dispatch(loginSuccess({ id, idx }));
-  //         } else {
-  //           // store.dispatch(logoutSuccess());
-  //         }
-  //       })
-  //       .then(() => {
-  //         setIsLoadUser(true);
-  //       });
-  //   };
-  //   loadUser();
-  //   //전체스크롤 진행률 설정
-  //   document.getElementById('__next')?.setAttribute('data-progress', scrollYProgress.get().toString());
-  // }, []);
-
   return getLayout(
     <Provider store={store}>
       <ThemeProvider theme={theme}>
