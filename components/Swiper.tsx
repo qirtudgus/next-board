@@ -103,7 +103,6 @@ const Swipers = ({
                   className='swiper-lazy'
                   src={i}
                   alt='image'
-                  // fill
                   width={1000}
                   height={727}
                 ></Image>
