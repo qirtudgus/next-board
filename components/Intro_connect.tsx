@@ -168,14 +168,16 @@ const Intro_connect = () => {
 };
 
 const ConnectBox1 = ({ scrollY }: { scrollY: MotionValue<number> }) => {
-  let widhts = document.getElementById('connectBox')?.clientWidth;
-  let titleWidths = document.getElementById('connectTitle')?.clientWidth;
   let resultWidth = () => {
-    if (widhts && titleWidths) {
-      return widhts - titleWidths + 'px';
+    if (typeof document !== 'undefined') {
+      let widhts = document.getElementById('connectBox')?.clientWidth;
+      let titleWidths = document.getElementById('connectTitle')?.clientWidth;
+      if (widhts && titleWidths) {
+        return widhts - titleWidths + 'px';
+      }
     }
   };
-  const width = useTransform(scrollY, [0, 0.4, 1], ['0px', '0px', `${widhts ? resultWidth() : '100vh'}`]);
+  const width = useTransform(scrollY, [0, 0.4, 1], ['0px', '0px', `${resultWidth()}`]);
   return (
     <>
       <ConnectBox id='connectBox'>
@@ -186,15 +188,17 @@ const ConnectBox1 = ({ scrollY }: { scrollY: MotionValue<number> }) => {
   );
 };
 const ConnectBox2 = ({ scrollY }: { scrollY: MotionValue<number> }) => {
-  let widhts = document.getElementById('meBox')?.clientWidth;
-  let titleWidths = document.getElementById('meTitle')?.clientWidth;
   let resultWidth = () => {
-    if (widhts && titleWidths) {
-      return widhts - titleWidths + 'px';
+    if (typeof document !== 'undefined') {
+      let widhts = document.getElementById('meBox')?.clientWidth;
+      let titleWidths = document.getElementById('meTitle')?.clientWidth;
+      if (widhts && titleWidths) {
+        return widhts - titleWidths + 'px';
+      }
     }
   };
 
-  const width = useTransform(scrollY, [0, 0.4, 1], ['0px', '0px', `${widhts ? resultWidth() : '100vh'}`]);
+  const width = useTransform(scrollY, [0, 0.4, 1], ['0px', '0px', `${resultWidth()}`]);
   return (
     <>
       <MeBox id='meBox'>
