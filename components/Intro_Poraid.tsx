@@ -7,7 +7,7 @@ import p0 from '../img/poraid0_1200.webp';
 import p1 from '../img/poraid1_1200.webp';
 import p2 from '../img/poraid2_1200.webp';
 
-const ContentWrapPoraid = styled(motion.div)`
+export const ContentWrap = styled(motion.div)`
   width: 100%;
   height: calc((100vh) * 1);
   background: #1d1d1f;
@@ -20,7 +20,7 @@ const ContentWrapPoraid = styled(motion.div)`
   position: relative;
 `;
 
-const ContentBox = styled(motion.div)`
+export const ContentBox = styled(motion.div)`
   width: 90%;
   max-width: 1300px;
   position: relative;
@@ -37,6 +37,7 @@ const ContentBox = styled(motion.div)`
     box-shadow: 0 0 40px 7px rgb(0 0 0 / 60%);
   }
   @media ${({ theme }) => theme.device.mobile} {
+    padding: 20px 15px;
     flex-direction: column;
     box-shadow: 0 0 15px 5px rgb(0 0 0 / 60%);
   }
@@ -48,20 +49,7 @@ const ContentBox = styled(motion.div)`
     border-radius: 20px;
     width: calc(100% + 5px);
     height: calc(100% + 5px);
-    @property --rotate {
-      syntax: '<angle>';
-      initial-value: 132deg;
-      inherits: false;
-    }
 
-    @keyframes spin {
-      0% {
-        --rotate: 0deg;
-      }
-      100% {
-        --rotate: 360deg;
-      }
-    }
     background-image: linear-gradient(
       var(--rotate),
       rgba(241, 87, 87, 1) 0%,
@@ -72,7 +60,7 @@ const ContentBox = styled(motion.div)`
   }
 `;
 
-const DescDiv = styled.div`
+export const DescDiv = styled.div`
   width: 500px;
   flex-direction: column;
   display: flex;
@@ -86,7 +74,7 @@ const DescDiv = styled.div`
   }
 `;
 
-const ContentName = styled.div`
+export const ContentName = styled.div`
   font-size: 2rem;
   border-bottom: 1px solid#fff;
   padding-bottom: 10px;
@@ -112,14 +100,12 @@ const ContentName = styled.div`
     fill: #ef5a34;
   }
 `;
-const ContentNameUnderline = styled.div``;
 
-const ImgDiv = styled.div`
+export const ImgDiv = styled.div`
   display: block;
   width: 60%;
   @media ${({ theme }) => theme.device.tablet} {
-    width: 100%;
-    margin-top: 30px;
+    width: 75%;
   }
   @media ${({ theme }) => theme.device.mobile} {
     width: 100%;
@@ -165,7 +151,7 @@ const Intro_Poraid = () => {
   const y = useParallax(scrollYProgress, 1000);
   return (
     <>
-      <ContentWrapPoraid ref={ref}>
+      <ContentWrap ref={ref}>
         <ContentBox>
           {/* <div className='LightBorder'> */}
           <DescDiv>
@@ -239,7 +225,7 @@ const Intro_Poraid = () => {
           </ImgDiv>
           {/* </div> */}
         </ContentBox>
-      </ContentWrapPoraid>
+      </ContentWrap>
     </>
   );
 };

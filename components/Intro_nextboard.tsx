@@ -2,126 +2,10 @@ import styled from 'styled-components';
 import { RefObject, useEffect, useRef } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import Swipers from './Swiper';
-import p0 from '../img/poraid0_1200.webp';
-import p1 from '../img/poraid1_1200.webp';
-import p2 from '../img/poraid2_1200.webp';
-
-const ContentWrapPoraid = styled.div`
-  width: 100%;
-  height: calc((100vh) * 1);
-  background: #1d1d1f;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 10;
-  position: relative;
-`;
-const ContentBox = styled(motion.div)`
-  width: 90%;
-  max-width: 1300px;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  border-radius: 20px;
-  box-shadow: 0 0 70px 10px rgb(0 0 0 / 60%);
-  background-color: #1d1d1f;
-  padding: 40px;
-  @media ${({ theme }) => theme.device.tablet} {
-    flex-direction: column;
-    padding: 15px;
-    box-shadow: 0 0 40px 7px rgb(0 0 0 / 60%);
-  }
-  @media ${({ theme }) => theme.device.mobile} {
-    flex-direction: column;
-    box-shadow: 0 0 15px 5px rgb(0 0 0 / 60%);
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    border-radius: 20px;
-    width: calc(100% + 5px);
-    height: calc(100% + 5px);
-    @property --rotate {
-      syntax: '<angle>';
-      initial-value: 132deg;
-      inherits: false;
-    }
-
-    @keyframes spin {
-      0% {
-        --rotate: 0deg;
-      }
-      100% {
-        --rotate: 360deg;
-      }
-    }
-    background-image: linear-gradient(
-      var(--rotate),
-      rgba(122, 156, 255, 1) 0%,
-      rgba(82, 161, 255, 1) 50%,
-      rgba(17, 78, 255, 1) 100%
-    );
-    animation: spin 2.5s linear infinite;
-  }
-`;
-
-const DescDiv = styled.div`
-  width: 500px;
-  flex-direction: column;
-  display: flex;
-  color: #fff;
-
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 100%;
-  }
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 100%;
-  }
-`;
-
-const ContentName = styled.div`
-  font-size: 2rem;
-  border-bottom: 1px solid#fff;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-  font-weight: bold;
-  display: flex;
-
-  /* align-items: center; */
-  justify-content: space-between;
-  & > div {
-    display: flex;
-    align-items: center;
-  }
-
-  & span {
-    color: #fff;
-    display: flex;
-    align-items: center;
-    margin-left: 5px;
-  }
-  & > div span svg:hover {
-    cursor: pointer;
-    fill: #366bff;
-  }
-`;
-const ContentNameUnderline = styled.div``;
-
-const ImgDiv = styled.div`
-  display: block;
-  width: 60%;
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 100%;
-    margin-top: 30px;
-  }
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 100%;
-  }
-`;
+import p0 from '../img/neb1.webp';
+import p1 from '../img/neb2.webp';
+import p2 from '../img/neb3.webp';
+import { ContentBox, ContentName, ContentWrap, DescDiv, ImgDiv } from './Intro_Poraid';
 
 const Intro_nextboard = () => {
   const ref = useRef() as RefObject<HTMLDivElement>;
@@ -151,7 +35,7 @@ const Intro_nextboard = () => {
 
   return (
     <>
-      <ContentWrapPoraid ref={ref}>
+      <ContentWrap ref={ref}>
         <ContentBox>
           <DescDiv>
             <ContentName>
@@ -221,7 +105,7 @@ const Intro_nextboard = () => {
             ></Swipers>
           </ImgDiv>
         </ContentBox>
-      </ContentWrapPoraid>
+      </ContentWrap>
     </>
   );
 };

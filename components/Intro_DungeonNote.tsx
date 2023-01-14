@@ -1,141 +1,13 @@
-import styled from 'styled-components';
 import { RefObject, useEffect, useRef } from 'react';
-import { motion, useScroll } from 'framer-motion';
+import { useScroll } from 'framer-motion';
 import Swipers from './Swiper';
 
 import note0 from '../img/note_1200.webp';
 import note1 from '../img/note0_1200.webp';
 import note2 from '../img/note1_1200.webp';
 import note3 from '../img/note2_1200.webp';
+import { ContentBox, ContentName, ContentWrap, DescDiv, ImgDiv } from './Intro_Poraid';
 
-const ContentWrapPoraid = styled.div`
-  width: 100%;
-  height: calc((100vh) * 1);
-  background: #1d1d1f;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 10;
-  position: relative;
-`;
-const ContentBox = styled(motion.div)`
-  width: 90%;
-  max-width: 1300px;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  border-radius: 20px;
-  box-shadow: 0 0 70px 10px rgb(0 0 0 / 60%);
-  background-color: #1d1d1f;
-  padding: 40px;
-  @media ${({ theme }) => theme.device.tablet} {
-    padding: 15px;
-    flex-direction: column;
-    box-shadow: 0 0 40px 7px rgb(0 0 0 / 60%);
-  }
-  @media ${({ theme }) => theme.device.mobile} {
-    flex-direction: column;
-    box-shadow: 0 0 15px 5px rgb(0 0 0 / 60%);
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    border-radius: 20px;
-    width: calc(100% + 5px);
-    height: calc(100% + 5px);
-    @property --rotate {
-      syntax: '<angle>';
-      initial-value: 132deg;
-      inherits: false;
-    }
-
-    @keyframes spin {
-      0% {
-        --rotate: 0deg;
-      }
-      100% {
-        --rotate: 360deg;
-      }
-    }
-    background-image: linear-gradient(
-      var(--rotate),
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 233, 122, 1) 45%,
-      rgba(222, 222, 222, 1) 100%
-    );
-    animation: spin 2.5s linear infinite;
-  }
-`;
-
-const DescDiv = styled.div`
-  width: 500px;
-  flex-direction: column;
-  display: flex;
-  position: relative;
-  z-index: 10;
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 100%;
-  }
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 100%;
-  }
-`;
-
-const DesckBlock = styled.div`
-  display: flex;
-  font-size: 1.3rem;
-`;
-
-const DescP = styled.p`
-  margin-bottom: 10px;
-  flex-shrink: 0;
-`;
-const DescText = styled.p`
-  margin-bottom: 10px;
-`;
-
-const ContentName = styled.div`
-  font-size: 2rem;
-  border-bottom: 1px solid#fff;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-  font-weight: bold;
-  display: flex;
-
-  /* align-items: center; */
-  justify-content: space-between;
-  & > div {
-    display: flex;
-    align-items: center;
-  }
-
-  & span {
-    display: flex;
-    align-items: center;
-    margin-left: 5px;
-  }
-  & > div span svg:hover {
-    cursor: pointer;
-    fill: #757575;
-  }
-`;
-const ContentNameUnderline = styled.div``;
-
-const ImgDiv = styled.div`
-  display: block;
-  width: 60%;
-  @media ${({ theme }) => theme.device.tablet} {
-    width: 100%;
-    margin-top: 30px;
-  }
-  @media ${({ theme }) => theme.device.mobile} {
-    width: 100%;
-  }
-`;
 const Intro_DungeonNote = () => {
   const ref = useRef() as RefObject<HTMLDivElement>;
   const { scrollYProgress } = useScroll({
@@ -163,7 +35,7 @@ const Intro_DungeonNote = () => {
 
   return (
     <>
-      <ContentWrapPoraid ref={ref}>
+      <ContentWrap ref={ref}>
         <ContentBox>
           <DescDiv>
             <ContentName>
@@ -234,30 +106,9 @@ const Intro_DungeonNote = () => {
             ></Swipers>
           </ImgDiv>
         </ContentBox>
-      </ContentWrapPoraid>
+      </ContentWrap>
     </>
   );
 };
 
 export default Intro_DungeonNote;
-{
-  /* <div>
-
-          <Canvas camera={{ position: [0, -0.2, 0.5] }}>
-            <ambientLight intensity={0.3} />
-            <Suspense fallback={null}>
-              <Scene />
-              <OrbitControls
-                //자동 회전
-                // autoRotate={true}
-                //줌 방지
-
-                enableZoom={false}
-                //   minPolarAngle={Math.PI / 2.5}
-                //   maxPolarAngle={Math.PI / 2.5}
-              />
-              <Environment preset='city' />
-            </Suspense>
-          </Canvas>
-        </div> */
-}
