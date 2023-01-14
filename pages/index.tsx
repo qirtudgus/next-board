@@ -20,13 +20,6 @@ import Intro_nextboard from '../components/Intro_nextboard';
 import Section_intro from '../components/Section_intro';
 import Intro_connect from '../components/Intro_connect';
 import Section_Portfolio from '../components/Section_Portfolio';
-import { useRouter } from 'next/router';
-
-interface ViewportProps {
-  width: number;
-  height: number;
-  backgroundcolors: string;
-}
 
 const SectionText = styled(motion.div)`
   font-size: 3rem;
@@ -50,10 +43,9 @@ const SectionDiv = styled(motion.div)`
   color: #fff;
 `;
 
-const SectionWrap = styled(motion.div)<ViewportProps>`
+const SectionWrap = styled(motion.div)`
   width: 100%;
-  height: calc(${(props) => props.height}px * 5);
-  /* background-color: ${(props) => props.backgroundcolors}; */
+  height: calc(100vh * 5);
   display: flex;
   justify-content: center;
   }
@@ -122,10 +114,10 @@ const IndexRef = () => {
 };
 
 const Go = () => {
-  const [viewport, setViewport] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
+  // const [viewport, setViewport] = useState({
+  //   width: 0,
+  //   height: 0,
+  // });
 
   const [currentProg, SetCurrentProg] = useState(0);
 
@@ -136,23 +128,26 @@ const Go = () => {
     offset: ['start start', 'end start'],
   });
 
-  useEffect(() => {
-    //과한 리사이징 호출을 대비하여 디바운스
-    let timer: number | null;
-    const SetPort = () => {
-      if (!timer) {
-        timer = window.setTimeout(function () {
-          timer = null;
-          console.log('리사이즈');
-          setViewport({ width: window.innerWidth, height: window.innerHeight });
-        }, 100);
-      }
-    };
-    window.addEventListener('resize', SetPort);
-    return () => {
-      window.removeEventListener('resize', SetPort);
-    };
-  }, []);
+  // useEffect(() => {
+  //   //과한 리사이징 호출을 대비하여 디바운스
+  //   let timer: number | null;
+  //   const SetPort = () => {
+  //     if (typeof window !== 'undefined') {
+  //       if (!timer) {
+  //         timer = window.setTimeout(function () {
+  //           timer = null;
+  //           console.log('리사이즈');
+  //           setViewport({ width: window.innerWidth, height: window.innerHeight });
+  //         }, 100);
+  //       }
+  //     }
+  //     window.addEventListener('resize', SetPort);
+  //   };
+
+  //   return () => {
+  //     window.removeEventListener('resize', SetPort);
+  //   };
+  // }, []);
 
   //인덱스페이지를 나갈 때 body값을 초기화해주자..!
   useEffect(() => {
@@ -169,16 +164,11 @@ const Go = () => {
 
   const opacity = useTransform(scrollYProgress, [0.01, 0.15], [1, 0]);
   const display = useTransform(scrollYProgress, [0, 0.9999, 1], ['flex', 'flex', 'none']);
-  const x = useTransform(scrollYProgress, [0.01, 0.06], [0, 30]);
-  const y = useTransform(scrollYProgress, [0.01, 0.05], [-30, 0]);
 
   return (
     <>
       <SectionWrap
         ref={ref}
-        width={viewport.width}
-        height={viewport.height}
-        backgroundcolors={'#1d1d1f'}
         id='firstSection'
       >
         {
@@ -213,11 +203,8 @@ const Go = () => {
           <DownArrowSVG />
         </DownArrow>
       </SectionWrap>
-      <Section_intro width={viewport.width} />
-      <Section_Portfolio
-        width={viewport.width}
-        height={viewport.height}
-      />
+      <Section_intro />
+      <Section_Portfolio />
       <Intro_Poraid />
       <Intro_DungeonNote />
       <Intro_nextboard />
