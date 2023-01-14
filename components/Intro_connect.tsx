@@ -74,6 +74,7 @@ const InfoWrap = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     flex-direction: column-reverse;
     justify-content: space-around;
+    height: 570px;
   }
 `;
 
@@ -95,7 +96,6 @@ const Me = styled.div`
   height: 250px;
 
   position: relative;
-
   & img {
     object-fit: cover;
   }
@@ -104,8 +104,8 @@ const Me = styled.div`
   }
 
   @media ${({ theme }) => theme.device.mobile} {
-    width: 150px;
-    height: 200px;
+    width: 160px;
+    height: 210px;
   }
 `;
 
@@ -115,23 +115,6 @@ const Intro_connect = () => {
     target: ref,
     offset: ['start end', 'end end'],
   });
-  useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
-      //전체스크롤 진행률 할당
-      // const progress = Number(scrollYProgress.get());
-      //0.479보다 크면 white 추가하기, 작으면 white 삭제하기
-      // if (progress < 0.987) {
-      //   (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('white');
-      //   (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('dark');
-      //   // (document!.getElementById('header') as HTMLElement).classList.add('text_black');
-      // } else {
-      //   (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('white');
-      //   (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('dark');
-      //   // (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
-      // }
-    });
-  }, []);
-
   return (
     <>
       <SectionWrap ref={ref}>
@@ -148,10 +131,26 @@ const Intro_connect = () => {
               <InfoTitle>🏤학력</InfoTitle>
               <InfoDesc>- 인덕대학교 멀티미디어디자인과 졸업 2020.02</InfoDesc>
               <InfoTitle>👨‍🎓교육 이수</InfoTitle>
-              <InfoDesc>- 스파르타 코딩클럽 2021.05~2021.06</InfoDesc>
+              <InfoDesc>- 스파르타 코딩클럽 10기 2021.05~2021.06</InfoDesc>
               <InfoTitle>📜자격증</InfoTitle>
               <InfoDesc>- 웹디자인기능사 2021.09.17</InfoDesc>
-              <InfoDesc>Git / Blog</InfoDesc>
+              <InfoDesc>
+                <a
+                  href='https://github.com/qirtudgus'
+                  target={'_blank'}
+                  rel={'noreferrer'}
+                >
+                  Git
+                </a>
+                /
+                <a
+                  href='https://sungt.tistory.com/'
+                  target={'_blank'}
+                  rel={'noreferrer'}
+                >
+                  Blog
+                </a>
+              </InfoDesc>
             </Info>
             <Me>
               <Image
@@ -187,7 +186,7 @@ const ConnectBox1 = ({ scrollY }: { scrollY: MotionValue<number> }) => {
   );
 };
 const ConnectBox2 = ({ scrollY }: { scrollY: MotionValue<number> }) => {
-  let widhts = document.getElementById('connectBox')?.clientWidth;
+  let widhts = document.getElementById('meBox')?.clientWidth;
   let titleWidths = document.getElementById('meTitle')?.clientWidth;
   let resultWidth = () => {
     if (widhts && titleWidths) {
@@ -198,7 +197,7 @@ const ConnectBox2 = ({ scrollY }: { scrollY: MotionValue<number> }) => {
   const width = useTransform(scrollY, [0, 0.4, 1], ['0px', '0px', `${widhts ? resultWidth() : '100vh'}`]);
   return (
     <>
-      <MeBox>
+      <MeBox id='meBox'>
         <MeBorder style={{ width }}></MeBorder>
         <Title id='meTitle'>Me</Title>
       </MeBox>
