@@ -20,6 +20,7 @@ import Intro_nextboard from '../components/Intro_nextboard';
 import Section_intro from '../components/Section_intro';
 import Intro_connect from '../components/Intro_connect';
 import Section_Portfolio from '../components/Section_Portfolio';
+import { useRouter } from 'next/router';
 
 interface ViewportProps {
   width: number;
@@ -89,6 +90,36 @@ const StackList2 = styled(motion.div)`
     margin: 10px;
   }
 `;
+
+const IndexWrap = styled.div``;
+
+const IndexRef = () => {
+  const ref = useRef() as RefObject<HTMLDivElement>;
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  });
+  useEffect(() => {
+    return scrollYProgress.onChange((latest) => {
+      //전체스크롤 진행률 할당
+      // document.getElementById('__next')?.setAttribute('data-fullprogress', scrollYProgress.get().toString());
+      const progress = Number(scrollYProgress.get());
+      if (document.getElementById('header')) {
+        if (progress > 0.0377) {
+          (document!.getElementById('header') as HTMLElement).classList.add('show');
+        } else {
+          (document!.getElementById('header') as HTMLElement).classList.remove('show');
+        }
+      }
+    });
+  }, []);
+
+  return (
+    <IndexWrap ref={ref}>
+      <Go />
+    </IndexWrap>
+  );
+};
 
 const Go = () => {
   const [viewport, setViewport] = useState({
@@ -242,4 +273,4 @@ const Stack_List = ({ scrollY, children }: { scrollY: MotionValue<number>; child
   );
 };
 
-export default Go;
+export default IndexRef;
