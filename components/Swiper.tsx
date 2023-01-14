@@ -89,8 +89,8 @@ const Swipers = ({
         navigation={true}
         modules={[Pagination, Navigation]}
         slidesPerView={1}
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log('slide change')}
+        // onSwiper={(swiper) => console.log(swiper)}
       >
         {imgArr &&
           (imgArr as StaticImageData[]).map((i, index) => {

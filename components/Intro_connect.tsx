@@ -195,8 +195,6 @@ const ConnectBox2 = ({ scrollY }: { scrollY: MotionValue<number> }) => {
     }
   };
 
-  console.log(resultWidth());
-
   const width = useTransform(scrollY, [0, 0.4, 1], ['0px', '0px', `${widhts ? resultWidth() : '100vh'}`]);
   return (
     <>

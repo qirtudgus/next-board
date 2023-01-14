@@ -31,13 +31,15 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   const [isLoadUser, setIsLoadUser] = useState(false);
 
-  const ref2 = useRef() as RefObject<HTMLElement>;
-  const { scrollYProgress } = useScroll({
-    target: ref2,
-    offset: ['start start', 'end end'],
-  });
+  // const ref2 = useRef() as RefObject<HTMLElement>;
+  // const { scrollYProgress } = useScroll({
+  //   target: ref2,
+  //   offset: ['start start', 'end end'],
+  // });
 
   const router = useRouter();
+
+  console.log('app이 렌더링');
 
   useEffect(() => {
     //인덱스일 경우 클래스 조정..
@@ -56,43 +58,42 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
     }
   }, []);
 
-  useEffect(() => {
-    return scrollYProgress.onChange((latest) => {
-      //전체스크롤 진행률 할당
-      document.getElementById('__next')?.setAttribute('data-fullprogress', scrollYProgress.get().toString());
-      const progress = Number(scrollYProgress.get());
+  // useEffect(() => {
+  //   return scrollYProgress.onChange((latest) => {
+  //     //전체스크롤 진행률 할당
+  //     // document.getElementById('__next')?.setAttribute('data-fullprogress', scrollYProgress.get().toString());
+  //     const progress = Number(scrollYProgress.get());
 
-      if (document.getElementById('header')) {
-        if (progress > 0.0377) {
-          (document!.getElementById('header') as HTMLElement).classList.add('show');
-        } else {
-          (document!.getElementById('header') as HTMLElement).classList.remove('show');
-        }
-      }
-    });
-  }, []);
+  //     if (document.getElementById('header')) {
+  //       if (progress > 0.0377) {
+  //         (document!.getElementById('header') as HTMLElement).classList.add('show');
+  //       } else {
+  //         (document!.getElementById('header') as HTMLElement).classList.remove('show');
+  //       }
+  //     }
+  //   });
+  // }, []);
 
-  useEffect(() => {
-    const loadUser = async () => {
-      //해당주소는 클라이언트의 쿠키를 검증한 뒤 아이디와 인덱스를 반환해준다.
-      await customAxios('GET', '/loadUser')
-        .then((res) => {
-          if (res.status === 200) {
-            let id = res.data.id;
-            let idx = res.data.idx;
-            store.dispatch(loginSuccess({ id, idx }));
-          } else {
-            // store.dispatch(logoutSuccess());
-          }
-        })
-        .then(() => {
-          setIsLoadUser(true);
-        });
-    };
-    loadUser();
-    //전체스크롤 진행률 설정
-    document.getElementById('__next')?.setAttribute('data-progress', scrollYProgress.get().toString());
-  }, []);
+  //큰 화면을 다시그린다는건 좀 큰 부담이다....빼놓고 빌드해보자
+  // useEffect(() => {
+  //   const loadUser = async () => {
+  //     //해당주소는 클라이언트의 쿠키를 검증한 뒤 아이디와 인덱스를 반환해준다.
+  //     await customAxios('GET', '/loadUser')
+  //       .then((res) => {
+  //         if (res.status === 200) {
+  //           let id = res.data.id;
+  //           let idx = res.data.idx;
+  //           store.dispatch(loginSuccess({ id, idx }));
+  //         } else {
+  //           // store.dispatch(logoutSuccess());
+  //         }
+  //       })
+  //       .then(() => {
+  //         setIsLoadUser(true);
+  //       });
+  //   };
+  //   loadUser();
+  // }, []);
 
   return getLayout(
     <Provider store={store}>
@@ -100,10 +101,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
         {/* isLoading이 true가 되고나면 페이지를 로드시켜준다, 이걸로 새로고침되었을 때에도 게시판에서 초기값이 0이라 좋아요 리스트가 무조건 좋아요로 나오던 오류가 수정된다. */}
         {isLoadUser && (
           <Layout>
-            <Component
-              ref={ref2}
-              {...pageProps}
-            />{' '}
+            <Component {...pageProps} />{' '}
           </Layout>
         )}
       </ThemeProvider>
