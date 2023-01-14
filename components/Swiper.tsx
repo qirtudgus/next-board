@@ -70,6 +70,7 @@ const SwiperStyle = styled.div<StyleInterface>`
     position: static !important;
   }
 `;
+
 const Swipers = ({
   imgArr,
   bulletActiveColor,
@@ -99,8 +100,9 @@ const Swipers = ({
                 <Image
                   src={i}
                   alt='image'
-                  fill
-                  quality={100}
+                  // fill
+                  width={1000}
+                  height={727}
                 ></Image>
               </SwiperSlide>
             );
