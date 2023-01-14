@@ -4,8 +4,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/lazy';
 // import required modules
-import { Pagination, Navigation } from 'swiper';
+import { Lazy, Pagination, Navigation } from 'swiper';
 
 import styled from 'styled-components';
 import Image, { StaticImageData } from 'next/image';
@@ -86,9 +87,10 @@ const Swipers = ({
       bulletBgColor={bulletBgColor}
     >
       <Swiper
+        lazy={true}
         pagination={true}
         navigation={true}
-        modules={[Pagination, Navigation]}
+        modules={[Lazy, Pagination, Navigation]}
         slidesPerView={1}
         // onSlideChange={() => console.log('slide change')}
         // onSwiper={(swiper) => console.log(swiper)}
@@ -98,6 +100,7 @@ const Swipers = ({
             return (
               <SwiperSlide key={index}>
                 <Image
+                  className='swiper-lazy'
                   src={i}
                   alt='image'
                   // fill

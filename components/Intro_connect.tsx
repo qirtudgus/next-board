@@ -157,8 +157,7 @@ const Intro_connect = () => {
               <Image
                 src={me}
                 alt='me'
-                width={295}
-                height={354}
+                fill
               ></Image>
             </Me>
           </InfoWrap>
