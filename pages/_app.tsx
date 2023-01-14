@@ -10,6 +10,7 @@ import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { loginSuccess } from '../store/userInfoSlice';
 import customAxios from '../utils/customAxios';
 import { useRouter } from 'next/router';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 // replace console.* for disable log on production
 if (process.env.NODE_ENV === 'production') {
@@ -78,7 +79,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
             <Component {...pageProps} />
           </Layout>
         ) : (
-          <p>Loading</p>
+          <LoadingSpinner />
         )}
       </ThemeProvider>
     </Provider>,
