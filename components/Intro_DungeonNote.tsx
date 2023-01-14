@@ -1,12 +1,53 @@
 import { RefObject, useEffect, useRef } from 'react';
-import { useScroll } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import Swipers from './Swiper';
 
 import note0 from '../img/note_1200.webp';
 import note1 from '../img/note0_1200.webp';
 import note2 from '../img/note1_1200.webp';
 import note3 from '../img/note2_1200.webp';
-import { ContentBox, ContentName, ContentWrap, DescDiv, ImgDiv } from './Intro_Poraid';
+import { ContentName, ContentWrap, DescDiv, ImgDiv } from './Intro_Poraid';
+import styled from 'styled-components';
+
+const ContentBox = styled(motion.div)`
+  width: 90%;
+  max-width: 1300px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 20px;
+  box-shadow: 0 0 70px 10px rgb(0 0 0 / 60%);
+  background-color: #1d1d1f;
+  padding: 40px;
+  @media ${({ theme }) => theme.device.tablet} {
+    padding: 15px;
+    flex-direction: column;
+    box-shadow: 0 0 40px 7px rgb(0 0 0 / 60%);
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    padding: 20px 15px;
+    flex-direction: column;
+    box-shadow: 0 0 15px 5px rgb(0 0 0 / 60%);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    border-radius: 20px;
+    width: calc(100% + 5px);
+    height: calc(100% + 5px);
+
+    background-image: linear-gradient(
+      var(--rotate),
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 233, 122, 1) 45%,
+      rgba(222, 222, 222, 1) 100%
+    );
+    animation: spin 2.5s linear infinite;
+  }
+`;
 
 const Intro_DungeonNote = () => {
   const ref = useRef() as RefObject<HTMLDivElement>;

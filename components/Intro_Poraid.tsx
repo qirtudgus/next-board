@@ -20,7 +20,7 @@ export const ContentWrap = styled(motion.div)`
   position: relative;
 `;
 
-export const ContentBox = styled(motion.div)`
+const ContentBox = styled(motion.div)`
   width: 90%;
   max-width: 1300px;
   position: relative;
