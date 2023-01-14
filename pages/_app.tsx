@@ -59,7 +59,7 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
       //전체스크롤 진행률 할당
-      document.getElementById('__next')?.setAttribute('data-fullprogress', scrollYProgress.get().toString());
+      // document.getElementById('__next')?.setAttribute('data-fullprogress', scrollYProgress.get().toString());
       const progress = Number(scrollYProgress.get());
 
       if (document.getElementById('header')) {
@@ -75,36 +75,36 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
   useEffect(() => {
     const loadUser = async () => {
       //해당주소는 클라이언트의 쿠키를 검증한 뒤 아이디와 인덱스를 반환해준다.
-      await customAxios('GET', '/loadUser')
-        .then((res) => {
-          if (res.status === 200) {
-            let id = res.data.id;
-            let idx = res.data.idx;
-            store.dispatch(loginSuccess({ id, idx }));
-          } else {
-            // store.dispatch(logoutSuccess());
-          }
-        })
-        .then(() => {
+      await customAxios('GET', '/loadUser').then((res) => {
+        if (res.status === 200) {
+          let id = res.data.id;
+          let idx = res.data.idx;
+          store.dispatch(loginSuccess({ id, idx }));
           setIsLoadUser(true);
-        });
+        } else {
+          setIsLoadUser(true);
+          // store.dispatch(logoutSuccess());
+        }
+      });
     };
     loadUser();
     //전체스크롤 진행률 설정
-    document.getElementById('__next')?.setAttribute('data-progress', scrollYProgress.get().toString());
+    // document.getElementById('__next')?.setAttribute('data-progress', scrollYProgress.get().toString());
   }, []);
 
   return getLayout(
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         {/* isLoading이 true가 되고나면 페이지를 로드시켜준다, 이걸로 새로고침되었을 때에도 게시판에서 초기값이 0이라 좋아요 리스트가 무조건 좋아요로 나오던 오류가 수정된다. */}
-        {isLoadUser && (
+        {isLoadUser ? (
           <Layout>
             <Component
               ref={ref2}
               {...pageProps}
             />{' '}
           </Layout>
+        ) : (
+          <p>로딩중..</p>
         )}
       </ThemeProvider>
     </Provider>,
