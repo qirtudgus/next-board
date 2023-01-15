@@ -21,6 +21,14 @@ body.outIndex {
   background-color: #fff !important;
 }
 
+body.outIndex .headerSVG {
+  fill: #202124;
+}
+body.outIndex #header {
+  background-color: #fff;
+  border-bottom: 1px solid#c4c4c4;
+}
+
 header .headerSVG {
   fill: #fff;
 }
