@@ -13,7 +13,7 @@ Next.js / TypeScript / Styled-Components /Redux / Redux-Toolkit
 ### Backend
 MySQL
 ### Deploy
-AWS-EC2-Linux /  Nginx
+AWS-EC2-Linux / Nginx
 
 
 ## 🚗 진행 동기
@@ -44,8 +44,6 @@ Vercel이 너무 느려 이미지 로딩에 대한 최적화를 진행해 봤다
 이후 Analytics를 통해 확인해 보니 실제로 큰 효과가 있었다.
 하지만 결국 제일 크게 시간을 잡아먹던 건 네트워크 통신이었다.
 해당 문제는 AWS EC2로 이전하여 해결되었다.
-
-- #### 
 
 ![이미지최적화전후](https://user-images.githubusercontent.com/70016257/212559494-0461367f-dce7-44d4-97cc-2e176b6747a9.jpg)
 
