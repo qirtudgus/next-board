@@ -114,10 +114,9 @@ const IndexRef = () => {
 };
 
 const Go = () => {
-  // const [viewport, setViewport] = useState({
-  //   width: 0,
-  //   height: 0,
-  // });
+  const [viewport, setViewport] = useState({
+    width: window.innerWidth,
+  });
 
   const [currentProg, SetCurrentProg] = useState(0);
 
@@ -128,26 +127,23 @@ const Go = () => {
     offset: ['start start', 'end start'],
   });
 
-  // useEffect(() => {
-  //   //과한 리사이징 호출을 대비하여 디바운스
-  //   let timer: number | null;
-  //   const SetPort = () => {
-  //     if (typeof window !== 'undefined') {
-  //       if (!timer) {
-  //         timer = window.setTimeout(function () {
-  //           timer = null;
-  //           console.log('리사이즈');
-  //           setViewport({ width: window.innerWidth, height: window.innerHeight });
-  //         }, 100);
-  //       }
-  //     }
-  //     window.addEventListener('resize', SetPort);
-  //   };
-
-  //   return () => {
-  //     window.removeEventListener('resize', SetPort);
-  //   };
-  // }, []);
+  useEffect(() => {
+    //과한 리사이징 호출을 대비하여 디바운스
+    let timer: number | null;
+    const SetPort = () => {
+      if (!timer) {
+        timer = window.setTimeout(function () {
+          timer = null;
+          console.log('리사이즈');
+          setViewport({ width: window.innerWidth });
+        }, 150);
+      }
+    };
+    window.addEventListener('resize', SetPort);
+    return () => {
+      window.removeEventListener('resize', SetPort);
+    };
+  }, []);
 
   //인덱스페이지를 나갈 때 body값을 초기화해주자..!
   useEffect(() => {
@@ -203,7 +199,7 @@ const Go = () => {
           <DownArrowSVG />
         </DownArrow>
       </SectionWrap>
-      <Section_intro />
+      <Section_intro width={viewport.width} />
       <Section_Portfolio />
       <Intro_Poraid />
       <Intro_DungeonNote />
