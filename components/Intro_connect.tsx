@@ -131,7 +131,7 @@ const Intro_connect = () => {
               <InfoTitle>🏤학력</InfoTitle>
               <InfoDesc>- 인덕대학교 멀티미디어디자인과 졸업 2020.02</InfoDesc>
               <InfoTitle>👨‍🎓교육 이수</InfoTitle>
-              <InfoDesc>- 스파르타 코딩클럽 10기 2021.05~2021.06</InfoDesc>
+              <InfoDesc>- 스파르타 코딩클럽 10기 2020.09~2020.10</InfoDesc>
               <InfoTitle>📜자격증</InfoTitle>
               <InfoDesc>- 웹디자인기능사 2021.09.17</InfoDesc>
               <InfoDesc>
