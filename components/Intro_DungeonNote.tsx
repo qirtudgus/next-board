@@ -131,7 +131,7 @@ const Intro_DungeonNote = () => {
                 </a>
               </div>
             </ContentName>
-            RPG 형식의 웹 게임입니다.
+            추억의 공책게임을 RPG형식의 턴제 웹 게임으로 제작하였습니다.
             <br />
             - 레벨업을 통해 스텟과 스킬포인트를 모아 캐릭터를 강하게!
             <br />
