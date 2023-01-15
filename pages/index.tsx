@@ -183,12 +183,12 @@ const Go = () => {
             animate={{ opacity: 1, translateX: 0 }}
             transition={{ duration: 0.5 }}
           >
-            &lt; &gt;
+            {/* &lt; &gt; */}
             <br />
             안녕하세요! <br />
             Web FrontEnd Developer <br />
             박성현입니다. <br />
-            &lt;&#47;&gt;
+            {/* &lt;&#47;&gt; */}
           </SectionText>
           <Stack_List2 scrollY={scrollYProgress} />
           <Section_Text scrollY={scrollYProgress}>
