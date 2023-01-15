@@ -1,34 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NeB (Next-Board)
+NeB은 Next를 학습하고, 포트폴리오 사이트 제작을 목적으로 시작한 사이트입니다. 
 
-## Getting Started
+목차
 
-First, run the development server:
+1. [Stacks](#-stacks)
+2. [진행 동기](#-진행-동기)
+3. [프로젝트를 통해 경험한 것!](#-프로젝트를-통해-경험한-것)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## 🛠 Stacks
+### Frontend
+Next.js / TypeScript / Styled-Components /Redux / Redux-Toolkit
+### Backend
+MySQL
+### Deploy
+AWS-EC2-Linux /  Nginx
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 🚗 진행 동기
+CSR과 SSR의 차이를 이론적으로만 알고 있었지만, 직접 체험해 보고 싶었고 그 욕구를 충족하기 위해
+시작한 프로젝트입니다.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 🏆 프로젝트를 통해 경험한 것!
+- #### 각 페이지별 head 태그 설정이 가능하다..!
+Next에선 Head 모듈을 지원하는데 이는 각 렌더링 된 페이지마다의 head 태그를 설정할 수 있는 것이었다.
+이를 통해 게시물 제목을 title 태그에 사용하는 등 SEO에 대한 강점을 느껴갈 수 있었다. 
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- #### Data Fetching에 따른 렌더링 방식을 선택할 수 있었다.
+Next.js라고 꼭 모든 페이지에 SSR방식을 채택해야 하는 것은 아니었다.
+SSR은 유동적인 데이터를 반환한 뒤에 렌더링 하기 위함이다.
+하지만 반대로 유동적인 데이터가 필요 없는 페이지라면 SSR 방식은 성능적으로 손해다.
+이는 getStaticProps를 통해 함수에서 반환된 데이터를 사용하여 빌드 시 페이지를 렌더링 할 수 있었다.
 
-## Learn More
+- #### Vercel을 통한 배포!
+기존에는 AWS EC2와 Git Actions를 주로 이용하였다. 하지만 Next를 제작한 팀 Vercel에서 추천하는 대로 직접 배포 해보는 경험을 가졌다.
+자체 Analytics, 배포 자동화, 빌드 시 환경 변수를 설정할 수 있는 등 간편한 점이 너무 많았다. 
+더 심도있는 기능이 많았겠지만, 네트워크 통신속도가 너무 느린 바람에 결국 EC2에 재배포하게 되었다.
 
-To learn more about Next.js, take a look at the following resources:
+- #### Vercel에 속도가 느린 덕분에 이미지 관련 최적화 경험을 하게 되었다.
+Vercel이 너무 느려 이미지 로딩에 대한 최적화를 진행해 봤다.
+인덱스 페이지에 너무 많은 이미지가 있어서, 코드 대비 큰 효율을 보일 거라 생각해서였다.
+우선 swiper의 lazy loading을 적극적으로 사용하고, Next의 Image 모듈을 사용하여 이미지의 퀄리티 및 우선순위를 지정했다.
+이후 Analytics를 통해 확인해 보니 실제로 큰 효과가 있었다.
+하지만 결국 제일 크게 시간을 잡아먹던 건 네트워크 통신이었다.
+해당 문제는 AWS EC2로 이전하여 해결되었다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![이미지최적화전후](https://user-images.githubusercontent.com/70016257/212559494-0461367f-dce7-44d4-97cc-2e176b6747a9.jpg)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- #### 로그인 시 이전 URL을 기억하여 로그인 후 해당 페이지로 리턴 시켜준다.
+- #### 로그인이 필요한 특정 경로에서는 미들웨어를 통해 유효성을 확인 후 진행 or 로그인 화면으로 리턴 시켜준다.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
