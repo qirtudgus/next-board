@@ -183,6 +183,7 @@ const MobileLoginButtonDiv = styled.div<SlideMenu>`
   /* width: 100%; */
   width: 230px;
   background: #fff;
+  color: #202124;
   transition: none;
   z-index: 100;
   display: none;
