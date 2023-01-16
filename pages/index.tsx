@@ -22,14 +22,14 @@ import Intro_connect from '../components/Intro_connect';
 import Section_Portfolio from '../components/Section_Portfolio';
 
 const SectionText = styled(motion.div)`
-  font-size: 3rem;
+  /* font-size: 3rem; */
   font-weight: bold;
   position: absolute;
   word-break: keep-all;
   text-align: center;
-  @media ${({ theme }) => theme.device.tablet} {
-    font-size: 2rem;
-  }
+  /* @media ${({ theme }) => theme.device.tablet} { */
+  /* font-size: 2rem; */
+  /* } */
 `;
 
 const SectionDiv = styled(motion.div)`
@@ -174,6 +174,7 @@ const Go = () => {
 
         <SectionDiv style={{ display }}>
           <SectionText
+            className='SectionMainText'
             style={{ opacity }}
             initial={{ opacity: 0, translateX: -20 }}
             animate={{ opacity: 1, translateX: 0 }}
@@ -221,7 +222,14 @@ const Section_Text = ({
   children: React.ReactNode;
 }) => {
   const opacity = useTransform(scrollY, [0, 0.151, 0.3, 0.62, 0.9], [0, 0, 1, 1, 0]);
-  return <SectionText style={{ opacity }}>{children}</SectionText>;
+  return (
+    <SectionText
+      className='SectionMainText'
+      style={{ opacity }}
+    >
+      {children}
+    </SectionText>
+  );
 };
 
 const Stack_List2 = ({ scrollY, children }: { scrollY: MotionValue<number>; children?: React.ReactNode }) => {

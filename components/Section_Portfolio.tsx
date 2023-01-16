@@ -28,14 +28,14 @@ const SectionDiv2 = styled(motion.div)`
 `;
 
 const SectionText_Portfolio = styled(motion.div)`
-  font-size: 4rem;
+  /* font-size: 4rem; */
   font-weight: bold;
   z-index: 10000;
   word-break: keep-all;
   text-align: center;
-  @media ${({ theme }) => theme.device.tablet} {
+  /* @media ${({ theme }) => theme.device.tablet} {
     font-size: 3rem;
-  }
+  } */
 `;
 
 const PortfolioImg = styled(motion.div)`
@@ -62,7 +62,14 @@ const Section_Text3 = ({
   const opacity = useTransform(scrollY, [0.15, 0.5, 0.9], [0, 1, 0]);
 
   const border = useTransform(scrollY, [0.15, 0.5, 0.9], ['0px solid#000', '100px solid#000', '100px solid#000']);
-  return <SectionText_Portfolio style={{ opacity, color: '#1d1d1f', border }}>{children}</SectionText_Portfolio>;
+  return (
+    <SectionText_Portfolio
+      className='SectionMainText'
+      style={{ opacity, color: '#1d1d1f', border }}
+    >
+      {children}
+    </SectionText_Portfolio>
+  );
 };
 
 const Section_Portfolio = () => {
