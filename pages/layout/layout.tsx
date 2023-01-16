@@ -89,11 +89,12 @@ const Footer = styled.footer`
   width: 100%;
   height: ${FooterHeight}px;
   background-color: #eee;
+
   padding: 0 10px;
   border-top: 1px solid#c4c4c4;
   & > div {
     /* width: 95%; */
-
+    color: #585858;
     max-width: 1000px;
     margin: 15px auto;
   }
@@ -493,7 +494,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       )}
       {checkNotLayoutPathname2() ? <IndexMain>{children}</IndexMain> : <Main>{children}</Main>}
 
-      {!checkNotLayoutPathname() && <Footer></Footer>}
+      {!checkNotLayoutPathname() && (
+        <Footer>
+          <div>
+            안녕하세요! 웹 프론트엔드 개발자 박성현의 포트폴리오 사이트입니다.
+            <br />
+            E-mail : wlslek0015@gmail.com
+          </div>
+        </Footer>
+      )}
     </>
   );
 }
