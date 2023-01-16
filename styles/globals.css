@@ -37,6 +37,21 @@ header.dark .headerSVG {
   fill: #202124;
 }
 
+.SectionMainText {
+  font-size: 72px;
+}
+
+@media screen and (max-width: 768px) {
+  .SectionMainText {
+    font-size: 54px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .SectionMainText {
+    font-size: 44px;
+  }
+}
+
 h1,
 h2,
 h3,
