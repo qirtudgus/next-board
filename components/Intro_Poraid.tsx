@@ -123,22 +123,15 @@ const Intro_Poraid = () => {
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
       if (ref.current) {
-        // ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
-        // let progressNumber = Number(ref.current.getAttribute('data-progress'));
-        let progressNumber = Number(scrollYProgress.get());
-        console.log(`포레이드 : ${progressNumber}`);
+        console.log(`포레이드 : ${Number(scrollYProgress.get())}`);
         //0.479보다 크면 white 추가하기, 작으면 white 삭제하기
-        if (progressNumber > 0.4789) {
+        if (Number(scrollYProgress.get()) > 0.4789) {
           (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('white');
           (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('dark');
-
-          // (document!.getElementById('header') as HTMLElement).classList.add('text_black');
         }
-        if (progressNumber > 0 && progressNumber < 0.4789) {
+        if (Number(scrollYProgress.get()) > 0 && Number(scrollYProgress.get()) < 0.4789) {
           (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('white');
           (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('dark');
-
-          // (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
         }
       }
     });
@@ -153,7 +146,6 @@ const Intro_Poraid = () => {
     <>
       <ContentWrap ref={ref}>
         <ContentBox>
-          {/* <div className='LightBorder'> */}
           <DescDiv>
             <ContentName>
               <span>포레이드</span>
@@ -223,7 +215,6 @@ const Intro_Poraid = () => {
               bulletBgColor='#ffffff'
             ></Swipers>
           </ImgDiv>
-          {/* </div> */}
         </ContentBox>
       </ContentWrap>
     </>
