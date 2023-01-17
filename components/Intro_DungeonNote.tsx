@@ -60,14 +60,10 @@ const Intro_DungeonNote = () => {
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
       if (ref.current) {
-        // ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
-        // let progressNumber = Number(ref.current.getAttribute('data-progress'));
-        let progressNumber = Number(scrollYProgress.get());
-        // console.log(`던전노트 : ${progressNumber}`);
-        if (progressNumber > 0.964) {
+        if (Number(scrollYProgress.get()) > 0.964) {
           (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
         }
-        if (progressNumber > 0 && progressNumber < 0.96) {
+        if (Number(scrollYProgress.get()) > 0 && Number(scrollYProgress.get()) < 0.96) {
           (document!.getElementById('header') as HTMLElement).classList.add('text_black');
         }
       }
