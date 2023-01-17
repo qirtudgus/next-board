@@ -20,6 +20,7 @@ import Intro_nextboard from '../components/Intro_nextboard';
 import Section_intro from '../components/Section_intro';
 import Intro_connect from '../components/Intro_connect';
 import Section_Portfolio from '../components/Section_Portfolio';
+import Head from 'next/head';
 
 const SectionText = styled(motion.div)`
   font-weight: bold;
@@ -145,6 +146,9 @@ const Go = () => {
 
   return (
     <>
+      <Head>
+        <title>박성현 - Frontend Developer</title>
+      </Head>
       <SectionWrap
         ref={ref}
         id='firstSection'
