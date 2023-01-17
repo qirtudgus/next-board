@@ -136,8 +136,8 @@ Login.getLayout = function getLayout(page: ReactElement) {
   return <LoginLayout>{page}</LoginLayout>;
 };
 
-export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  const url = new URL(context.req.headers.referer);
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const url = new URL(context.req.headers.referer as string);
   //url확인
   //returnUrl이 들어있으면 그걸 넣고 없으면 pathname을 넣는다.
   let returnUrl = context.query.returnUrl ? context.query.returnUrl : url.pathname;
