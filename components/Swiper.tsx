@@ -1,11 +1,10 @@
-// Import Swiper React components
+//포트폴리오 소개 시 쓰이는 스와이퍼 컴포넌트입니다.
+
 import { Swiper, SwiperSlide } from 'swiper/react';
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/lazy';
-// import required modules
 import { Lazy, Pagination, Navigation } from 'swiper';
 
 import styled from 'styled-components';
@@ -92,8 +91,6 @@ const Swipers = ({
         navigation={true}
         modules={[Lazy, Pagination, Navigation]}
         slidesPerView={1}
-        // onSlideChange={() => console.log('slide change')}
-        // onSwiper={(swiper) => console.log(swiper)}
       >
         {imgArr &&
           (imgArr as StaticImageData[]).map((i, index) => {
