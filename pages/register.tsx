@@ -45,16 +45,6 @@ export default function Register() {
   const router = useRouter();
   const idReg = /^[a-z0-9_-]{5,15}$/;
   const passwordReg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,15}$/;
-  function checkIdFunc2(id: string): void {
-    if (idReg.test(id)) {
-      console.log('아이디 정규식 테스트를 성공했습니다.');
-      dispatch(DuplicationCheckId.duplicationCheckId(id));
-    } else {
-      console.log('아이디 정규식 테스트에 실패했습니다.');
-      dispatch(outOfSyncRegExpressionId());
-    }
-  }
-
   const idRef = useRef() as any;
   const nameRef = useRef() as any;
   const passwordRef = useRef() as any;
