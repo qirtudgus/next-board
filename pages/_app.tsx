@@ -61,13 +61,10 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
           setIsLoadUser(true);
         } else {
           setIsLoadUser(true);
-          // store.dispatch(logoutSuccess());
         }
       });
     };
     loadUser();
-    //전체스크롤 진행률 설정
-    // document.getElementById('__next')?.setAttribute('data-progress', scrollYProgress.get().toString());
   }, []);
 
   return getLayout(
