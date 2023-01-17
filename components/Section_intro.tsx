@@ -7,7 +7,6 @@ import 존중 from '../img/상호존중0.webp';
 import Image from 'next/image';
 
 const SectionWrap3 = styled(motion.div)`
-  //스크롤바 너비를 빼준다
   width: 100%;
   height: calc(100vh * 3.5);
   display: flex;
@@ -26,15 +25,9 @@ const SectionDiv3 = styled(motion.div)`
   height: 100%;
   display: flex;
   justify-content: space-around;
-  /* justify-content: center; */
-
   z-index: 1;
-
-  /* margin: 0 200px; */
-
   @media screen and (max-width: 1680px) {
     flex-direction: column;
-    /* justify-content: flex-start; */
     align-items: center;
   }
   @media screen and (max-width: 1140px) {
@@ -48,14 +41,12 @@ const SectionDiv3 = styled(motion.div)`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    /* margin: 0 50px; */
     & .section3_image {
       width: 100%;
       height: fit-content;
     }
   }
   @media ${({ theme }) => theme.device.mobile} {
-    /* margin: 0 25px; */
   }
 `;
 
@@ -196,39 +187,21 @@ const Section_intro = ({ width }: { width: number }) => {
   useEffect(() => {
     return scrollYProgress.onChange((latest: any) => {
       if (ref.current) {
-        // ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
-        // let progressNumber = Number(ref.current.getAttribute('data-progress'));
         let progressNumber = Number(scrollYProgress.get());
         console.log(`섹션3 :${progressNumber}`);
-        //섹션3에 돌입하면 1번섹션의 배경을 흰색으로 변경해주기
-        //섹션3은 기본 검은색 배경 흰색글씨 -> 흰 배경 검은 글씨로
-        //시작구간 값은 약 0.08 정도
-        if (progressNumber > 0.1) {
-          // (document!.getElementById('firstSection') as HTMLElement).classList.add('white');
-          // (document!.getElementById('thirdSection') as HTMLElement).classList.add('white');
-          // (document!.getElementById('Body') as HTMLElement).classList.add('white');
 
+        if (progressNumber > 0.1) {
           (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('white');
           (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('dark');
         } else {
-          // (document!.getElementById('firstSection') as HTMLElement).classList.remove('white');
-          // (document!.getElementById('thirdSection') as HTMLElement).classList.remove('white');
           (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('white');
           (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('dark');
-          // (document!.getElementById('Body') as HTMLElement).classList.remove('white');
         }
       }
     });
   }, []);
 
   const opacity = useTransform(scrollYProgress, [0.22, 0.48, 0.75, 0.9], [1, 0, 0, 1]);
-
-  let currentWidth = () => {
-    if (typeof window !== 'undefined') {
-      console.log(window.innerWidth);
-      return window.innerWidth as number;
-    }
-  };
 
   return (
     <>
@@ -238,7 +211,7 @@ const Section_intro = ({ width }: { width: number }) => {
         id={'thirdSection'}
       >
         <SectionDiv3 style={{}}>
-          {/* width 뷰포트가 769미만이면 opacity를 호출하고 이상이면 opacity를 1로 설정해준다. */}
+          {/* width 뷰포트가 1681보다 작으면 opacity를 호출하고 이상이면 opacity를 1로 설정해준다. */}
           <Section3_title style={width < 1681 ? { opacity } : { opacity: '1' }}>
             이런 개발자가
             <br /> 되기 위해
