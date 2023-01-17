@@ -1,21 +1,21 @@
 import React, { RefObject, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion, MotionValue, transform, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
-import DownArrowSVG from '../components/DownArrowSVG';
-import ReactSVG from '../components/ReactSVG';
-import ReduxSVG from '../components/ReduxSVG';
-import SagaSVG from '../components/SagaSVG';
-import NodeSVG from '../components/NodeSVG';
-import NextSVG from '../components/NextSVG';
-import TsSVG from '../components/TsSVG';
-import JsSVG from '../components/JsSVG';
-import MysqlSVG from '../components/MysqlSVG';
-import FigmaSVG from '../components/FigmaSVG';
-import GitSVG from '../components/GitSVG';
-import AwsSVG from '../components/AwsSVG';
+import DownArrowSVG from '../components/svg/DownArrowSVG';
+import ReactSVG from '../components/svg/ReactSVG';
+import ReduxSVG from '../components/svg/ReduxSVG';
+import SagaSVG from '../components/svg/SagaSVG';
+import NodeSVG from '../components/svg/NodeSVG';
+import NextSVG from '../components/svg/NextSVG';
+import TsSVG from '../components/svg/TsSVG';
+import JsSVG from '../components/svg/JsSVG';
+import MysqlSVG from '../components/svg/MysqlSVG';
+import FigmaSVG from '../components/svg/FigmaSVG';
+import GitSVG from '../components/svg/GitSVG';
+import AwsSVG from '../components/svg/AwsSVG';
 import Intro_Poraid from '../components/Intro_Poraid';
 import Intro_DungeonNote from '../components/Intro_DungeonNote';
-import VercelSVG from '../components/VercelSVG';
+import VercelSVG from '../components/svg/VercelSVG';
 import Intro_nextboard from '../components/Intro_nextboard';
 import Section_intro from '../components/Section_intro';
 import Intro_connect from '../components/Intro_connect';
@@ -117,9 +117,6 @@ const Go = () => {
   const [viewport, setViewport] = useState({
     width: window.innerWidth,
   });
-
-  const [currentProg, SetCurrentProg] = useState(0);
-
   // const ref = useRef(null);
   const ref = useRef() as RefObject<HTMLDivElement>;
   const { scrollYProgress } = useScroll({
@@ -167,11 +164,6 @@ const Go = () => {
         ref={ref}
         id='firstSection'
       >
-        {
-          // replace console.* for disable log on production
-          process.env.NODE_ENV !== 'production' && <CurrentProg>{currentProg}</CurrentProg>
-        }
-
         <SectionDiv style={{ display }}>
           <SectionText
             className='SectionMainText'
@@ -187,13 +179,13 @@ const Go = () => {
             박성현입니다. <br />
             {/* &lt;&#47;&gt; */}
           </SectionText>
-          <Stack_List2 scrollY={scrollYProgress} />
+          <StackListTop scrollY={scrollYProgress} />
           <Section_Text scrollY={scrollYProgress}>
             리액트를 필두로
             <br />
             다양한 경험을 쌓고있습니다.
           </Section_Text>
-          <Stack_List scrollY={scrollYProgress} />
+          <StackListBottom scrollY={scrollYProgress} />
           {/* <Section_Text2 scrollY={scrollYProgress}>Portfolio</Section_Text2> */}
         </SectionDiv>
         <DownArrow style={{ display }}>
@@ -232,10 +224,8 @@ const Section_Text = ({
   );
 };
 
-const Stack_List2 = ({ scrollY, children }: { scrollY: MotionValue<number>; children?: React.ReactNode }) => {
+const StackListTop = ({ scrollY, children }: { scrollY: MotionValue<number>; children?: React.ReactNode }) => {
   const opacity = useTransform(scrollY, [0, 0.22, 0.3, 0.55, 0.78], [0, 0, 1, 1, 0]);
-
-  // const x = useTransform(scrollY, [0, 0.22, 0.6], [-1500, -1500, 1000]);
   const x = useTransform(scrollY, [0, 0.22, 0.9], [1500, 1500, -1000]);
   return (
     <StackList2 style={{ x, opacity }}>
@@ -249,7 +239,7 @@ const Stack_List2 = ({ scrollY, children }: { scrollY: MotionValue<number>; chil
   );
 };
 
-const Stack_List = ({ scrollY, children }: { scrollY: MotionValue<number>; children?: React.ReactNode }) => {
+const StackListBottom = ({ scrollY, children }: { scrollY: MotionValue<number>; children?: React.ReactNode }) => {
   const opacity = useTransform(scrollY, [0, 0.22, 0.3, 0.55, 0.78], [0, 0, 1, 1, 0]);
   const x = useTransform(scrollY, [0, 0.22, 0.9], [-1500, -1500, 1000]);
   return (
