@@ -103,6 +103,7 @@ const Login = (props: { returnUrl: string; isSession: string }) => {
             statusText={loginResult.idStatusText}
           ></BasicInput>
           <BasicInput
+            type='password'
             ref={passwordRef}
             placeholderValue='비밀번호'
             isError={loginResult.passwordValue}

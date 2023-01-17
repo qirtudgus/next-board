@@ -80,6 +80,7 @@ interface BasicInputStyleInterface {
 
 interface BasicInputInterface {
   placeholderValue: string;
+  type?: string;
   isError?: boolean | null | undefined;
   PropsOnBlurFunc?: () => void;
   PropsOnFocusFunc?: () => void;
@@ -121,6 +122,7 @@ export const BasicInput = forwardRef<HTMLDivElement, BasicInputInterface>((props
       >
         {props.placeholderValue && <label className={focus ? 'active' : ''}>{props.placeholderValue}</label>}
         <Input
+          type={props.type}
           ref={inputRef}
           onFocus={setFocusTrue}
           onBlur={setFocusFalse}

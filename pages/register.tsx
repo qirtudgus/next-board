@@ -154,12 +154,14 @@ export default function Register() {
         ></BasicInput>
 
         <BasicInput
+          type='password'
           ref={passwordRef}
           isError={passwordValue}
           statusText={passwordStatusText}
           placeholderValue='비밀번호'
         ></BasicInput>
         <BasicInput
+          type='password'
           ref={passwordConfirmRef}
           isError={passwordConfirmValue}
           statusText={passwordConfirmStatusText}
