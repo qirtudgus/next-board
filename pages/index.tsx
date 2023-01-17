@@ -1,6 +1,6 @@
 import React, { RefObject, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { motion, MotionValue, transform, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, MotionValue, useScroll, useTransform } from 'framer-motion';
 import DownArrowSVG from '../components/svg/DownArrowSVG';
 import ReactSVG from '../components/svg/ReactSVG';
 import ReduxSVG from '../components/svg/ReduxSVG';
@@ -22,14 +22,10 @@ import Intro_connect from '../components/Intro_connect';
 import Section_Portfolio from '../components/Section_Portfolio';
 
 const SectionText = styled(motion.div)`
-  /* font-size: 3rem; */
   font-weight: bold;
   position: absolute;
   word-break: keep-all;
   text-align: center;
-  /* @media ${({ theme }) => theme.device.tablet} { */
-  /* font-size: 2rem; */
-  /* } */
 `;
 
 const SectionDiv = styled(motion.div)`
@@ -49,14 +45,6 @@ const SectionWrap = styled(motion.div)`
   display: flex;
   justify-content: center;
   }
-`;
-
-const CurrentProg = styled.div`
-  position: fixed;
-  top: 100px;
-  left: 20px;
-  color: red;
-  z-index: 1000;
 `;
 
 const DownArrow = styled(motion.div)`
@@ -93,8 +81,6 @@ const IndexRef = () => {
   });
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
-      //전체스크롤 진행률 할당
-      // document.getElementById('__next')?.setAttribute('data-fullprogress', scrollYProgress.get().toString());
       const progress = Number(scrollYProgress.get());
       if (document.getElementById('header')) {
         if (progress > 0.0377) {
@@ -117,7 +103,6 @@ const Go = () => {
   const [viewport, setViewport] = useState({
     width: window.innerWidth,
   });
-  // const ref = useRef(null);
   const ref = useRef() as RefObject<HTMLDivElement>;
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -172,12 +157,10 @@ const Go = () => {
             animate={{ opacity: 1, translateX: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {/* &lt; &gt; */}
             <br />
             안녕하세요! <br />
             Web FrontEnd Developer <br />
             박성현입니다. <br />
-            {/* &lt;&#47;&gt; */}
           </SectionText>
           <StackListTop scrollY={scrollYProgress} />
           <Section_Text scrollY={scrollYProgress}>
@@ -186,7 +169,6 @@ const Go = () => {
             다양한 경험을 쌓고있습니다.
           </Section_Text>
           <StackListBottom scrollY={scrollYProgress} />
-          {/* <Section_Text2 scrollY={scrollYProgress}>Portfolio</Section_Text2> */}
         </SectionDiv>
         <DownArrow style={{ display }}>
           <DownArrowSVG />
@@ -204,13 +186,10 @@ const Go = () => {
 
 const Section_Text = ({
   scrollY,
-  inputRange,
-  outputRange,
   children,
 }: {
   scrollY: MotionValue<number>;
-  inputRange?: number[];
-  outputRange?: number[];
+
   children: React.ReactNode;
 }) => {
   const opacity = useTransform(scrollY, [0, 0.151, 0.3, 0.62, 0.9], [0, 0, 1, 1, 0]);
@@ -224,7 +203,7 @@ const Section_Text = ({
   );
 };
 
-const StackListTop = ({ scrollY, children }: { scrollY: MotionValue<number>; children?: React.ReactNode }) => {
+const StackListTop = ({ scrollY }: { scrollY: MotionValue<number> }) => {
   const opacity = useTransform(scrollY, [0, 0.22, 0.3, 0.55, 0.78], [0, 0, 1, 1, 0]);
   const x = useTransform(scrollY, [0, 0.22, 0.9], [1500, 1500, -1000]);
   return (
@@ -239,7 +218,7 @@ const StackListTop = ({ scrollY, children }: { scrollY: MotionValue<number>; chi
   );
 };
 
-const StackListBottom = ({ scrollY, children }: { scrollY: MotionValue<number>; children?: React.ReactNode }) => {
+const StackListBottom = ({ scrollY }: { scrollY: MotionValue<number> }) => {
   const opacity = useTransform(scrollY, [0, 0.22, 0.3, 0.55, 0.78], [0, 0, 1, 1, 0]);
   const x = useTransform(scrollY, [0, 0.22, 0.9], [-1500, -1500, 1000]);
   return (
