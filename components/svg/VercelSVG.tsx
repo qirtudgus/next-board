@@ -1,4 +1,4 @@
-import SVG_Card from './SVG_Card';
+import SVG_Card from '../SVG_Card';
 
 export default function VercelSVG() {
   return (
