@@ -55,20 +55,13 @@ const Intro_nextboard = () => {
   });
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
-      //전체스크롤 진행률 할당
-      const progress = Number(scrollYProgress.get());
-      console.log(progress);
       //0.479보다 크면 white 추가하기, 작으면 white 삭제하기
-      if (progress < 0.98279) {
+      if (Number(scrollYProgress.get()) < 0.98279) {
         (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('white');
         (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.remove('dark');
-
-        // (document!.getElementById('header') as HTMLElement).classList.add('text_black');
       } else {
         (document!.getElementsByTagName('body') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('white');
         (document!.getElementsByTagName('header') as HTMLCollectionOf<HTMLBodyElement>)[0].classList.add('dark');
-
-        // (document!.getElementById('header') as HTMLElement).classList.remove('text_black');
       }
     });
   }, []);
