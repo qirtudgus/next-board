@@ -78,28 +78,15 @@ const Section_Portfolio = () => {
     target: ref,
     offset: ['start end', 'end start'],
   });
-
-  //해당 함수를 통해 data attribute 세팅
-  // useEffect(() => {
-  //   return scrollYProgress.onChange((latest) => {
-  //     if (ref.current) {
-  //       // ref.current.setAttribute('data-progress', scrollYProgress.get().toString());
-  //       // let progressNumber = Number(ref.current.getAttribute('data-progress'));
-  //     }
-  //   });
-  // }, []);
   const display = useTransform(scrollYProgress, [0, 0.9, 1], ['flex', 'flex', 'none']);
   return (
     <>
-      <SectionWrap2
-        ref={ref}
-        data-progress={scrollYProgress.get()}
-      >
+      <SectionWrap2 ref={ref}>
         <SectionDiv2 style={{ display }}>
           <Section_Text3 scrollY={scrollYProgress}>Portfolio</Section_Text3>
         </SectionDiv2>
 
-        <PortfolioImg style={{}}>
+        <PortfolioImg>
           <Image
             src={포폴3}
             alt='사진'
