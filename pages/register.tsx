@@ -17,6 +17,7 @@ import { ReactElement, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { isLoading, isSuccess } from '../store/isLoadingSlice';
 import LoginLayout from './layout/loginLayout';
+import Head from 'next/head';
 
 const Box = styled.div`
   width: 100%;
@@ -113,6 +114,9 @@ export default function Register() {
   }, []);
   return (
     <Box>
+      <Head>
+        <title>회원가입</title>
+      </Head>
       <Wrap>
         <div
           style={{ cursor: 'pointer' }}

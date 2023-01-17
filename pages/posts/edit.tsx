@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { RefObject, useEffect, useRef, useState } from 'react';
 import { SolidButton } from '../../components/BasicButton';
@@ -26,6 +27,9 @@ const Edit = ({ data, idx }: props) => {
 
   return (
     <>
+      <Head>
+        <title>게시물 수정</title>
+      </Head>
       제목 :{' '}
       <input
         ref={titleRef}

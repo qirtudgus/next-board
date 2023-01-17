@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactElement, RefObject, useEffect, useRef, useState } from 'react';
@@ -86,6 +87,9 @@ const Login = (props: { returnUrl: string; isSession: string }) => {
 
   return (
     <>
+      <Head>
+        <title>로그인</title>
+      </Head>
       <Box>
         <Wrap>
           <div

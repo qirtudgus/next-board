@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { RefObject, useEffect, useRef, useState } from 'react';
@@ -145,6 +146,9 @@ export default function PostList(props: BoardListInterface) {
 
   return (
     <>
+      <Head>
+        <title>게시판 - {props.currentPageNumber}페이지</title>
+      </Head>
       <BasicTitle BasicTitleValue='게시판'></BasicTitle>
       <SearchInputBox>
         <SolidButton

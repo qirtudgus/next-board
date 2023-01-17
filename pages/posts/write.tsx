@@ -1,5 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { RefObject, useRef, useState } from 'react';
 import styled from 'styled-components';
@@ -41,6 +42,9 @@ const Write = () => {
 
   return (
     <>
+      <Head>
+        <title>게시물 작성</title>
+      </Head>
       <BasicTitle BasicTitleValue='게시물 작성'></BasicTitle>
       <TitleInput>
         제목

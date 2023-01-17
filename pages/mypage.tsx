@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import BasicTitle from '../components/BasicTitle';
@@ -120,6 +121,9 @@ const MyPage = () => {
 
   return (
     <>
+      <Head>
+        <title>마이 페이지</title>
+      </Head>
       <BasicTitle BasicTitleValue='내 정보'></BasicTitle>
       <Wrap>
         <MenuWrap>
