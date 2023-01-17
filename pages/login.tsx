@@ -89,6 +89,7 @@ const Login = (props: { returnUrl: string; isSession: string }) => {
       <Box>
         <Wrap>
           <div
+            style={{ cursor: 'pointer' }}
             onClick={() => {
               router.push('/');
             }}

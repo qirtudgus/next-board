@@ -125,6 +125,7 @@ export default function Register() {
     <Box>
       <Wrap>
         <div
+          style={{ cursor: 'pointer' }}
           onClick={() => {
             router.push('/');
           }}
