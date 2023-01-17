@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 const Card = styled.div`
@@ -17,8 +18,8 @@ const Card = styled.div`
   }
 `;
 
-const SVG_Card = (props: any) => {
-  return <Card>{props.children}</Card>;
+const SVG_Card = ({ children }: { children: React.ReactNode }) => {
+  return <Card>{children}</Card>;
 };
 
 export default SVG_Card;

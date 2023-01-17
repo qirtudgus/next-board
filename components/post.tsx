@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
-import CommentCountSVG from './CommentCountSVG';
-import LikeCountSVG from './LikeCountSVG';
-import ViewCountSVG from './ViewCountSVG';
+import CommentCountSVG from './svg/CommentCountSVG';
+import LikeCountSVG from './svg/LikeCountSVG';
+import ViewCountSVG from './svg/ViewCountSVG';
 
 const BoardLi = styled.li`
   &:first-child {
