@@ -42,7 +42,7 @@ const SectionDiv = styled(motion.div)`
 
 const SectionWrap = styled(motion.div)`
   width: 100%;
-  height: calc(100vh * 5);
+  height: calc(100vh * 4);
   display: flex;
   justify-content: center;
   }
