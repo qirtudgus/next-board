@@ -43,6 +43,12 @@ export const LabelRedux = () => {
 export const LabelAWS = () => {
   return <SVG_StackLabel bgColor='#F68536'>AWS EC2</SVG_StackLabel>;
 };
+export const LabelS3 = () => {
+  return <SVG_StackLabel bgColor='#da6b1c'>AWS S3</SVG_StackLabel>;
+};
+export const LabelNginx = () => {
+  return <SVG_StackLabel bgColor='#2fb12f'>Nginx</SVG_StackLabel>;
+};
 export const LabelFigma = () => {
   return <SVG_StackLabel bgColor='#a259ff'>Figma</SVG_StackLabel>;
 };
@@ -77,4 +83,12 @@ export const LabelNode = () => {
 export const LabelExpress = () => {
   return <SVG_StackLabel bgColor='#333333'>Express</SVG_StackLabel>;
 };
+export const LabelSC = () => {
+  return <SVG_StackLabel bgColor='#b91871'>Styled-Components</SVG_StackLabel>;
+};
+
+export const LabelGitActions = () => {
+  return <SVG_StackLabel bgColor='#2e2e2e'>Git Actions</SVG_StackLabel>;
+};
+
 export default SVG_StackLabel;
