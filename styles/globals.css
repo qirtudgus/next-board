@@ -16,6 +16,22 @@ body.white {
   background-color: #fff;
 }
 
+body.white .topBtnInner {
+  /* transition: all 0.6s; */
+  background: #202124;
+  color: #fff;
+}
+body.white .topBtnInner > svg {
+  fill: #fff;
+}
+
+body.white .progressYBar {
+  border: 1px solid #202124;
+}
+body.white .progressYBarInner {
+  background: #202124;
+}
+
 body.outIndex {
   color: #202124 !important;
   background-color: #fff !important;
