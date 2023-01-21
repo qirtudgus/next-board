@@ -75,34 +75,17 @@ const StackList2 = styled(motion.div)`
 
 const IndexWrap = styled.div``;
 
-const BarWrap = styled.div`
-  /* width: 100vh;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative; */
-`;
+const BarWrap = styled.div``;
 
 const ProgressBar = styled.div`
   width: 6px;
   height: 150px;
   border: 1px solid #fff;
-  /* background: red; */
   position: fixed;
   right: 72px;
   bottom: 99px;
   z-index: 10000;
-  /* &::after {
-    content: '';
-    top: 0;
-    left: 0;
-    width: 6px;
-    height: ${(props) => props.scrollY * 100}px;
-    background: red;
-    position: absolute;
-    z-index: 10;
-  } */
+
   @media ${({ theme }) => theme.device.mobile} {
     right: 42px;
     bottom: 69px;
