@@ -3,6 +3,25 @@ import { RefObject, useEffect, useRef } from 'react';
 import { motion, MotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import me from '../img/me.webp';
+import {
+  LabelAWS,
+  LabelExpress,
+  LabelFigma,
+  LabelJS,
+  LabelMysql,
+  LabelNext,
+  LabelNginx,
+  LabelNode,
+  LabelReact,
+  LabelRedux,
+  LabelReduxSaga,
+  LabelReduxToolkit,
+  LabelS3,
+  LabelSC,
+  LabelTS,
+  LabelVercel,
+} from './SVG_StackLabel';
+import { StackList } from './Intro_Poraid';
 
 const SectionWrap = styled.div`
   height: fit-content;
@@ -74,7 +93,7 @@ const InfoWrap = styled.div`
   @media ${({ theme }) => theme.device.mobile} {
     flex-direction: column-reverse;
     justify-content: space-around;
-    height: 570px;
+    height: fit-content;
   }
 `;
 
@@ -124,16 +143,15 @@ const Intro_connect = () => {
           <InfoWrap>
             <Info>
               <InfoTitle>🙋‍♂️인적 사항</InfoTitle>
-              <InfoDesc>- 박성현</InfoDesc>
-              <InfoDesc>- 1996.01.12</InfoDesc> <InfoDesc>- wlslek0015@gmail.com</InfoDesc>
-              <InfoTitle>🧥경력</InfoTitle>
-              <InfoDesc>- 스마트웰컴퍼니 웹디자이너 2020.02 ~ 2021.05</InfoDesc>
+              <InfoDesc>박성현 / 1996.01.12</InfoDesc>
+              {/* <InfoDesc></InfoDesc> */}
+              {/* <InfoDesc>wlslek0015@gmail.com</InfoDesc> */}
               <InfoTitle>🏤학력</InfoTitle>
-              <InfoDesc>- 인덕대학교 멀티미디어디자인과 졸업 2020.02</InfoDesc>
+              <InfoDesc>인덕대학교 멀티미디어디자인과 졸업 2020.02</InfoDesc>
               <InfoTitle>👨‍🎓교육 이수</InfoTitle>
-              <InfoDesc>- 스파르타 코딩클럽 10기 2020.09~2020.10</InfoDesc>
+              <InfoDesc>스파르타 코딩클럽 10기 2020.09~2020.10</InfoDesc>
               <InfoTitle>📜자격증</InfoTitle>
-              <InfoDesc>- 웹디자인기능사 2021.09.17</InfoDesc>
+              <InfoDesc>웹디자인기능사 2021.09.17</InfoDesc>
               <InfoDesc>
                 <a
                   href='https://github.com/qirtudgus'
@@ -150,6 +168,33 @@ const Intro_connect = () => {
                 >
                   Blog
                 </a>
+              </InfoDesc>
+              <InfoTitle>Frontend Skills</InfoTitle>
+              <InfoDesc>
+                <StackList>
+                  <LabelReact />
+                  <LabelNext />
+                  <LabelRedux />
+                  <LabelReduxSaga />
+                  <LabelReduxToolkit />
+                  <LabelJS />
+                  <LabelTS />
+                  <LabelSC />
+                  <LabelFigma />
+                </StackList>
+              </InfoDesc>
+              <InfoTitle>Backend Skills</InfoTitle>
+              <InfoDesc>
+                <StackList>
+                  <LabelAWS />
+                  <LabelS3 />
+                  <LabelNginx />
+
+                  <LabelNode />
+                  <LabelExpress />
+                  <LabelMysql />
+                  <LabelVercel />
+                </StackList>
               </InfoDesc>
             </Info>
             <Me>
