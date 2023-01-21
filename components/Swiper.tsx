@@ -33,12 +33,14 @@ const SwiperStyle = styled.div<StyleInterface>`
     width: 20px;
     height: 5px;
     border-radius: 0px;
-    background: ${(props) => props.bulletBgColor};
+    background: #464646;
+    /* background: ${(props) => props.bulletBgColor}; */
     opacity: 0.7;
   }
 
   & .swiper-pagination-bullet-active {
-    background: ${(props) => props.bulletActiveColor};
+    background: #366bff;
+    /* background: ${(props) => props.bulletActiveColor}; */
     opacity: 1;
   }
 
@@ -53,7 +55,8 @@ const SwiperStyle = styled.div<StyleInterface>`
   .swiper-rtl,
   .swiper-button-next {
     z-index: 11;
-    color: ${(props) => props.bulletActiveColor};
+    color: #366bff;
+    /* color: ${(props) => props.bulletActiveColor}; */
   }
 
   & .swiper-button-next:after,
