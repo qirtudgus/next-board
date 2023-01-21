@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 const SectionWrap3 = styled(motion.div)`
   width: 100%;
-  height: calc(100vh * 3.5);
+  height: calc(100vh * 3);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,10 +73,10 @@ const Section3_title = styled(motion.div)`
 const Section3_boxWrap = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 100vh 0;
+  padding: 50vh 0;
 `;
 
-const Section3_box = styled.div`
+const Section3_box = styled(motion.div)`
   position: relative;
   flex-shrink: 0;
   max-width: 400px;
@@ -90,7 +90,7 @@ const Section3_box = styled.div`
   flex-direction: row-reverse;
 
   &:nth-child(1) {
-    margin-left: 340px;
+    margin-left: 300px;
     & > div {
       padding-right: 30px;
       text-align: right;
@@ -104,9 +104,9 @@ const Section3_box = styled.div`
   }
 
   &:nth-child(3) {
-    margin-left: 340px;
+    margin-left: 160px;
     & > div {
-      position: absolute;
+      text-align: right;
       left: -200px;
     }
   }
@@ -156,8 +156,8 @@ const Section3_box = styled.div`
   }
 `;
 
-const Section3_boxText = styled.div`
-  width: 200px;
+const Section3_boxText = styled(motion.div)`
+  width: fit-content;
   font-size: 1.2rem;
   flex-shrink: 0;
   /* width: fit-content; */
@@ -168,12 +168,57 @@ const Section3_boxText = styled.div`
   & .Title {
     display: block;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 40px;
     /* padding-bottom: 5px; */
     @media ${({ theme }) => theme.device.tablet} {
       margin-top: 20px;
     }
   }
+  & .Number1 {
+    top: 136px;
+    left: -294px;
+    letter-spacing: -10px;
+    font-weight: bold;
+    font-size: 140px;
+    color: rgba(0, 0, 0, 0.1);
+    position: absolute;
+  }
+  & .Number2 {
+    top: 137px;
+    left: 274px;
+    letter-spacing: -10px;
+    font-weight: bold;
+    font-size: 140px;
+    color: rgba(0, 0, 0, 0.1);
+    position: absolute;
+  }
+  & .Number3 {
+    top: 143px;
+    left: -112px;
+    letter-spacing: -10px;
+    font-weight: bold;
+    font-size: 140px;
+    color: rgba(0, 0, 0, 0.1);
+    position: absolute;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    & .Number1 {
+      top: 62px;
+      left: -33px;
+    }
+    & .Number2 {
+      left: 177px;
+    }
+    & .Number3 {
+      top: -5px;
+      left: -7px;
+    }
+  }
+`;
+
+const SubText = styled(motion.span)`
+  font-size: 22px;
+  position: relative;
 `;
 
 const Section_intro = ({ width }: { width: number }) => {
@@ -219,7 +264,18 @@ const Section_intro = ({ width }: { width: number }) => {
           </Section3_title>
           {/* 기존의 스타일 */}
           <Section3_boxWrap>
-            <Section3_box>
+            <Section3_box
+              initial={{ opacity: 0, translateY: 50 }}
+              whileInView={{
+                opacity: 1,
+                translateY: 0,
+                transition: {
+                  delay: 0.1,
+                  type: 'spring',
+                  duration: 1,
+                },
+              }}
+            >
               <Image
                 className='section3_image'
                 src={존중}
@@ -227,15 +283,31 @@ const Section_intro = ({ width }: { width: number }) => {
                 width={600}
               ></Image>
               <Section3_boxText>
-                <span className='Title'>상호존중</span>
-                <br />늘 존중하는 자세, 하지만 리뷰는 확실하게!
+                <span className='Number1'>01</span>
+                <span className='Title'>긍정적이고</span>
+                <br />
+                <SubText>
+                  늘 긍정적인 마인드로
+                  <br /> 스트레스를 받지않아요!
+                </SubText>
               </Section3_boxText>
             </Section3_box>
-            <Section3_box>
+            <Section3_box
+              initial={{ opacity: 0, translateY: 50 }}
+              whileInView={{
+                opacity: 1,
+                translateY: 0,
+                transition: { delay: 0.1, type: 'spring', duration: 1 },
+              }}
+            >
               <Section3_boxText>
-                <span className='Title'>주인의식</span>
+                <span className='Number2'>02</span>
+                <span className='Title'>기록하고</span>
                 <br />
-                주어지는것뿐 아니라 스스로 찾아낼 수 있게!
+                <SubText>
+                  처음 보는 버그는 블로그에
+                  <br /> 기록하여 두번 겪지않으려해요.
+                </SubText>
               </Section3_boxText>
               <Image
                 className='section3_image'
@@ -244,7 +316,14 @@ const Section_intro = ({ width }: { width: number }) => {
                 width={600}
               ></Image>
             </Section3_box>
-            <Section3_box>
+            <Section3_box
+              initial={{ opacity: 0, translateY: 50 }}
+              whileInView={{
+                opacity: 1,
+                translateY: 0,
+                transition: { delay: 0.1, type: 'spring', duration: 1 },
+              }}
+            >
               <Image
                 className='section3_image'
                 src={메타}
@@ -252,9 +331,14 @@ const Section_intro = ({ width }: { width: number }) => {
                 width={470}
               ></Image>
               <Section3_boxText>
-                <span className='Title'>메타인지</span>
+                <span className='Number3'>03</span>
+                <span className='Title'>함께하는</span>
                 <br />
-                무엇을 모르고, 무엇을 아는지 스스로 따져보는!
+                <SubText>
+                  항상 주위를 격려해주는 편이에요.
+                  <br />
+                  함께 가고싶은 사람이 되고싶어요.{' '}
+                </SubText>
               </Section3_boxText>
             </Section3_box>
           </Section3_boxWrap>
