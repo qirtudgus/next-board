@@ -1,6 +1,6 @@
 import React, { RefObject, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { motion, MotionValue, useScroll, useTransform } from 'framer-motion';
+import { animate, motion, MotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import DownArrowSVG from '../components/svg/DownArrowSVG';
 import ReactSVG from '../components/svg/ReactSVG';
 import ReduxSVG from '../components/svg/ReduxSVG';
@@ -21,6 +21,8 @@ import Section_intro from '../components/Section_intro';
 import Intro_connect from '../components/Intro_connect';
 import Section_Portfolio from '../components/Section_Portfolio';
 import Head from 'next/head';
+import Section_Skill from '../components/Section_Skill';
+import Section_PortfolioText from '../components/Section_PortfolioText';
 
 const SectionText = styled(motion.div)`
   font-weight: bold;
@@ -42,7 +44,7 @@ const SectionDiv = styled(motion.div)`
 
 const SectionWrap = styled(motion.div)`
   width: 100%;
-  height: calc(100vh * 4);
+  height: calc(100vh * 3);
   display: flex;
   justify-content: center;
   }
@@ -74,12 +76,106 @@ const StackList2 = styled(motion.div)`
 
 const IndexWrap = styled.div``;
 
+const BarWrap = styled.div`
+  /* width: 100vh;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; */
+`;
+
+const ProgressBar = styled.div`
+  width: 6px;
+  height: 150px;
+  border: 1px solid #fff;
+  /* background: red; */
+  position: fixed;
+  right: 72px;
+  bottom: 99px;
+  z-index: 10000;
+  /* &::after {
+    content: '';
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: ${(props) => props.scrollY * 100}px;
+    background: red;
+    position: absolute;
+    z-index: 10;
+  } */
+  @media ${({ theme }) => theme.device.mobile} {
+    right: 42px;
+    bottom: 69px;
+  }
+`;
+
+const Bars = styled(motion.div)`
+  width: 6px;
+  height: 150px;
+  right: 72px;
+  bottom: 99px;
+  position: fixed;
+  z-index: 10000;
+  background: #fff;
+  transform-origin: top left;
+  @media ${({ theme }) => theme.device.mobile} {
+    right: 42px;
+    bottom: 69px;
+  }
+`;
+
+const TopBtnInner = styled(motion.div)`
+  cursor: pointer;
+  user-select: none;
+  position: fixed;
+  z-index: 10000;
+  /* top: 570px; */
+  bottom: 50px;
+  right: 50px;
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  /* border-radius: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 12px;
+  color: #202124;
+  transition: all 0.3s;
+  & span {
+    position: absolute;
+    top: 20px;
+  }
+
+  & svg {
+    position: absolute;
+    top: 4px;
+    fill: #202124;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    right: 20px;
+    bottom: 20px;
+  }
+`;
+
+//인덱스를 감싸는 전체 스크롤 감지용
 const IndexRef = () => {
   const ref = useRef() as RefObject<HTMLDivElement>;
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start start', 'end start'],
+    offset: ['start start', 'end end'],
   });
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0, 0.28, 0.3], [0, 0, 0, 1]);
+
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
       const progress = Number(scrollYProgress.get());
@@ -95,6 +191,35 @@ const IndexRef = () => {
 
   return (
     <IndexWrap ref={ref}>
+      <BarWrap>
+        <ProgressBar className='progressYBar' />
+        <Bars
+          className='progressYBarInner'
+          style={{ scaleY }}
+        />{' '}
+        <TopBtnInner
+          style={{ opacity }}
+          className='topBtnInner'
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            height='24px'
+            viewBox='0 0 24 24'
+            width='24px'
+            // fill='#fff'
+          >
+            <path
+              d='M0 0h24v24H0z'
+              fill='none'
+            />
+            <path d='M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z' />
+          </svg>
+          <span> TOP</span>
+        </TopBtnInner>
+      </BarWrap>
       <Go />
     </IndexWrap>
   );
@@ -170,7 +295,7 @@ const Go = () => {
           <Section_Text scrollY={scrollYProgress}>
             리액트를 필두로
             <br />
-            다양한 경험을 쌓고있습니다.
+            다양한 경험을 쌓고있습니다!
           </Section_Text>
           <StackListBottom scrollY={scrollYProgress} />
         </SectionDiv>
@@ -179,7 +304,9 @@ const Go = () => {
         </DownArrow>
       </SectionWrap>
       <Section_intro width={viewport.width} />
-      <Section_Portfolio />
+      {/* <Section_Skill /> */}
+      {/* <Section_Portfolio /> */}
+      <Section_PortfolioText />
       <Intro_Poraid />
       <Intro_DungeonNote />
       <Intro_nextboard />
