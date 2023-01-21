@@ -149,7 +149,7 @@ const Intro_DungeonNote = () => {
             <br />
             - Redux를 통해 유저정보를 업데이트하고, MySql에 유저 정보를 관리.
             <br />
-            - 유저중에 '던전 층수'가 높은 순으로 보여주는 Ranking 기능 구현
+            - 높은 던전에 도달한 유저순으로 보여주는 Ranking 기능 구현
             <br />- MySql 도감 테이블로 잡은 몬스터 기록을 안내해주는 페이지 구현
             <br />- 애니메이션을 통해 Element에 등록되어있는 함수를 실행하는 기능 구현
             <br />- LocalStorage를 사용하여 일회성 팝업 구현
