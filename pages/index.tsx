@@ -21,7 +21,6 @@ import Section_intro from '../components/Section_intro';
 import Intro_connect from '../components/Intro_connect';
 import Section_Portfolio from '../components/Section_Portfolio';
 import Head from 'next/head';
-import Section_Skill from '../components/Section_Skill';
 import Section_PortfolioText from '../components/Section_PortfolioText';
 
 const SectionText = styled(motion.div)`
