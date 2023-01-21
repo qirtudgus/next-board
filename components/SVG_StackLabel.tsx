@@ -13,7 +13,8 @@ const Wrap = styled.div<LabelDesign>`
   margin-bottom: 5px;
   margin-right: 5px;
   font-size: 13px;
-  background-color: ${(props) => props.bgColor || '#202124'};
+  /* background: linear-gradient(90deg, rgba(162, 255, 225, 1) 0%, rgba(122, 156, 255, 1) 51%, rgba(0, 116, 255, 1) 100%); */
+  background: ${(props) => props.bgColor || '#202124'};
   font-weight: bold;
   padding: 4px 5px;
   border-radius: 5px;
@@ -29,7 +30,11 @@ const SVG_StackLabel = ({ children, bgColor }: { children: string; bgColor: stri
 };
 
 export const LabelSingle = () => {
-  return <SVG_StackLabel bgColor='#000'>1인 개발</SVG_StackLabel>;
+  return (
+    <SVG_StackLabel bgColor=' linear-gradient(180deg, rgba(0,159,253,1) 0%, rgba(42,42,114,1) 100%);'>
+      1인 개발
+    </SVG_StackLabel>
+  );
 };
 
 export const LabelTS = () => {
