@@ -4,6 +4,14 @@ const nextConfig = {
   compiler: {
     styledComponents: { displayName: true, ssr: true, minify: true },
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i1.daumcdn.net',
+      },
+    ],
+  },
 };
 module.exports = nextConfig;
 // const withTM = require('next-transpile-modules')(['three']);
