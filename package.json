@@ -12,6 +12,7 @@
     "@next/font": "13.0.7",
     "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.2.1",
+    "cheerio": "^1.0.0-rc.12",
     "cookies-next": "^2.1.1",
     "crypto-js": "^4.1.1",
     "framer-motion": "^8.2.4",
