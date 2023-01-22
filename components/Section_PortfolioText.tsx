@@ -8,6 +8,12 @@ const Text = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media ${({ theme }) => theme.device.tablet} {
+    font-size: 54px;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 44px;
+  }
 `;
 
 const Section_PortfolioText = () => {
