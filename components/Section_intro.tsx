@@ -246,7 +246,7 @@ const Section_intro = ({ width }: { width: number }) => {
     });
   }, []);
 
-  const opacity = useTransform(scrollYProgress, [0.22, 0.48, 0.75, 0.9], [1, 0, 0, 1]);
+  const opacity = useTransform(scrollYProgress, [0.22, 0.35, 0.7, 0.9], [1, 0, 0, 1]);
 
   return (
     <>
