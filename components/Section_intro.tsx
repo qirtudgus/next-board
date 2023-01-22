@@ -266,13 +266,12 @@ const Section_intro = ({ width }: { width: number }) => {
           <Section3_boxWrap>
             <Section3_box
               initial={{ opacity: 0, translateY: 50 }}
+              viewport={{ once: true }}
               whileInView={{
                 opacity: 1,
                 translateY: 0,
                 transition: {
-                  delay: 0.1,
-                  type: 'spring',
-                  duration: 1,
+                  duration: 0.7,
                 },
               }}
             >
@@ -294,10 +293,11 @@ const Section_intro = ({ width }: { width: number }) => {
             </Section3_box>
             <Section3_box
               initial={{ opacity: 0, translateY: 50 }}
+              viewport={{ once: true }}
               whileInView={{
                 opacity: 1,
                 translateY: 0,
-                transition: { delay: 0.1, type: 'spring', duration: 1 },
+                transition: { duration: 0.7 },
               }}
             >
               <Section3_boxText>
@@ -318,10 +318,11 @@ const Section_intro = ({ width }: { width: number }) => {
             </Section3_box>
             <Section3_box
               initial={{ opacity: 0, translateY: 50 }}
+              viewport={{ once: true }}
               whileInView={{
                 opacity: 1,
                 translateY: 0,
-                transition: { delay: 0.1, type: 'spring', duration: 1 },
+                transition: { duration: 0.7 },
               }}
             >
               <Image
