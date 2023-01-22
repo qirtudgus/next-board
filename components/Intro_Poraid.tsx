@@ -284,17 +284,17 @@ const Intro_Poraid = () => {
               </div>
             </ContentName>
             <BottomBorder />
-            Socket.IO를 코어로 제작한 웹 사이트입니다.
+            Socket.IO를 코어로 제작한 실시간 서비스 기반 웹 사이트입니다.
+            <br />
+            - Web Notification API와 Vibrate API를 통한 PC, mobile 진동 및 소리 알람 기능 구현
+            <br />- Git Actions을 통한 배포 및 빌드 자동화 구축
             <br /> - Redux-Toolkit를 통한 상태 관리
             <br />
             - Socket Session으로 사용자를 식별하여 접속자 수 안내
-            <br />
-            - Web Notification API와 Vibrate API를 통한 PC, mobile 진동 및 소리 알람 기능 구현
             <br />- node schedule을 사용하여 주기별 서버 데이터 정리
             <br />- 자신이 생성한 Socket Message를 자신만이 다시 삭제할 수 있는 기능 구현
             <br />- AWS EC2 amazon-linux2 환경에서 서버 구축
             <br />- LetsEncrypt를 사용하여 SSL 인증서 발급 후 https 적용
-            <br />- Git Actions을 통한 배포 및 빌드 자동화 구축
             <BottomBorder />
             <StackList>
               <LabelSingle />
