@@ -69,13 +69,10 @@ const MeBorder = styled(motion.div)`
 `;
 
 const Title = styled(motion.div)`
-  font-size: 52px;
+  font-size: 30px;
   color: #202124;
   font-weight: bold;
 
-  @media ${({ theme }) => theme.device.tablet} {
-    font-size: 44px;
-  }
   @media ${({ theme }) => theme.device.mobile} {
     font-size: 30px;
   }
