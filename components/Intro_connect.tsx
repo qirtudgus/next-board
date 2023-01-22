@@ -3,6 +3,7 @@ import { RefObject, useEffect, useRef } from 'react';
 import { motion, MotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import me from '../img/me.webp';
+import me2 from '../img/me2.png';
 import {
   LabelAWS,
   LabelExpress,
@@ -127,6 +128,24 @@ const Me = styled.div`
     height: 210px;
   }
 `;
+const Me2 = styled.div`
+  width: 500px;
+  /* height: 0px; */
+  height: 450px;
+  position: relative;
+  z-index: 10;
+  & img {
+    object-fit: cover;
+  }
+
+  @media ${({ theme }) => theme.device.tablet} {
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 160px;
+    height: 210px;
+  }
+`;
 
 const Intro_connect = () => {
   const ref = useRef() as RefObject<HTMLDivElement>;
@@ -197,13 +216,21 @@ const Intro_connect = () => {
                 </StackList>
               </InfoDesc>
             </Info>
-            <Me>
+            {/* <Me>
               <Image
                 src={me}
                 alt='me'
                 fill
               ></Image>
-            </Me>
+            </Me> */}
+            <Me2>
+              <Image
+                src={me2}
+                alt='me'
+                quality={100}
+                fill
+              ></Image>
+            </Me2>
           </InfoWrap>
           <ConnectBox2 scrollY={scrollYProgress} />
         </SectionBox>
