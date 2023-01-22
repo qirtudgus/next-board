@@ -19,9 +19,9 @@ import VercelSVG from '../components/svg/VercelSVG';
 import Intro_nextboard from '../components/Intro_nextboard';
 import Section_intro from '../components/Section_intro';
 import Intro_connect from '../components/Intro_connect';
-import Section_Portfolio from '../components/Section_Portfolio';
 import Head from 'next/head';
 import Section_PortfolioText from '../components/Section_PortfolioText';
+import Section_RecentPosts from '../components/Section_RecentPosts';
 
 const SectionText = styled(motion.div)`
   font-weight: bold;
@@ -292,6 +292,7 @@ const Go = () => {
       <Intro_Poraid />
       <Intro_DungeonNote />
       <Intro_nextboard />
+      <Section_RecentPosts />
       <Intro_connect />
     </>
   );
