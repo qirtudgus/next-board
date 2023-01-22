@@ -5,6 +5,7 @@ import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const Wrap = styled.div`
   width: 100%;
@@ -70,6 +71,8 @@ const TitleDiv = styled.div`
   color: #fff;
 `;
 
+const AtagWrap = styled(motion.a)``;
+
 const Section_RecentPosts = (props: any) => {
   const arr = [0, 1, 2, 3, 4];
 
@@ -104,8 +107,8 @@ const Section_RecentPosts = (props: any) => {
       <PostWrap>
         {posts.titleList.map((i, idx) => {
           return (
-            <a
-              key={i}
+            <AtagWrap
+              key={idx}
               href={posts.linkList[idx]}
               target='_blank'
               rel='noreferrer'
@@ -125,7 +128,7 @@ const Section_RecentPosts = (props: any) => {
                   {i}
                 </TitleDiv>
               </Post>{' '}
-            </a>
+            </AtagWrap>
           );
         })}
       </PostWrap>
