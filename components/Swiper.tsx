@@ -89,6 +89,7 @@ const Swipers = ({
       bulletBgColor={bulletBgColor}
     >
       <Swiper
+        grabCursor
         lazy={true}
         pagination={true}
         navigation={true}
