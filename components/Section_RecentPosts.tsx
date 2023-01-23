@@ -11,7 +11,6 @@ const Wrap = styled.div`
   width: 100%;
   height: 600px;
   background-color: #202124;
-  /* padding: 50px 0; */
   position: relative;
   display: flex;
   justify-content: center;
@@ -19,7 +18,6 @@ const Wrap = styled.div`
   flex-direction: column;
 `;
 const Title = styled.div`
-  /* position: absolute; */
   color: #fff;
   font-size: 72px;
   font-weight: bold;
@@ -44,7 +42,7 @@ const PostWrap = styled.div`
   }
 `;
 
-const Post = styled.div`
+const Post = styled(motion.div)`
   cursor: pointer;
   width: 250px;
   height: 300px;
@@ -53,6 +51,28 @@ const Post = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
+
+  &:hover {
+    /* &::after {
+      content: '';
+      position: absolute;
+      z-index: 100;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: red;
+    } */
+    & .ImgDiv {
+      /* height: 0px; */
+    }
+    & .TitleDiv {
+      height: 100%;
+      background: rgba(0, 0, 0, 1);
+      /* position: absolute; */
+    }
+  }
 `;
 
 const ImgDiv = styled.div`
@@ -61,7 +81,7 @@ const ImgDiv = styled.div`
 `;
 
 const TitleDiv = styled.div`
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   width: 100%;
   bottom: 0px;
   height: 100px;
@@ -69,13 +89,12 @@ const TitleDiv = styled.div`
   position: relative;
   z-index: 2;
   color: #fff;
+  transition: 0.5s all;
 `;
 
 const AtagWrap = styled(motion.a)``;
 
-const Section_RecentPosts = (props: any) => {
-  const arr = [0, 1, 2, 3, 4];
-
+const Section_RecentPosts = () => {
   interface postsInterface {
     titleList: string[];
     dateList: string[];
@@ -115,7 +134,7 @@ const Section_RecentPosts = (props: any) => {
             >
               <Post>
                 {/* {i} */}
-                <ImgDiv>
+                <ImgDiv className='ImgDiv'>
                   <Image
                     src={posts.imgList[idx]}
                     alt='썸네일'
@@ -123,7 +142,7 @@ const Section_RecentPosts = (props: any) => {
                     height={250}
                   ></Image>
                 </ImgDiv>
-                <TitleDiv>
+                <TitleDiv className='TitleDiv'>
                   <div>{posts.dateList[idx]}</div>
                   {i}
                 </TitleDiv>
