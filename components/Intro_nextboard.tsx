@@ -116,7 +116,6 @@ const Intro_nextboard = () => {
             <br />- Vercel을 통한 배포 경험 후, AWS EC2로 서버 이전
             <br />- framer를 통한 스크롤 기반의 애니메이션 구현
             <br />- AWS EC2 amazon-linux2 환경에서 서버 구축
-            <br />- LetsEncrypt를 사용하여 SSL 인증서 발급 후 https 적용
             <BottomBorder />
             <StackList>
               <LabelSingle />
@@ -124,10 +123,10 @@ const Intro_nextboard = () => {
               <LabelNext />
               <LabelRedux />
               <LabelReduxToolkit />
+              <LabelSC />
               <LabelVercel />
               <LabelAWS />
               <LabelMysql />
-              <LabelSC />
             </StackList>
           </DescDiv>
           <ImgDiv>

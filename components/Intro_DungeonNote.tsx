@@ -154,8 +154,7 @@ const Intro_DungeonNote = () => {
             <br />- 애니메이션을 통해 Element에 등록되어있는 함수를 실행하는 기능 구현
             <br />- LocalStorage를 사용하여 일회성 팝업 구현
             <br />- react-intersection-observer를 사용해 무한 스크롤 구현
-            <br />- 네이버 클라우드 플랫폼에서 Node Express 서버 구축
-            <br />- LetsEncrypt를 사용하여 SSL 인증서 발급 후 https 적용
+            <br />- 네이버 클라우드 플랫폼에서 웹 서버 및 Node Express 서버 구축
             <br />- Git Actions을 통한 배포 및 빌드 자동화 구축
             <BottomBorder />
             <StackList>
