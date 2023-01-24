@@ -143,6 +143,7 @@ const Section_RecentPosts = () => {
                   ></Image>
                 </ImgDiv>
                 <TitleDiv className='TitleDiv'>
+                  <div>{posts.categoryList[idx]}</div>
                   <div>{posts.dateList[idx]}</div>
                   {i}
                 </TitleDiv>
