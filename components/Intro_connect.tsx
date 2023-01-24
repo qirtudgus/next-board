@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { RefObject, useEffect, useRef } from 'react';
-import { motion, MotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
+import { RefObject, useRef } from 'react';
+import { motion, MotionValue, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import me from '../img/me.webp';
 import me2 from '../img/me2.png';
 import {
   LabelAWS,
@@ -213,13 +212,6 @@ const Intro_connect = () => {
                 </StackList>
               </InfoDesc>
             </Info>
-            {/* <Me>
-              <Image
-                src={me}
-                alt='me'
-                fill
-              ></Image>
-            </Me> */}
             <Me2>
               <Image
                 src={me2}
