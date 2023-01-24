@@ -236,7 +236,13 @@ const NoComments = styled.div`
   color: #c4c4c4;
 `;
 
-export default function Post({ propsPost, comment }: any) {
+export default function Post({
+  propsPost,
+  comment,
+}: {
+  propsPost: postPropsInterface;
+  comment: commentPropsInterface[];
+}) {
   const router = useRouter();
   const idx = router.query.idx;
   const { id: userId, idx: userIdx, isLogin } = useAppSelector((state) => state.userInfoSlice);
