@@ -305,7 +305,7 @@ const Section_intro = ({ width }: { width: number }) => {
                 <span className='Title'>기록하고</span>
                 <br />
                 <SubText>
-                  처음 보는 버그는 블로그에
+                  처음 보는 버그는 항상
                   <br /> 기록하여 두번 겪지않으려해요.
                 </SubText>
               </Section3_boxText>
