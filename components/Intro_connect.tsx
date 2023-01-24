@@ -190,8 +190,8 @@ const Intro_connect = () => {
                   <LabelReact />
                   <LabelNext />
                   <LabelRedux />
-                  <LabelReduxSaga />
-                  <LabelReduxToolkit />
+                  {/* <LabelReduxSaga /> */}
+                  {/* <LabelReduxToolkit /> */}
                   <LabelJS />
                   <LabelTS />
                   <LabelSC />
