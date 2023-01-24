@@ -230,7 +230,7 @@ const Section_intro = ({ width }: { width: number }) => {
 
   //해당 함수를 통해 data attribute 세팅
   useEffect(() => {
-    return scrollYProgress.onChange((latest: any) => {
+    return scrollYProgress.onChange((latest: number) => {
       if (ref.current) {
         let progressNumber = Number(scrollYProgress.get());
         console.log(`섹션3 :${progressNumber}`);
