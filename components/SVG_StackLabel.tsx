@@ -96,4 +96,11 @@ export const LabelGitActions = () => {
   return <SVG_StackLabel bgColor='#2e2e2e'>Git Actions</SVG_StackLabel>;
 };
 
+export const LabelFirebase = () => {
+  return <SVG_StackLabel bgColor='#f3611e'>Firebase</SVG_StackLabel>;
+};
+export const LabelElectron = () => {
+  return <SVG_StackLabel bgColor='#00b4eb'>Electron</SVG_StackLabel>;
+};
+
 export default SVG_StackLabel;
