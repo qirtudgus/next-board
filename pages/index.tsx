@@ -22,6 +22,7 @@ import Intro_connect from '../components/Intro_connect';
 import Head from 'next/head';
 import Section_PortfolioText from '../components/Section_PortfolioText';
 import Section_RecentPosts from '../components/Section_RecentPosts';
+import Intro_ddokddok from '../components/Intro_ddokddok';
 
 const SectionText = styled(motion.div)`
   font-weight: bold;
@@ -289,6 +290,7 @@ const Go = () => {
       {/* <Section_Skill /> */}
       {/* <Section_Portfolio /> */}
       <Section_PortfolioText />
+      <Intro_ddokddok />
       <Intro_Poraid />
       <Intro_DungeonNote />
       <Intro_nextboard />
