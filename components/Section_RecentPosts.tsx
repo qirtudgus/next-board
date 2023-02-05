@@ -90,6 +90,17 @@ const TitleDiv = styled.div`
   z-index: 2;
   color: #fff;
   transition: 0.5s all;
+
+  & .titleText {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
+  }
+  &:hover .titleText {
+    white-space: normal;
+  }
 `;
 
 const AtagWrap = styled(motion.a)``;
@@ -145,7 +156,7 @@ const Section_RecentPosts = () => {
                 <TitleDiv className='TitleDiv'>
                   <div>{posts.categoryList[idx]}</div>
                   <div>{posts.dateList[idx]}</div>
-                  {i}
+                  <div className='titleText'>{i}</div>
                 </TitleDiv>
               </Post>{' '}
             </AtagWrap>
