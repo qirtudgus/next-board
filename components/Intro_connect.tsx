@@ -161,8 +161,8 @@ const Intro_connect = () => {
               <InfoDesc>박성현 / 1996.01.12</InfoDesc>
               {/* <InfoDesc></InfoDesc> */}
               {/* <InfoDesc>wlslek0015@gmail.com</InfoDesc> */}
-              <InfoTitle>🏤학력</InfoTitle>
-              <InfoDesc>인덕대학교 멀티미디어디자인과 졸업 2020.02</InfoDesc>
+              {/* <InfoTitle>🏤학력</InfoTitle>
+              <InfoDesc>인덕대학교 멀티미디어디자인과 졸업 2020.02</InfoDesc> */}
               <InfoTitle>👨‍🎓교육 이수</InfoTitle>
               <InfoDesc>스파르타 코딩클럽 10기 2020.09~2020.10</InfoDesc>
               <InfoTitle>📜자격증</InfoTitle>
@@ -202,13 +202,13 @@ const Intro_connect = () => {
               <InfoDesc>
                 <StackList>
                   <LabelAWS />
-                  <LabelS3 />
-                  <LabelNginx />
+                  {/* <LabelS3 /> */}
+                  {/* <LabelNginx /> */}
 
                   <LabelNode />
                   <LabelExpress />
-                  <LabelMysql />
-                  <LabelVercel />
+                  {/* <LabelMysql /> */}
+                  {/* <LabelVercel /> */}
                 </StackList>
               </InfoDesc>
             </Info>
